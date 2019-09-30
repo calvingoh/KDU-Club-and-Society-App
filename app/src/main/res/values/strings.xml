@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">KDU Club and Society</string>
 
+    <!-- Log in page -->
     <string name="label_google_sign_in">Firebase + Google Sign In</string>
     <string name="desc_google_sign_in">Use a Google Sign In credential to authenticate with Firebase.</string>
 
@@ -90,4 +91,12 @@
 
     <string name="id_fmt">User ID: %s</string>
     <string name="email_fmt">Email: %s</string>
+
+
+    <!-- Navigation Bar -->
+    <string name="dashboard_title"> Dashboard </string>
+    <string name="club_title">Clubs</string>
+    <string name="notification_title">Notification</string>
+    <string name="profile_title">Profile</string>
+
 </resources>
