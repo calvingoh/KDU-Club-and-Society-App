@@ -98,5 +98,9 @@
     <string name="club_title">Clubs</string>
     <string name="notification_title">Notification</string>
     <string name="profile_title">Profile</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 
 </resources>
