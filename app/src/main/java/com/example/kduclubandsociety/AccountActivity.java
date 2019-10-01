@@ -1,4 +1,6 @@
 package com.example.kduclubandsociety;
 
-class AccountActivity {
+import android.app.Activity;
+
+public class AccountActivity extends Activity {
 }

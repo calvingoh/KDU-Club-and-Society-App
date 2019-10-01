@@ -89,10 +89,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:backgroundTint="#2196F3"
+                android:backgroundTint="#4E5052"
                 android:text="@string/sign_in"
                 android:textColorHighlight="#2196F3"
-                android:textColorLink="#2196F3"
+                android:textColorLink="#3A3C3D"
                 android:theme="@style/ThemeOverlay.MyDarkButton" />
 
         </LinearLayout>
