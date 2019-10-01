@@ -4,27 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccountActivity">
+    tools:context=".AccountActivity"
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="TextView" />
+android:id="@+id/signedInButtons"
+android:layout_centerInParent="true"
+android:orientation="horizontal"
+android:paddingLeft="16dp"
+android:paddingRight="16dp"
+android:weightSum="2.0">
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+<Button
+    android:id="@+id/signOutButton"
+    style="@style/Widget.AppCompat.Button.Colored"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="1.0"
+    android:text="@string/sign_out"
+    android:theme="@style/ThemeOverlay.MyDarkButton" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:text="Button" />
+
 </LinearLayout>
+
 
