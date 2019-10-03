@@ -28,6 +28,3 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-dependencies {
-    implementation 'com.android.support:design:27.0.2'
-}
