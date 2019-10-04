@@ -2,14 +2,13 @@ package com.example.kduclubandsociety;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.ProgressDialog;
+
 import android.content.Intent;
 
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 import android.widget.TextView;
@@ -21,7 +20,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     private static final String TAG = "EmailPassword";
 
@@ -36,7 +35,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -79,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             updateUI(user);
                         } else {
                             Log.w(TAG, "createuserwithemail:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Authentication failed", Toast.LENGTH_LONG).show();
                             updateUI(null);
                         }
                        // hideProgressDialog();
@@ -102,10 +101,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // FirebaseUser user = mAuth.getCurrentUser();
-                           Intent intent = new Intent(MainActivity.this, AccountActivity.class);
+                           Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
                            startActivity(intent);
                         } else {
-                            Toast.makeText(MainActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();
+                            Toast.makeText(LoginActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();
                            // updateUI(null);
                         }
                     }
@@ -131,12 +130,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         findViewById(R.id.verifyEmailButton).setEnabled(true);
 
                         if (task.isSuccessful()) {
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(LoginActivity.this,
                                     "Verification email sent to " + user.getEmail(),
                                     Toast.LENGTH_SHORT).show();
                         } else {
                             Log.e(TAG, "sendEmailVerification", task.getException());
-                            Toast.makeText(MainActivity.this,
+                            Toast.makeText(LoginActivity.this,
                                     "Failed to send verification email.",
                                     Toast.LENGTH_SHORT).show();
                         }
