@@ -32,4 +32,8 @@ public class AccountActivity extends AppCompatActivity implements View.OnClickLi
     public void onClick(View view) {
         signOut();
     }
+
+    @Override
+    public void onBackPressed(){}
+
 }
