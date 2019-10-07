@@ -100,12 +100,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            mPasswordField.setText ("");
                             // FirebaseUser user = mAuth.getCurrentUser();
-                           Intent intent = new Intent(LoginActivity.this, AccountActivity.class);
+                           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                            startActivity(intent);
                         } else {
                             Toast.makeText(LoginActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();
                            // updateUI(null);
+                            mEmailField.setText ("");
+                            mPasswordField.setText ("");
                         }
                     }
                 });
