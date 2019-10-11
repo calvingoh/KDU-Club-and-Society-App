@@ -34,12 +34,13 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <Button
-        android:id="@+id/signoutButton2"
+        android:id="@+id/btnSignout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="323dp"
         android:layout_marginBottom="304dp"
         android:text="@string/sign_out"
+        android:onClick="onClick"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
         app:layout_constraintStart_toStartOf="parent"

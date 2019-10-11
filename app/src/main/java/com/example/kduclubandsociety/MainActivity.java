@@ -2,7 +2,6 @@ package com.example.kduclubandsociety;
 
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,9 +14,9 @@ import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button signoutbutton2;
 
     private FirebaseAuth mAuth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
-        findViewById(R.id.signoutButton2).setOnClickListener(this);
     }
 
     private void signOut() {
@@ -43,7 +40,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        signOut();
+        if (view.getId() == R.id.btnSignout) {
+            signOut();
+        }
     }
 
     @Override

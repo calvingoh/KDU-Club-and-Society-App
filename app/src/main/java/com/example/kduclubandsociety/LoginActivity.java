@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private static final String TAG = "EmailPassword";
 
-    private TextView mStatusTextView;
     private EditText mEmailField;
     private EditText mPasswordField;
 
@@ -42,14 +41,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         // Views
-        mStatusTextView = findViewById(R.id.status);
         mEmailField = findViewById(R.id.fieldEmail);
         mPasswordField = findViewById(R.id.fieldPassword);
-
-        // Buttons
-        findViewById(R.id.emailSignInButton).setOnClickListener(this);
-
-        findViewById(R.id.signOutButton).setOnClickListener(this);
 
     }
 
@@ -105,7 +98,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             // FirebaseUser user = mAuth.getCurrentUser();
                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                            startActivity(intent);
-                        } else {
+                        }
+                        else {
                             Toast.makeText(LoginActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();
                            // updateUI(null);
                             mEmailField.setText ("");
@@ -159,7 +153,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (TextUtils.isEmpty(email)) {
             mEmailField.setError("Required.");
             valid = false;
-        } else {
+        }
+        else {
             mEmailField.setError(null);
         }
 
@@ -198,11 +193,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 */
     @Override
     public void onClick(View v) {
-        int i = v.getId();
-          if (i == R.id.emailSignInButton) {
+        if (v.getId() == R.id.btnSignin) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
-        }// else if (i == R.id.signOutButton) {
-            //signOut();
+        }
         }
     }
 
