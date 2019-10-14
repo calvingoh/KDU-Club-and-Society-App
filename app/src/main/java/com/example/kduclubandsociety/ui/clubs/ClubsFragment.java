@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety.ui.home;
+package com.example.kduclubandsociety.ui.clubs;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,17 +14,17 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.example.kduclubandsociety.R;
 
-public class HomeFragment extends Fragment {
+public class ClubsFragment extends Fragment {
 
-    private HomeViewModel homeViewModel;
+    private ClubsViewModel clubsViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_home, container, false);
+        clubsViewModel =
+                ViewModelProviders.of(this).get(ClubsViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_clubs, container, false);
         final TextView textView = root.findViewById(R.id.text_home);
-        homeViewModel.getText().observe(this, new Observer<String>() {
+        clubsViewModel.getText().observe(this, new Observer<String>() {
             @Override
             public void onChanged(@Nullable String s) {
                 textView.setText(s);

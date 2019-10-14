@@ -1,16 +1,16 @@
-package com.example.kduclubandsociety.ui.home;
+package com.example.kduclubandsociety.ui.clubs;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class HomeViewModel extends ViewModel {
+public class ClubsViewModel extends ViewModel {
 
     private MutableLiveData<String> mText;
 
-    public HomeViewModel() {
+    public ClubsViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is home fragment");
+        mText.setValue("This is clubs fragment");
     }
 
     public LiveData<String> getText() {
