@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:341301978913:android:cf5035bc9972eed1384060",
+        "mobilesdk_app_id": "1:341301978913:android:8167d21a6c2e99f9384060",
         "android_client_info": {
           "package_name": "com.example.kduclubandsociety"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "341301978913-o8e7rb5vj0ooaga43pltnto8rdnptk33.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.kduclubandsociety",
-            "certificate_hash": "00f51c7d71afd1cf5ce93dfbb65aa5cfcaf92e50"
-          }
-        },
         {
           "client_id": "341301978913-m0h5ghi07sou6agsjk5iqr6f3rudd387.apps.googleusercontent.com",
           "client_type": 1,

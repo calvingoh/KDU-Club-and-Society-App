@@ -39,38 +39,45 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="323dp"
         android:layout_marginBottom="304dp"
-        android:text="@string/sign_out"
         android:onClick="onClick"
+        android:text="@string/sign_out"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.83" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/conditiontextview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
         android:text="TextView"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="228dp" />
+        app:layout_constraintEnd_toEndOf="@+id/nav_host_fragment"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="294dp" />
 
     <Button
         android:id="@+id/addbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="80dp"
         android:text="add"
-        tools:layout_editor_absoluteX="141dp"
-        tools:layout_editor_absoluteY="461dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/newclubeditText" />
 
     <EditText
         android:id="@+id/newclubeditText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="32dp"
         android:ems="10"
         android:inputType="textPersonName"
         android:text="Name"
-        tools:layout_editor_absoluteX="75dp"
-        tools:layout_editor_absoluteY="427dp" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnSignout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

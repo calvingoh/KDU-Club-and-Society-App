@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseReference myRef;
 
     private static final String TAG = " ";
-    private TextView mConditionTextView;
     private Button mAddButton;
     private EditText mNewClub;
 
@@ -43,15 +43,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //firebase
-        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+        myRef = mFirebaseDatabase.getReference("");
 
-        mConditionTextView = findViewById(R.id.conditiontextview);
         mAddButton = findViewById(R.id.addbutton);
         mNewClub = findViewById(R.id.newclubeditText);
 
 
+        //Bottom Navigation
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
@@ -61,6 +60,18 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
+
+        //Authentication
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                FirebaseUser user = firebaseAuth.getCurrentUser();
+                if(user != null){
+                    Log.d(TAG, "Sign in" + user.getUid());
+                }
+            }
+        };
+
 
         // Read from the database
         myRef.addValueEventListener(new ValueEventListener() {
@@ -78,16 +89,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-/*
-mAuthListener = new FirebaseAuth.AuthStateListener() {
-    @Override
-    public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-        if(user != null){
-            Log.d(TAG, "Sign in" + user.getUid());
-        }
-    }
-});
- */
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -95,19 +96,29 @@ mAuthListener = new FirebaseAuth.AuthStateListener() {
                 Log.d(TAG, "Attempting to add object to database");
                 String newClub = mNewClub.getText().toString();
                 if(!newClub.equals("")){
-                    //FirebaseDatabase user = mAuth.getCurrentUser();
-                    //String userID = user.getUid();
-                    myRef.child("Club").child("Academic Club").child(newClub).setValue("true");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    String userID = user.getUid();
+                    myRef.child(userID).child("Club").child("Academic Club").child(newClub).setValue("true");
                     //reset the text
                     mNewClub.setText("");
-
                 }
             }
         });
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
+    }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mAuthListener != null){
+            mAuth.removeAuthStateListener(mAuthListener);
+        }
+    }
 
     private void signOut() {
         mAuth.signOut();
