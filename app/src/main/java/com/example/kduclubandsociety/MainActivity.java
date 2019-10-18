@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private FirebaseAuth.AuthStateListener mAuthListener;
     private DatabaseReference myRef;
 
-    private static final String TAG = " ";
+    private static final String TAG = "MainActivity";
     private Button mAddButton;
     private EditText mNewClub;
 
@@ -43,8 +43,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         //firebase
+        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference("");
+        myRef = mFirebaseDatabase.getReference();
 
         mAddButton = findViewById(R.id.addbutton);
         mNewClub = findViewById(R.id.newclubeditText);
@@ -68,6 +69,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FirebaseUser user = firebaseAuth.getCurrentUser();
                 if(user != null){
                     Log.d(TAG, "Sign in" + user.getUid());
+                }
+
+                else {
+                    Log.d(TAG, "sign out");
                 }
             }
         };
