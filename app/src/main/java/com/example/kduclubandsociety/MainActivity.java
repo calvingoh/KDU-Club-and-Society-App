@@ -14,6 +14,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button mAddButton;
     private EditText mNewClub;
 
+  //  Club club1 = new Club (101, "Wham", "cool", 10, "wed");
 
 
     @Override
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if(!newClub.equals("")){
                     FirebaseUser user = mAuth.getCurrentUser();
                     String userID = user.getUid();
-                    myRef.child(userID).child("Club").child("Academic Club").child(newClub).setValue("true");
+                   myRef.child(userID).child("Club").child("Academic Club").child(newClub).setValue("true");
                     //reset the text
                     mNewClub.setText("");
                 }
