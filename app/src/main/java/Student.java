@@ -3,9 +3,9 @@ public class Student {
     private int id;
     private String name;
     private String email;
-    private String[][] clubs;
+    private int[][] clubs;
 
-    public Student(String uid, int id, String name, String email, String[][] clubs) {
+    public Student(String uid, int id, String name, String email, int[][] clubs) {
         this.uid = uid;
         this.id = id;
         this.name = name;
@@ -45,11 +45,11 @@ public class Student {
         this.email = email;
     }
 
-    public String[][] getClubs() {
+    public int[][] getClubs() {
         return clubs;
     }
 
-    public void setClubs(String[][] clubs) {
+    public void setClubs(int[][] clubs) {
         this.clubs = clubs;
     }
 }
