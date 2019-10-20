@@ -34,7 +34,7 @@
         app:navGraph="@navigation/mobile_navigation" />
 
     <Button
-        android:id="@+id/btnSignout"
+        android:id="@+id/Signoutbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="323dp"
@@ -62,22 +62,9 @@
         android:id="@+id/addbutton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="80dp"
-        android:text="add"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/newclubeditText" />
-
-    <EditText
-        android:id="@+id/newclubeditText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="32dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSignout" />
+        android:layout_marginBottom="29dp"
+        android:text="show"
+        app:layout_constraintBottom_toTopOf="@+id/Signoutbutton"
+        tools:layout_editor_absoluteX="49dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

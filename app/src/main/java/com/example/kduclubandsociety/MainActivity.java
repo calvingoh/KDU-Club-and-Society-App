@@ -9,23 +9,19 @@ import android.widget.TextView;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-
+public class MainActivity extends AppCompatActivity {
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
@@ -33,10 +29,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DatabaseReference myRef;
 
     private static final String TAG = "MainActivity";
+    private TextView mTextView;
     private Button mAddButton;
+    private Button mSignOut;
     private EditText mNewClub;
 
-  //  Club club1 = new Club (101, "Wham", "cool", 10, "wed");
+    //  Club club1 = new Club (101, "Wham", "cool", 10, "wed");
 
 
     @Override
@@ -47,10 +45,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference();
+//     myRef = mFirebaseDatabase.getReference();
 
         mAddButton = findViewById(R.id.addbutton);
-        mNewClub = findViewById(R.id.newclubeditText);
+        mSignOut = findViewById(R.id.Signoutbutton);
+        mTextView = findViewById(R.id.conditiontextview);
+        // mNewClub = findViewById(R.id.newclubeditText);
 
 
         //Bottom Navigation
@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-
+/*
         //Authentication
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -79,40 +79,45 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-
-        // Read from the database
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Object value = dataSnapshot.getValue();
-                Log.d(TAG, "Value is: " + value);
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
+ */
 
         mAddButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d(TAG, "Attempting to add object to database");
-                String newClub = mNewClub.getText().toString();
-                if(!newClub.equals("")){
-                    FirebaseUser user = mAuth.getCurrentUser();
-                    String userID = user.getUid();
-                   myRef.child(userID).child("Club").child("Academic Club").child(newClub).setValue("true");
-                    //reset the text
-                    mNewClub.setText("");
-                }
+                myRef = FirebaseDatabase.getInstance().getReference().child("Club");
+                // Read from the database
+                myRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        //Object value = dataSnapshot.getValue();
+                        //Log.d(TAG, "Value is: " + value);
+                        Club club = dataSnapshot.getValue(Club.class);
+                        mTextView.setText(club.getDescription());
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
+
+            }
+
+
+        });
+        mSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                finish();
             }
         });
     }
 
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -126,22 +131,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mAuth.removeAuthStateListener(mAuthListener);
         }
     }
-
+*/
+/*
     private void signOut() {
         mAuth.signOut();
     }
-
+    */
+/*
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btnSignout) {
             signOut();
         }
     }
+*/
+        @Override
+        public void onBackPressed () {
 
-    @Override
-    public void onBackPressed(){
-
-    }
-
+        }
 
 }
+
+
+
+
