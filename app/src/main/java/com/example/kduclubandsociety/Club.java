@@ -1,13 +1,13 @@
 package com.example.kduclubandsociety;
 
 public class Club {
-    private int id;
+    private Integer id;
     private String name;
     private String description;
-    private int maxNum;
+    private Integer maxNum;
     private String meeting;
 
-    public Club(int id, String name, String description, int maxNum, String meeting) {
+    public Club() {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -15,11 +15,11 @@ public class Club {
         this.meeting = meeting;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -39,11 +39,11 @@ public class Club {
         this.description = description;
     }
 
-    public int getMaxNum() {
+    public Integer getMaxNum() {
         return maxNum;
     }
 
-    public void setMaxNum(int maxNum) {
+    public void setMaxNum(Integer maxNum) {
         this.maxNum = maxNum;
     }
 

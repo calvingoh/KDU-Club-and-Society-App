@@ -49,7 +49,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onStart() {
         super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
+        //FirebaseUser currentUser = mAuth.getCurrentUser();
+
 
     }
 
@@ -66,13 +67,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             mPasswordField.setText ("");
-                            // FirebaseUser user = mAuth.getCurrentUser();
+                             //FirebaseUser currentUser = mAuth.getCurrentUser();
                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                            startActivity(intent);
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();
-                           // updateUI(null);
                             mEmailField.setText ("");
                             mPasswordField.setText ("");
                         }

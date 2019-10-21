@@ -1,20 +1,24 @@
 package com.example.kduclubandsociety;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
@@ -26,13 +30,15 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    private DatabaseReference myRef;
+    DatabaseReference Ref;
 
+    Club club;
     private static final String TAG = "MainActivity";
     private TextView mTextView;
-    private Button mAddButton;
+    private Button mShowButton;
     private Button mSignOut;
-    private EditText mNewClub;
+    private EditText mNameEditText;
+    private Button mSave;
 
     //  Club club1 = new Club (101, "Wham", "cool", 10, "wed");
 
@@ -42,15 +48,28 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        club = new Club();
+
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 //     myRef = mFirebaseDatabase.getReference();
 
-        mAddButton = findViewById(R.id.addbutton);
+        //mShowButton = findViewById(R.id.showbutton);
         mSignOut = findViewById(R.id.Signoutbutton);
-        mTextView = findViewById(R.id.conditiontextview);
+        mNameEditText = findViewById(R.id.NameeditText);
         // mNewClub = findViewById(R.id.newclubeditText);
+        mSave = findViewById(R.id.savebutton);
+
+        Ref = FirebaseDatabase.getInstance().getReference().child("Club");
+        mSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                club.setName(mNameEditText.getText().toString().trim());
+                Ref.push().setValue(club);
+                Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
+            }
+        });
 
 
         //Bottom Navigation
@@ -63,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
-/*
+
         //Authentication
         mAuthListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -79,12 +98,12 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
- */
 
-        mAddButton.setOnClickListener(new View.OnClickListener() {
+/*
+        mShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                myRef = FirebaseDatabase.getInstance().getReference().child("Club");
+                myRef = FirebaseDatabase.getInstance().getReference().child("club");
                 // Read from the database
                 myRef.addValueEventListener(new ValueEventListener() {
                     @Override
@@ -108,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         });
+        */
+
         mSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
