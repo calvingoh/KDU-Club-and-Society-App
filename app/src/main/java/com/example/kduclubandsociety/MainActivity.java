@@ -1,5 +1,6 @@
 package com.example.kduclubandsociety;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -42,6 +43,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+     //   Intent intent = getIntent();
+       // String uID = intent.getStringExtra(LoginActivity.user);
+
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -49,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         mAddButton = findViewById(R.id.addbutton);
         mSignOut = findViewById(R.id.Signoutbutton);
-        mTextView = findViewById(R.id.conditiontextview);
+   //     mTextView = findViewById(R.id.conditiontextview);
         // mNewClub = findViewById(R.id.newclubeditText);
 
 
@@ -105,14 +109,13 @@ public class MainActivity extends AppCompatActivity {
                 });
 
             }
-
-
         });
+
         mSignOut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mAuth.signOut();
-                finish();
+                    mAuth.signOut();
+                    finish();
             }
         });
     }
@@ -132,23 +135,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 */
-/*
-    private void signOut() {
-        mAuth.signOut();
-    }
-    */
-/*
     @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.btnSignout) {
-            signOut();
-        }
-    }
-*/
-        @Override
-        public void onBackPressed () {
+    public void onBackPressed () {
 
-        }
+    }
 
 }
 

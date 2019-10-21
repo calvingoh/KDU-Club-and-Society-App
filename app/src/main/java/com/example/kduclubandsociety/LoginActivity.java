@@ -50,7 +50,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
         FirebaseUser currentUser = mAuth.getCurrentUser();
-
     }
 
     private void signIn(String email, String password) {
@@ -66,8 +65,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             mPasswordField.setText ("");
-                            // FirebaseUser user = mAuth.getCurrentUser();
+                          //  FirebaseUser user = mAuth.getCurrentUser();
                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                          // intent.putExtra("user", user);
                            startActivity(intent);
                         }
                         else {
