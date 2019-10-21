@@ -61,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
         // mNewClub = findViewById(R.id.newclubeditText);
         mSave = findViewById(R.id.savebutton);
 
+        //insert data
         Ref = FirebaseDatabase.getInstance().getReference().child("Club");
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
