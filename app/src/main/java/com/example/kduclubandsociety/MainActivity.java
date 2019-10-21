@@ -30,17 +30,19 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference Ref;
+    DatabaseReference myRef;
 
     Club club;
+    long maxid=0;
     private static final String TAG = "MainActivity";
-    private TextView mTextView;
-    private Button mShowButton;
     private Button mSignOut;
-    private EditText mNameEditText;
     private Button mSave;
+    private Button mShow;
+    private EditText mNameEditText;
+    private EditText mDescriptionEditText;
+    private EditText mMaxEditText;
+    private EditText mMeetingEditText;
 
-    //  Club club1 = new Club (101, "Wham", "cool", 10, "wed");
 
 
     @Override
@@ -53,26 +55,55 @@ public class MainActivity extends AppCompatActivity {
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-//     myRef = mFirebaseDatabase.getReference();
 
-        //mShowButton = findViewById(R.id.showbutton);
-        mSignOut = findViewById(R.id.Signoutbutton);
+        //initialize views
+        mSignOut = findViewById(R.id.SignOutbutton);
+        mSave = findViewById(R.id.Savebutton);
+        mShow = findViewById(R.id.Showbutton);
         mNameEditText = findViewById(R.id.NameeditText);
-        // mNewClub = findViewById(R.id.newclubeditText);
-        mSave = findViewById(R.id.savebutton);
+        mDescriptionEditText = findViewById(R.id.DescriptioneditText);
+        mMaxEditText = findViewById(R.id.MaxeditText);
+        mMeetingEditText = findViewById(R.id.MeetingeditText);
 
         //insert data
-        Ref = FirebaseDatabase.getInstance().getReference().child("Club");
+        myRef = FirebaseDatabase.getInstance().getReference().child("Club");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    maxid = (dataSnapshot.getChildrenCount());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
         mSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 club.setName(mNameEditText.getText().toString().trim());
-                Ref.push().setValue(club);
+                club.setDescription(mDescriptionEditText.getText().toString().trim());
+                club.setMeeting(mMeetingEditText.getText().toString().trim());
+                int max = Integer.parseInt(mMaxEditText.getText().toString().trim());
+                club.setMaxNum(max);
+                myRef.child(String.valueOf(maxid+1)).setValue(club);
                 Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
             }
         });
 
+        mShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(MainActivity.this, Club_Profile.class);
+                startActivity(intent);
+            }
+        });
 
+
+/*
         //Bottom Navigation
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -99,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         };
 
-
+*/
 /*
         mShowButton.setOnClickListener(new View.OnClickListener() {
             @Override
