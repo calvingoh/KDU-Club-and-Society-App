@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,12 +37,16 @@ public class MainActivity extends AppCompatActivity {
     private EditText mMaxEditText;
     private EditText mMeetingEditText;
 
+    private TextView mName;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Intent intent = getIntent();
+        String uid = intent.getStringExtra("currentUid");
 
         club = new Club();
 
@@ -57,6 +62,25 @@ public class MainActivity extends AppCompatActivity {
         mDescriptionEditText = findViewById(R.id.descriptioneditText);
         mMaxEditText = findViewById(R.id.maxeditText);
         mMeetingEditText = findViewById(R.id.meetingeditText);
+        mName = findViewById(R.id.txtName);
+
+
+
+        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String name = dataSnapshot.child("name").getValue().toString();
+
+                mName.setText(name);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
 
         //insert data
         myRef = FirebaseDatabase.getInstance().getReference().child("Club");

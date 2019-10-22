@@ -67,8 +67,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             mPasswordField.setText ("");
-                             //FirebaseUser currentUser = mAuth.getCurrentUser();
+                            FirebaseUser currentUser = mAuth.getCurrentUser();
+                            String user = currentUser.getUid();
                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                           intent.putExtra("currentUid", user);
                            startActivity(intent);
                         }
                         else {
@@ -98,7 +100,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (TextUtils.isEmpty(password)) {
             mPasswordField.setError("Required.");
             valid = false;
-        } else {
+        }
+        else {
             mPasswordField.setError(null);
         }
 
@@ -110,8 +113,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v.getId() == R.id.btnSignin) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
         }
-        }
     }
+}
 
 
 
