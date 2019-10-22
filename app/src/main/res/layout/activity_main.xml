@@ -5,7 +5,7 @@
     android:layout_height="match_parent">
 
     <EditText
-        android:id="@+id/NameeditText"
+        android:id="@+id/nameeditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -13,7 +13,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/DescriptioneditText"
+        android:id="@+id/descriptioneditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -21,7 +21,7 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/MeetingeditText"
+        android:id="@+id/meetingeditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -29,27 +29,29 @@
         android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/MaxeditText"
+        android:id="@+id/maxeditText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="198dp"
         android:ems="10"
         android:hint="Max. Number of Students"
         android:inputType="textPersonName" />
 
     <Button
-        android:id="@+id/Savebutton"
+        android:id="@+id/saveButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Save" />
 
     <Button
-        android:id="@+id/Showbutton"
+        android:id="@+id/showButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Show" />
 
     <Button
-        android:id="@+id/SignOutbutton"
+        android:id="@+id/signoutButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Sign Out" />

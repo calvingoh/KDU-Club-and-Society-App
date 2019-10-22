@@ -2,16 +2,12 @@ package com.example.kduclubandsociety;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -20,10 +16,6 @@ import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
 public class MainActivity extends AppCompatActivity {
     //firebase
@@ -57,13 +49,13 @@ public class MainActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         //initialize views
-        mSignOut = findViewById(R.id.SignOutbutton);
-        mSave = findViewById(R.id.Savebutton);
-        mShow = findViewById(R.id.Showbutton);
-        mNameEditText = findViewById(R.id.NameeditText);
-        mDescriptionEditText = findViewById(R.id.DescriptioneditText);
-        mMaxEditText = findViewById(R.id.MaxeditText);
-        mMeetingEditText = findViewById(R.id.MeetingeditText);
+        mSignOut = findViewById(R.id.signoutButton);
+        mSave = findViewById(R.id.saveButton);
+        mShow = findViewById(R.id.showButton);
+        mNameEditText = findViewById(R.id.nameeditText);
+        mDescriptionEditText = findViewById(R.id.descriptioneditText);
+        mMaxEditText = findViewById(R.id.maxeditText);
+        mMeetingEditText = findViewById(R.id.meetingeditText);
 
         //insert data
         myRef = FirebaseDatabase.getInstance().getReference().child("Club");
