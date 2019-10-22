@@ -18,6 +18,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
+
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
@@ -94,6 +95,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                finish();
+            }
+        });
+
 
 /*
         //Bottom Navigation
@@ -123,73 +132,9 @@ public class MainActivity extends AppCompatActivity {
         };
 
 */
-/*
-        mShowButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                myRef = FirebaseDatabase.getInstance().getReference().child("club");
-                // Read from the database
-                myRef.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        // This method is called once with the initial value and again
-                        // whenever data at this location is updated.
-                        //Object value = dataSnapshot.getValue();
-                        //Log.d(TAG, "Value is: " + value);
-                        Club club = dataSnapshot.getValue(Club.class);
-                        mTextView.setText(club.getDescription());
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError error) {
-                        // Failed to read value
-                        Log.w(TAG, "Failed to read value.", error.toException());
-                    }
-                });
-
-            }
-
-
-        });
-        */
-
-        mSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                finish();
-            }
-        });
     }
 
-/*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(mAuthListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(mAuthListener != null){
-            mAuth.removeAuthStateListener(mAuthListener);
-        }
-    }
-*/
-/*
-    private void signOut() {
-        mAuth.signOut();
-    }
-    */
-/*
-    @Override
-    public void onClick(View view) {
-        if (view.getId() == R.id.btnSignout) {
-            signOut();
-        }
-    }
-*/
         @Override
         public void onBackPressed () {
 
