@@ -2,6 +2,7 @@ package com.example.kduclubandsociety;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -114,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         mShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, Club_Profile.class);
+                Intent intent = new Intent(MainActivity.this, club_list_activity.class);
                 startActivity(intent);
             }
         });
