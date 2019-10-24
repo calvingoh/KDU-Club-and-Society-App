@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "match_parent">
+
+        <!--top tool bar -->
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:id= "@+id/rellayout1">
+        </RelativeLayout>
+
+        <!--Middle section -->
+        <RelativeLayout
+            android:layout_width = "match_parent"
+            android:layout_height = "wrap_content"
+            android:id= "@+id/rellayout2">
+
+        </RelativeLayout>
+
+        <!--Bottom Navigation -->
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>
