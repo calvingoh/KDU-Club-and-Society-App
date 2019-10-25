@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context = ".activity.DashboardActivity">
 
     <RelativeLayout
         android:layout_width = "match_parent"
@@ -15,16 +16,23 @@
             android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
             android:id= "@+id/rellayout1">
+
+            <include layout="@layout/layout_top_tabs"/>
         </RelativeLayout>
 
         <!--Middle section -->
         <RelativeLayout
             android:layout_width = "match_parent"
             android:layout_height = "wrap_content"
-            android:id= "@+id/rellayout2">
+            android:id= "@+id/rellayout2"
+            android:layout_below="@+id/rellayout1">
+
+            <include layout="@layout/layout_center_viewpager"/>
 
         </RelativeLayout>
 
         <!--Bottom Navigation -->
+        <include layout="@layout/layout_bottom_navigation_view" />
+
     </RelativeLayout>
-</android.support.design.widget.CoordinatorLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

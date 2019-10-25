@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id= "@+id/ic_dashboard"
+        android:icon= "@drawable/ic_dashboard"
+        android:title = "dashboard">
+    </item>
+
+    <item
+        android:id= "@+id/ic_club"
+        android:icon= "@drawable/ic_club"
+        android:title = "club">
+    </item>
+
+    <item
+        android:id= "@+id/ic_notification"
+        android:icon= "@drawable/ic_notification"
+        android:title = "notification">
+    </item>
+
+    <item
+        android:id= "@+id/ic_profile"
+        android:icon= "@drawable/ic_profile"
+        android:title = "profile">
+    </item>
+
+
+</menu>

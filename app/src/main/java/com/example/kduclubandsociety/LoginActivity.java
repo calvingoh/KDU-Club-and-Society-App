@@ -14,6 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kduclubandsociety.activity.DashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -69,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             mPasswordField.setText ("");
                             FirebaseUser currentUser = mAuth.getCurrentUser();
                             String user = currentUser.getUid();
-                           Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                   Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                            intent.putExtra("currentUid", user);
                            startActivity(intent);
                         }

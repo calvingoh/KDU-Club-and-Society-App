@@ -1,0 +1,55 @@
+package com.example.kduclubandsociety.Utils;
+
+import android.content.Context;
+import android.content.Intent;
+import android.view.MenuItem;
+
+import com.example.kduclubandsociety.activity.ClubActivity;
+import com.example.kduclubandsociety.activity.DashboardActivity;
+import com.example.kduclubandsociety.activity.NotificationActivity;
+import com.example.kduclubandsociety.activity.ProfileActivity;
+import com.example.kduclubandsociety.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import androidx.annotation.NonNull;
+
+public class BottomNavigationViewHelper {
+    private static final String TAG = "BottomNavigationViewHelper";
+
+    public static void enableNavigation (final Context context, BottomNavigationView view){
+        view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch (menuItem.getItemId()){
+                    case R.id.ic_dashboard:{
+                        Intent intent1 =new Intent(context, DashboardActivity.class);   //ACTIVITY_NUM = 0
+                        context.startActivity(intent1);
+                        break;
+                    }
+                    case R.id.ic_club:{
+                        Intent intent2 =new Intent(context, ClubActivity.class);   //ACTIVITY_NUM = 1
+                        context.startActivity(intent2);
+                        break;
+                    }
+
+                    case R.id.ic_notification:{
+                        Intent intent3 =new Intent(context, NotificationActivity.class);   //ACTIVITY_NUM = 2
+                        context.startActivity(intent3);
+                        break;
+                    }
+
+                    case R.id.ic_profile:{
+                        Intent intent4 =new Intent(context, ProfileActivity.class);    //ACTIVITY_NUM = 3
+                        context.startActivity(intent4);
+                        break;
+                    }
+
+
+                }
+
+                return false;
+            }
+        });
+    }
+
+}
