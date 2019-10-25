@@ -10,6 +10,7 @@ import com.example.kduclubandsociety.Profile.ProfileActivity;
 import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseUser;
 
 import androidx.annotation.NonNull;
 

@@ -69,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             mPasswordField.setText ("");
                             FirebaseUser currentUser = mAuth.getCurrentUser();
                             String user = currentUser.getUid();
-                                   Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
+                            Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
                            intent.putExtra("currentUid", user);
                            startActivity(intent);
                         }
