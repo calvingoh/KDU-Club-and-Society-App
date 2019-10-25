@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety.activity;
+package com.example.kduclubandsociety.Profile;
 
 import android.content.Context;
 import android.os.Bundle;

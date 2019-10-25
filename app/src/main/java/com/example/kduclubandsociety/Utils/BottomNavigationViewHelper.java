@@ -4,10 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.MenuItem;
 
-import com.example.kduclubandsociety.activity.ClubActivity;
-import com.example.kduclubandsociety.activity.DashboardActivity;
-import com.example.kduclubandsociety.activity.NotificationActivity;
-import com.example.kduclubandsociety.activity.ProfileActivity;
+import com.example.kduclubandsociety.Dashboard.DashboardActivity;
+import com.example.kduclubandsociety.Notification.NotificationActivity;
+import com.example.kduclubandsociety.Profile.ProfileActivity;
+import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -27,7 +27,7 @@ public class BottomNavigationViewHelper {
                         break;
                     }
                     case R.id.ic_club:{
-                        Intent intent2 =new Intent(context, ClubActivity.class);   //ACTIVITY_NUM = 1
+                        Intent intent2 =new Intent(context, ClubsActivity.class);   //ACTIVITY_NUM = 1
                         context.startActivity(intent2);
                         break;
                     }

@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety;
+package com.example.kduclubandsociety.Class;
 
 public class Club {
     private Integer id;

@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety.activity;
+package com.example.kduclubandsociety.Clubs;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,19 +10,17 @@ import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class DashboardActivity extends AppCompatActivity {
-
-    private static final String TAG = "DashboardActivity";
-    private static final int ACTIVITY_NUM = 0;
-    private Context mContext = DashboardActivity.this;
-
+public class ClubsActivity extends AppCompatActivity {
+    private static final String TAG = "ClubsActivity";
+    private static final int ACTIVITY_NUM = 1;
+    private Context mContext = ClubsActivity.this;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-        Log.d (TAG, "onCreate: starting");
+        setContentView(R.layout.activity_main);
         setupBottomNavigationView();
     }
 

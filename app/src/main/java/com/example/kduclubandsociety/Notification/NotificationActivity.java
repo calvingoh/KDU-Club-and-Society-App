@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety.activity;
+package com.example.kduclubandsociety.Notification;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -13,10 +13,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class ClubActivity extends AppCompatActivity {
-    private static final String TAG = "ClubActivity";
-    private static final int ACTIVITY_NUM = 1;
-    private Context mContext = ClubActivity.this;
+public class NotificationActivity extends AppCompatActivity {
+    private static final String TAG = "NotificationActivity";
+    private static final int ACTIVITY_NUM = 2;
+    private Context mContext = NotificationActivity.this;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

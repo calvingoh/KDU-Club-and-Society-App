@@ -1,4 +1,4 @@
-package com.example.kduclubandsociety;
+package com.example.kduclubandsociety.Class;
 
 public class Student {
     private String uid; //from firebase

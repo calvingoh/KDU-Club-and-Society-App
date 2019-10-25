@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.DashboardActivity"></activity>
+        <activity android:name=".Dashboard.DashboardActivity"></activity>
+        <activity android:name=".Clubs.ClubsActivity"></activity>
+        <activity android:name=".Notification.NotificationActivity"></activity>
+        <activity android:name=".Profile.ProfileActivity"></activity>
         <activity android:name=".club_list_activity" />
         <activity android:name=".Club_Profile" />
         <activity android:name=".MainActivity" /> <!-- android:label="@string/title_activity_main"></activity> -->
