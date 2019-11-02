@@ -27,7 +27,7 @@
             android:id= "@+id/rellayout2"
             android:layout_below="@+id/rellayout1">
 
-            <include layout="@layout/layout_center_viewpager"/>
+            <include layout="@layout/layout_center_viewpager_profile"/>
 
         </RelativeLayout>
 
