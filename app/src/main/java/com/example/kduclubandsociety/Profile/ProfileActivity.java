@@ -58,7 +58,7 @@ public class ProfileActivity extends AppCompatActivity {
         mEmail = findViewById(R.id.txtEmail);
 
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid);
+        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
