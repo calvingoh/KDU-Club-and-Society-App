@@ -70,8 +70,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                             FirebaseUser currentUser = mAuth.getCurrentUser();
                             String user = currentUser.getUid();
                             Intent intent = new Intent(LoginActivity.this, DashboardActivity.class);
-                           intent.putExtra("currentUid", user);
-                           startActivity(intent);
+                            intent.putExtra("currentUid", user);
+                            startActivity(intent);
                         }
                         else {
                             Toast.makeText(LoginActivity.this, "Email/Password Invalid", Toast.LENGTH_LONG).show();

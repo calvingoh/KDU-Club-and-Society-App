@@ -26,6 +26,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static final String TAG = "DashboardActivity";
     private static final int ACTIVITY_NUM = 0;
     private Context mContext = DashboardActivity.this;
+    private String uid;
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -43,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
         setupBottomNavigationView();
 
         Intent intent = getIntent();
-        String uid = intent.getStringExtra("currentUid");
+        uid = intent.getStringExtra("currentUid");
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
@@ -60,7 +61,6 @@ public class DashboardActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 String name = dataSnapshot.child("name").getValue().toString();
-                String email = dataSnapshot.child("email").getValue().toString();
 
                 mName.setText(name);
             }
@@ -80,7 +80,7 @@ public class DashboardActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView, uid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

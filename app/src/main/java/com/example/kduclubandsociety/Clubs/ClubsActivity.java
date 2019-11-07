@@ -21,25 +21,28 @@ public class ClubsActivity extends AppCompatActivity {
     private static final String TAG = "ClubsActivity";
     private static final int ACTIVITY_NUM = 1;
     private Context mContext = ClubsActivity.this;
-/*
+    private String uid;
+
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
-*/
+
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clubs);
         setupBottomNavigationView();
-/*
+
         Intent intent = getIntent();
         String uid = intent.getStringExtra("currentUid");
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
-        mFirebaseDatabase = FirebaseDatabase.getInstance(); */
+        mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+
     }
 
 
@@ -47,7 +50,7 @@ public class ClubsActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

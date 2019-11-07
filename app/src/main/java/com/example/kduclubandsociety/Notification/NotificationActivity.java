@@ -21,29 +21,30 @@ public class NotificationActivity extends AppCompatActivity {
     private static final String TAG = "NotificationActivity";
     private static final int ACTIVITY_NUM = 2;
     private Context mContext = NotificationActivity.this;
-/*
+    private String uid;
+
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
- */
+
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notification);
         setupBottomNavigationView();
-/*
+
         Intent intent = getIntent();
-        String uid = intent.getStringExtra("currentUid");
+        uid = intent.getStringExtra("currentUid");
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
- */
+
     }
 
 
@@ -51,7 +52,7 @@ public class NotificationActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
