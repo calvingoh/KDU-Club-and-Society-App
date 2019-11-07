@@ -41,10 +41,12 @@ public class DashboardActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Log.d (TAG, "onCreate: starting");
-        setupBottomNavigationView();
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
+
+        setupBottomNavigationView();
+
 
         //firebase
         mAuth = FirebaseAuth.getInstance();

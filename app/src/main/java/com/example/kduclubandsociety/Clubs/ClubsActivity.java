@@ -33,10 +33,13 @@ public class ClubsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_clubs);
-        setupBottomNavigationView();
 
         Intent intent = getIntent();
         String uid = intent.getStringExtra("currentUid");
+
+        setupBottomNavigationView();
+
+
 
         //firebase
         mAuth = FirebaseAuth.getInstance();

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -44,10 +45,13 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        setupBottomNavigationView();
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
+
+        setupBottomNavigationView();
+
+
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
@@ -74,6 +78,15 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        //SIGN OUT
+        mSignOut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mAuth.signOut();
+                finish();
             }
         });
 
