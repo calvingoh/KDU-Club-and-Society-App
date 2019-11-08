@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
@@ -29,6 +30,8 @@ public class NotificationActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
+    private TextView topTitle;
+
 
 
     @Override
@@ -43,6 +46,10 @@ public class NotificationActivity extends AppCompatActivity {
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+        //TOP TAB TITLE
+        topTitle =findViewById(R.id.txtTitle);
+        topTitle.setText("Notification");
 
 
     }

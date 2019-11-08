@@ -8,8 +8,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.kduclubandsociety.LoginActivity;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,7 +23,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ProfileActivity extends AppCompatActivity {
@@ -40,29 +41,35 @@ public class ProfileActivity extends AppCompatActivity {
     private Button mSignOut;
     private TextView mName;
     private TextView mEmail;
+    private TextView topTitle;
+    private TextView mClubName;
 
+
+    String findClubs;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
 
         setupBottomNavigationView();
 
-
+        //TOP TAB TITLE
+        topTitle =findViewById(R.id.txtTitle);
+        topTitle.setText("Profile");
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
         //initialize views
-        mSignOut = findViewById(R.id.signoutButton);
         mName = findViewById(R.id.txtName);
         mEmail = findViewById(R.id.txtEmail);
+        mClubName =findViewById(R.id.txtClubTitle);
 
 
+        //set profile details
         myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -70,6 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
+             //   findClubs = dataSnapshot.child ("clubs").child("id").getValue().toString();
 
                 mName.setText(name);
                 mEmail.setText (email);
@@ -81,14 +89,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        //SIGN OUT
-        mSignOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mAuth.signOut();
-                finish();
-            }
-        });
 
     }
 
@@ -102,5 +102,17 @@ public class ProfileActivity extends AppCompatActivity {
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    //sign out
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.btnSignOut :{
+                mAuth.signOut();
+                Intent intentSignOut = new Intent(mContext, LoginActivity.class);
+                startActivity(intentSignOut);
+            }
+        }
+
     }
 }

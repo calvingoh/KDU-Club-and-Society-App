@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
@@ -29,6 +30,8 @@ public class ClubsActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
+    private TextView topTitle;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +41,10 @@ public class ClubsActivity extends AppCompatActivity {
         String uid = intent.getStringExtra("currentUid");
 
         setupBottomNavigationView();
+
+        //TOP TAB TITLE
+        topTitle =findViewById(R.id.txtTitle);
+        topTitle.setText("Clubs");
 
 
 

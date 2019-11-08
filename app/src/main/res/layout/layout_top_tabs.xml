@@ -10,13 +10,22 @@
             android:layout_height= "match_parent">
 
             <androidx.appcompat.widget.Toolbar
-                android:layout_width = "match_parent"
-                android:layout_height= "match_parent"
-                android:id = "@+id/tabs"
+                android:id="@+id/tabs"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="@drawable/white_grey_border_bottom">
+
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="10dp"
+            android:textSize="24sp" />
 
 
     </RelativeLayout>

@@ -35,6 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     DatabaseReference myRef;
 
     private TextView mName;
+    private TextView topTitle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,10 @@ public class DashboardActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
 
+        //TOP TAB TITLE
+        topTitle =findViewById(R.id.txtTitle);
+        topTitle.setText("Dashboard");
+
 
         //firebase
         mAuth = FirebaseAuth.getInstance();
@@ -57,7 +62,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
+        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
