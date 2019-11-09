@@ -15,8 +15,8 @@
             <ImageView
                 android:id="@+id/imageView2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                tools:srcCompat="@tools:sample/avatars" />
+                android:layout_height="128dp"
+                android:src="@drawable/kdulogo" />
 
             <TextView
                 android:id="@+id/txtName"
@@ -31,10 +31,13 @@
                 android:inputType="textPersonName" />
 
             <LinearLayout
+                android:id="@+id/LinearEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
+                android:layout_marginTop="15dp"
                 android:layout_marginEnd="15dp"
+                android:layout_marginBottom="15dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -44,15 +47,16 @@
                     android:layout_weight="1"
                     android:text="Email : "
                     android:textAlignment="textEnd"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtEmail"
-                    android:layout_width="250dp"
+                    android:layout_width="220dp"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/LinearClub"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="15dp"
@@ -61,18 +65,17 @@
 
                 <TextView
                     android:id="@+id/txtClubTitle"
-                    android:layout_width="130dp"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Club : "
                     android:textAlignment="textEnd"
-                    android:textSize="24sp" />
+                    android:textSize="18sp" />
 
                 <TextView
                     android:id="@+id/txtClub"
-                    android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
+                    android:layout_width="220dp"
+                    android:layout_height="wrap_content" />
             </LinearLayout>
 
             <Button
@@ -80,6 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:layout_marginTop="100dp"
                 android:onClick="onClick"
                 android:text="@string/sign_out" />
 

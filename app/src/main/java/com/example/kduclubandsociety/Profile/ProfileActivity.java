@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity {
         //initialize views
         mName = findViewById(R.id.txtName);
         mEmail = findViewById(R.id.txtEmail);
-        mClubName =findViewById(R.id.txtClubTitle);
+        mClubName =findViewById(R.id.txtClub);
 
 
         //set profile details
@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity {
 
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
-             //   findClubs = dataSnapshot.child ("clubs").child("id").getValue().toString();
+                findClubs = dataSnapshot.child ("clubs").getChildren().toString(); //to figure this part
 
                 mName.setText(name);
                 mEmail.setText (email);
@@ -87,7 +87,27 @@ public class ProfileActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
+
+
         });
+
+        //set profile details
+        myRef = FirebaseDatabase.getInstance().getReference().child("Club").child("2"); //problem
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                String clubs =  dataSnapshot.child("name").getValue().toString();
+
+                mClubName.setText(clubs);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
 
 
     }

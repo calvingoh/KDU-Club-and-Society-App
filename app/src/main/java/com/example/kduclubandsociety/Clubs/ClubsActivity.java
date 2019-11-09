@@ -38,7 +38,7 @@ public class ClubsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_clubs);
 
         Intent intent = getIntent();
-        String uid = intent.getStringExtra("currentUid");
+        uid = intent.getStringExtra("currentUid");
 
         setupBottomNavigationView();
 
