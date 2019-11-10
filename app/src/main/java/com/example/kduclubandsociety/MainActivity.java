@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 club.setMeeting(mMeetingEditText.getText().toString().trim());
                 int max = Integer.parseInt(mMaxEditText.getText().toString().trim());
                 club.setMaxNum(max);
-                myRef.child(String.valueOf(maxid+1)).setValue(club);
+                myRef.child(String.valueOf(maxid+1)).setValue(club); //TO REGISTER NEW CLUB
                 Toast.makeText(MainActivity.this, "Data inserted", Toast.LENGTH_LONG).show();
             }
         });
