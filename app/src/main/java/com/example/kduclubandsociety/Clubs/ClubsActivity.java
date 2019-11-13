@@ -103,6 +103,7 @@ public class ClubsActivity extends AppCompatActivity {
                 }
                 adapter = new ClubListAdapter(ClubsActivity.this, clubList);
                 mlistview.setAdapter(adapter);
+
             }
 
             @Override
