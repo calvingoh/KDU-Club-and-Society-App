@@ -37,6 +37,7 @@ public class ClubsActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
     private Context mContext = ClubsActivity.this;
     private String uid;
+    private TextView topTitle;
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -55,7 +56,7 @@ public class ClubsActivity extends AppCompatActivity {
     int pos;
 
     //
-    private TextView topTitle;
+
     private SearchView sv;
 
     @Override
@@ -85,7 +86,6 @@ public class ClubsActivity extends AppCompatActivity {
         sv= findViewById(R.id.searchFilter);
 
         clubDetails();
-
         searchView();
     }
 

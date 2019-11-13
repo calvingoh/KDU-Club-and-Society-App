@@ -13,7 +13,9 @@ import com.squareup.picasso.Picasso;
 
 public class Club_Profile extends AppCompatActivity {
 
-    private TextView mNameTextView;
+    private TextView topTitle;
+
+   // private TextView mNameTextView;
     private TextView mDescriptionTextView;
     private TextView mMeetingTextView;
     private TextView mMaxTextView;
@@ -27,7 +29,8 @@ public class Club_Profile extends AppCompatActivity {
         setContentView(R.layout.club_activity_profile);
 
 
-        mNameTextView = findViewById(R.id.NametextView);
+
+      //  mNameTextView = findViewById(R.id.NametextView);
         mDescriptionTextView = findViewById(R.id.DescriptiontextView);
         mMeetingTextView = findViewById(R.id.MeetingtextView);
         mMaxTextView = findViewById(R.id.MaxtextView);
@@ -41,7 +44,11 @@ public class Club_Profile extends AppCompatActivity {
         String clubImage = intent.getStringExtra("cImage");
 
 
-        mNameTextView.setText(clubName);
+        //TOP TAB TITLE
+        topTitle =findViewById(R.id.txtTitle);
+        topTitle.setText(clubName);
+
+     //   mNameTextView.setText(clubName);
         mDescriptionTextView.setText(clubDesc);
         mMaxTextView.setText(clubMax);
         mMeetingTextView.setText(clubMeeting);
