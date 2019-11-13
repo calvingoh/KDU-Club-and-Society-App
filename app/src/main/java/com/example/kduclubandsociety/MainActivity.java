@@ -9,6 +9,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Club;
+import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -115,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         mShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, club_list_activity.class);
+                Intent intent = new Intent(MainActivity.this, ClubsActivity.class);
                 startActivity(intent);
             }
         });

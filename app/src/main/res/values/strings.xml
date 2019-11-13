@@ -17,4 +17,11 @@
     <string name="title_profile">Profile</string>
 
     <string name="noRegisteredClub">No Registered Club and Society</string>
+
+    <string name="register">Register</string>
+
+    <string name="clubName">Club Name</string>
+    <string name="clubDesc">Description</string>
+    <string name="clubMeeting">Meeting Datails</string>
+    <string name="clubMaxNum">Maximum Number of Member</string>
 </resources>

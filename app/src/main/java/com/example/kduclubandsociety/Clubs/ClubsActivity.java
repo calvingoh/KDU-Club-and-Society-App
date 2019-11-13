@@ -3,17 +3,20 @@ package com.example.kduclubandsociety.Clubs;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.ClubList;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
-import com.example.kduclubandsociety.club_list_activity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -26,7 +29,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class ClubsActivity extends AppCompatActivity {
@@ -41,10 +43,17 @@ public class ClubsActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
+    //Listview
+    ClubListAdapter adapter;
     ListView mlistview;
     List<Club> clubList;
 
+    //
+    int pos;
+
+    //
     private TextView topTitle;
+    private EditText theFilter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +74,15 @@ public class ClubsActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference("Club");
 
+        //listview
         mlistview = findViewById(R.id.listview2);
         clubList = new ArrayList<>();
+
+        //search filter
+        theFilter= findViewById(R.id.search_filter);
+
+        clubDetails();
+     //   search();
     }
 
     @Override
@@ -81,12 +97,51 @@ public class ClubsActivity extends AppCompatActivity {
                     Club club = clubSnapshot.getValue(Club.class);
                     clubList.add(club);
                 }
-                ClubList adapter = new ClubList(ClubsActivity.this, clubList);
+                adapter = new ClubListAdapter(ClubsActivity.this, clubList);
                 mlistview.setAdapter(adapter);
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    void search (){
+        //search filter
+        theFilter.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                (ClubsActivity.this).adapter.getFilter().filter(s);
+                adapter.notifyDataSetChanged();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+    }
+
+    //move to club activity
+    void clubDetails (){
+        mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pos = position;
+                Intent intentClubDetails = new Intent(mContext, Club_Profile.class);
+                intentClubDetails.putExtra("cName", clubList.get(pos).getName());
+                intentClubDetails.putExtra("cDescription", clubList.get(pos).getDescription());
+                intentClubDetails.putExtra("cMaxNum", clubList.get(pos).getMaxNum());
+                intentClubDetails.putExtra("cMeeting", clubList.get(pos).getMeeting());
+                startActivity (intentClubDetails);
 
             }
         });

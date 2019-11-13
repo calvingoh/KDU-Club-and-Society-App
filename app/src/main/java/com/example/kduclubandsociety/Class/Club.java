@@ -1,11 +1,14 @@
 package com.example.kduclubandsociety.Class;
 
+import java.net.URI;
+
 public class Club {
     private Integer id;
     private String name;
     private String description;
     private Integer maxNum;
     private String meeting;
+    private String image;
 
     public Club() {
         this.id = id;
@@ -13,6 +16,8 @@ public class Club {
         this.description = description;
         this.maxNum = maxNum;
         this.meeting = meeting;
+        this.image = image;
+
     }
 
     public Integer getId() {
@@ -53,5 +58,13 @@ public class Club {
 
     public void setMeeting(String meeting) {
         this.meeting = meeting;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

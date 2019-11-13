@@ -4,39 +4,98 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal"
-    tools:context=".Club_Profile">
+    android:layout_marginStart="15dp"
+    android:layout_marginEnd="15dp"
+    android:layout_marginBottom="200dp"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".Clubs.Club_Profile">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
-    <TextView
-        android:id="@+id/NametextView"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:text="TextView" />
+        android:layout_weight="0"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/DescriptiontextView"
+        <TextView
+            android:id="@+id/NametextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:text="TextView" />
+        android:layout_weight="0.2"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/MeetingtextView"
+        <TextView
+            android:id="@+id/descTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/clubDesc"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/DescriptiontextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:text="TextView" />
+        android:layout_weight="0.1"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/MaxtextView"
+        <TextView
+            android:id="@+id/meetingTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="@string/clubMeeting"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/MeetingtextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="0.3"
-        android:text="TextView" />
-</LinearLayout>
+        android:layout_marginBottom="20dp"
+        android:layout_weight="0"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/maxTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="0"
+            android:text="@string/clubMaxNum"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/MaxtextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:text="@string/register" />
+
 </LinearLayout>
