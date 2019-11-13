@@ -12,6 +12,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Club;
@@ -47,13 +48,15 @@ public class ClubsActivity extends AppCompatActivity {
     ClubListAdapter adapter;
     ListView mlistview;
     List<Club> clubList;
+    List<Club> clubList2;
+    Club club;
 
     //
     int pos;
 
     //
     private TextView topTitle;
-    private EditText theFilter;
+    private SearchView sv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,10 +82,11 @@ public class ClubsActivity extends AppCompatActivity {
         clubList = new ArrayList<>();
 
         //search filter
-        theFilter= findViewById(R.id.search_filter);
+        sv= findViewById(R.id.searchFilter);
 
         clubDetails();
-     //   search();
+
+        searchView();
     }
 
     @Override
@@ -94,7 +98,7 @@ public class ClubsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 clubList.clear();
                 for(DataSnapshot clubSnapshot: dataSnapshot.getChildren()){
-                    Club club = clubSnapshot.getValue(Club.class);
+                    club = clubSnapshot.getValue(Club.class);
                     clubList.add(club);
                 }
                 adapter = new ClubListAdapter(ClubsActivity.this, clubList);
@@ -106,29 +110,28 @@ public class ClubsActivity extends AppCompatActivity {
 
             }
         });
-
     }
 
-    void search (){
-        //search filter
-        theFilter.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+    void searchView (){
+        sv.setIconifiedByDefault(false);
+        sv.setQueryHint("Search Club and Society");
 
+        sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                (ClubsActivity.this).adapter.getFilter().filter(s);
+            public boolean onQueryTextChange(String newText) {
+                adapter.getFilter().filter(newText);
                 adapter.notifyDataSetChanged();
-            }
 
-            @Override
-            public void afterTextChanged(Editable s) {
-
+                return false;
             }
         });
     }
+
 
     //move to club activity
     void clubDetails (){
@@ -141,6 +144,7 @@ public class ClubsActivity extends AppCompatActivity {
                 intentClubDetails.putExtra("cDescription", clubList.get(pos).getDescription());
                 intentClubDetails.putExtra("cMaxNum", clubList.get(pos).getMaxNum());
                 intentClubDetails.putExtra("cMeeting", clubList.get(pos).getMeeting());
+                intentClubDetails.putExtra("cImage", clubList.get(pos).getImage());
                 startActivity (intentClubDetails);
 
             }

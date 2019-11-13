@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Dashboard.DashboardActivity"></activity>
-        <activity android:name=".Clubs.ClubsActivity"></activity>
+        <activity android:name=".Clubs.ClubsActivity"
+            android:windowSoftInputMode="adjustPan"></activity>
         <activity android:name=".Notification.NotificationActivity"></activity>
         <activity android:name=".Profile.ProfileActivity"></activity>
         <activity android:name=".Clubs.Club_Profile" />
