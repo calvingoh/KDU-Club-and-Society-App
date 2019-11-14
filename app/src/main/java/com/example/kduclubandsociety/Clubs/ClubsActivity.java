@@ -114,7 +114,7 @@ public class ClubsActivity extends AppCompatActivity {
     }
 
     void searchView (){
-        sv.setIconifiedByDefault(false);
+
         sv.setQueryHint("Search Club and Society");
 
         sv.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -133,7 +133,6 @@ public class ClubsActivity extends AppCompatActivity {
         });
     }
 
-
     //move to club activity
     void clubDetails (){
         mlistview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -141,17 +140,19 @@ public class ClubsActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 pos = position;
                 Intent intentClubDetails = new Intent(mContext, Club_Profile.class);
+                intentClubDetails.putExtra("cId",clubList.get(pos).getId());
                 intentClubDetails.putExtra("cName", clubList.get(pos).getName());
                 intentClubDetails.putExtra("cDescription", clubList.get(pos).getDescription());
                 intentClubDetails.putExtra("cMaxNum", clubList.get(pos).getMaxNum());
                 intentClubDetails.putExtra("cMeeting", clubList.get(pos).getMeeting());
                 intentClubDetails.putExtra("cImage", clubList.get(pos).getImage());
+                intentClubDetails.putExtra("currentUid",uid);
+
                 startActivity (intentClubDetails);
 
             }
         });
     }
-
 
     // set up bottom navigation bar
     private void setupBottomNavigationView(){

@@ -103,10 +103,11 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnRegister"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:text="@string/register" />
+        android:text="@string/register"
+        android:onClick="onClick"/>
 
 </LinearLayout>

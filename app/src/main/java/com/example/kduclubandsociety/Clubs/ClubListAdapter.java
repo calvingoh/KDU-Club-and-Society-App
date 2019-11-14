@@ -17,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import io.opencensus.trace.export.RunningSpanStore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,11 +46,9 @@ public class ClubListAdapter extends ArrayAdapter<Club> implements Filterable {
         Club club = clubList.get(position);
 
         clubName.setText(club.getName());
-     //   clubDescription.setText(club.getDescription());
         Picasso.get().load(club.getImage()).into(img);
 
         return listViewItem;
-        //return super.getView(position, convertView, parent);
 
     }
 

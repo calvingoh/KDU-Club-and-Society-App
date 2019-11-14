@@ -7,7 +7,20 @@
 
         <com.google.android.material.appbar.AppBarLayout
             android:layout_width = "match_parent"
-            android:layout_height= "match_parent">
+            android:layout_height= "match_parent"
+            android:background="@drawable/white_grey_border_bottom">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingTop="10dp"
+                android:text="cc"
+                android:textSize="18sp"
+                android:background="@color/white"/>
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tabs"
@@ -18,14 +31,6 @@
             </androidx.appcompat.widget.Toolbar>
 
         </com.google.android.material.appbar.AppBarLayout>
-
-        <TextView
-            android:id="@+id/txtTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingLeft="20dp"
-            android:paddingTop="10dp"
-            android:textSize="18sp" />
 
 
     </RelativeLayout>
