@@ -9,14 +9,16 @@ public class Club {
     private Integer maxNum;
     private String meeting;
     private String image;
+    private String icon;
 
-    public Club(int id, String name, String description, int num, String meeting, String image) {
+    public Club(int id, String name, String description, int num, String meeting, String image, String icon) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.maxNum = maxNum;
         this.meeting = meeting;
         this.image = image;
+        this.icon = icon;
     }
 
     public Integer getId() {
@@ -66,6 +68,16 @@ public class Club {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public String getIcon() {
+        return icon;
+    }
+
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
+
+
 
     public Club(){}
 }

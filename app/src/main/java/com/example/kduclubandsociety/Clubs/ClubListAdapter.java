@@ -41,12 +41,12 @@ public class ClubListAdapter extends ArrayAdapter<Club> implements Filterable {
 
         TextView clubName = listViewItem.findViewById(R.id.txtClubName);
        // TextView clubDescription = listViewItem.findViewById(R.id.txtClubDesc);
-        ImageView img = listViewItem.findViewById(R.id.imgIcon);
+        ImageView icon = listViewItem.findViewById(R.id.imgIcon);
 
         Club club = clubList.get(position);
 
         clubName.setText(club.getName());
-        Picasso.get().load(club.getImage()).into(img);
+        Picasso.get().load(club.getIcon()).into(icon);
 
         return listViewItem;
 

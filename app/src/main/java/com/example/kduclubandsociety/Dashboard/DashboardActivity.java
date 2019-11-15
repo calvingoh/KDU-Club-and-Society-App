@@ -43,7 +43,6 @@ public class DashboardActivity extends AppCompatActivity {
 
     // Recycle View - Dash board
     RecyclerView dashView;
-    DashboardAdapter dashAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,8 +63,6 @@ public class DashboardActivity extends AppCompatActivity {
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference().child("Club");
         myRef.keepSynced(true);
-
-
 
         //recycler view
         dashView = findViewById(R.id.dashboardView);
@@ -91,34 +88,6 @@ public class DashboardActivity extends AppCompatActivity {
 
         dashView.setAdapter(firebaseRecyclerAdapter);
     }
-
-
-
-    /*
-    @Override
-    protected void onStart() {
-        super.onStart();
-        clubList = new ArrayList<>();
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                //club = new ArrayList<>();
-                for(DataSnapshot clubSnapshot: dataSnapshot.getChildren()){
-                    club = clubSnapshot.getValue(Club.class);
-                    clubList.add(club);
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-    }
-     */
-
 
     // set up bottom navigation bar
     private void setupBottomNavigationView(){
