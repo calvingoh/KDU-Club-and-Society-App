@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String uid = intent.getStringExtra("currentUid");
 
-        club = new Club();
+        //club = new Club();
 
         //firebase
         mAuth = FirebaseAuth.getInstance();

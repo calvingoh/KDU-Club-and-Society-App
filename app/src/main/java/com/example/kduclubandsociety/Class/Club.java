@@ -10,14 +10,13 @@ public class Club {
     private String meeting;
     private String image;
 
-    public Club() {
+    public Club(int id, String name, String description, int maxNum, String meeting, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.maxNum = maxNum;
         this.meeting = meeting;
         this.image = image;
-
     }
 
     public Integer getId() {
