@@ -10,7 +10,7 @@ public class Club {
     private String meeting;
     private String image;
 
-    public Club(int id, String name, String description, int maxNum, String meeting, String image) {
+    public Club(int id, String name, String description, int num, String meeting, String image) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -66,4 +66,6 @@ public class Club {
     public void setImage(String image) {
         this.image = image;
     }
+
+    public Club(){}
 }
