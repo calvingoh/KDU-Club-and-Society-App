@@ -8,6 +8,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.example.kduclubandsociety.Class.Club;
+import com.example.kduclubandsociety.Clubs.ClubListAdapter;
+import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -18,8 +21,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -34,8 +41,14 @@ public class DashboardActivity extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
-    private TextView mName;
+    //Top Tabs
     private TextView topTitle;
+
+    // Recycle View - Dash board
+    RecyclerView dashView;
+    DashboardAdapter dashAdapter;
+
+    ArrayList<Club> club;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,24 +65,24 @@ public class DashboardActivity extends AppCompatActivity {
         topTitle =findViewById(R.id.txtTitle);
         topTitle.setText("Dashboard");
 
-
         //firebase
         mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
 
-        //initialize views
-        mName = findViewById(R.id.txtName);
-
-
-
-        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                club = new ArrayList<>();
+                for(DataSnapshot clubSnapshot: dataSnapshot.getChildren()){
+                    Club c = new Club (clubSnapshot.getValue(Club.class).getId(),
+                            clubSnapshot.getValue(Club.class).getName(),
+                            clubSnapshot.getValue(Club.class).getDescription(),
+                            clubSnapshot.getValue(Club.class).getMaxNum(),
+                            clubSnapshot.getValue(Club.class).getMeeting(),
+                            clubSnapshot.getValue(Club.class).getImage());
+                    club.add(c);
+                }
 
-                String name = dataSnapshot.child("name").getValue().toString();
-
-                mName.setText(name);
             }
 
             @Override
@@ -78,7 +91,11 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
-
+        //recycler view
+        dashView = findViewById(R.id.dashboardView);
+        dashView.setLayoutManager((new GridLayoutManager(this, 2)));
+        dashAdapter = new DashboardAdapter(DashboardActivity.this,club );
+        dashView.setAdapter(dashAdapter);
 
     }
 
