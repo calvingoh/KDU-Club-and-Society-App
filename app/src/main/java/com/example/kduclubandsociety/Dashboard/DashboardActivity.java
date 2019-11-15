@@ -62,7 +62,7 @@ public class DashboardActivity extends AppCompatActivity {
 
 
 
-        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid);
+        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

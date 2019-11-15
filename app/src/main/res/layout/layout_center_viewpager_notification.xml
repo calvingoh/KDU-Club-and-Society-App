@@ -1,8 +1,16 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width = "match_parent"
-        android:layout_height= "match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/TokenTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:text="Show Notification" />
 
         <TextView
             android:id="@+id/txtName"
@@ -11,13 +19,42 @@
             android:gravity="center|center_horizontal"
             android:text="notification" />
 
+        <EditText
+            android:id="@+id/TitleeditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/BodyeditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Body"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/addButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="add to channel 1"
+            android:onClick="sendNotification1" />
+
+        <Button
+            android:id="@+id/addButton2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="add to channel 2" />
+
         <androidx.viewpager.widget.ViewPager
-            android:layout_width = "match_parent"
-            android:layout_height= "match_parent"
-            android:id= "@+id/container">
+            android:id="@+id/container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
 
         </androidx.viewpager.widget.ViewPager>
 
-    </RelativeLayout>
+    </LinearLayout>
 </merge>

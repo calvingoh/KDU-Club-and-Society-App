@@ -113,13 +113,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mShow.setOnClickListener(new View.OnClickListener() {
+        /*mShow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MainActivity.this, ClubsActivity.class);
                 startActivity(intent);
             }
         });
+
+         */
 
         mSignOut.setOnClickListener(new View.OnClickListener() {
             @Override

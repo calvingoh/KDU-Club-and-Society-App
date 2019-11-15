@@ -81,7 +81,7 @@ public class Club_Profile extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
-                                Toast.makeText(Club_Profile.this, "Data inserted", Toast.LENGTH_LONG).show();
+                                Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
                                 startActivity(intent);
                             }

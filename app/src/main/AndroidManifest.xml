@@ -11,11 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard.DashboardActivity"></activity>
-        <activity android:name=".Clubs.ClubsActivity"
-            android:windowSoftInputMode="adjustPan|stateHidden"></activity>
-        <activity android:name=".Notification.NotificationActivity"></activity>
-        <activity android:name=".Profile.ProfileActivity"></activity>
+        <activity android:name=".Notification.GenerateNotification"/>
+        <activity android:name=".Dashboard.DashboardActivity" />
+        <activity android:name=".Clubs.ClubsActivity" />
+        <activity android:name=".Notification.NotificationActivity" />
+        <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".Clubs.Club_Profile" />
         <activity android:name=".MainActivity" /> <!-- android:label="@string/title_activity_main"></activity> -->
         <activity android:name=".LoginActivity">
@@ -23,8 +23,12 @@
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </activity>
+
+        <service android:name=".Notification.FirebaseMessagingService" />
     </application>
 
 </manifest>

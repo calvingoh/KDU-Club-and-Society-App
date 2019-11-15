@@ -3,13 +3,16 @@ package com.example.kduclubandsociety.Class;
 public class Student {
     private String uid; //from firebase
     private int id;
+    private String token;
     private String name;
     private String email;
     private int[][] clubs;
 
-    public Student(String uid, int id, String name, String email, int[][] clubs) {
+
+    public Student(String uid, String token) {
         this.uid = uid;
         this.id = id;
+        this.token = token;
         this.name = name;
         this.email = email;
         this.clubs = clubs;
@@ -53,5 +56,13 @@ public class Student {
 
     public void setClubs(int[][] clubs) {
         this.clubs = clubs;
+    }
+
+    public String getToken() {
+        return token;
+    }
+
+    public void setToken(String token) {
+        this.token = token;
     }
 }
