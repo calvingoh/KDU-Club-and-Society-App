@@ -19,9 +19,13 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
+import java.util.List;
+
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,13 +40,14 @@ public class DashboardActivity extends AppCompatActivity {
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
-    DatabaseReference myRef;
+    DatabaseReference myRef , mStudentRef, mClubRef;
 
     //Top Tabs
     private TextView topTitle;
 
     // Recycle View - Dash board
     RecyclerView dashView;
+    Query query;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,23 +66,24 @@ public class DashboardActivity extends AppCompatActivity {
 
         //firebase
         mFirebaseDatabase = FirebaseDatabase.getInstance();
-        myRef = mFirebaseDatabase.getReference().child("Club");
+        myRef = mFirebaseDatabase.getReference();
+        mStudentRef = myRef.child ("Student").child(uid);
+        mClubRef = myRef.child ("Club");
+
         myRef.keepSynced(true);
 
         //recycler view
         dashView = findViewById(R.id.dashboardView);
-        //dashView.setHasFixedSize(true);
         dashView.setLayoutManager(new GridLayoutManager(this,2));
-      //  dashAdapter = new DashboardAdapter(DashboardActivity.this,clubList );
-      //  dashView.setAdapter(dashAdapter);
 
     }
 
+    //set up card view
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Club,MyHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Club, MyHolder>
-                (Club.class, R.layout.dashboard_cardview,MyHolder.class,myRef) {
+                (Club.class, R.layout.dashboard_cardview,MyHolder.class,mClubRef) {
             @Override
             protected void populateViewHolder(MyHolder myHolder, Club club, int i) {
                 myHolder.setTitle(club.getName());

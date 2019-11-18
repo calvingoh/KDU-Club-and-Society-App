@@ -58,6 +58,7 @@ public class Club_Profile extends AppCompatActivity {
         String clubImage = intent.getStringExtra("cImage");
         currentUid = intent.getStringExtra("currentUid");
 
+        ref = FirebaseDatabase.getInstance().getReference().child("Student").child(currentUid);
 
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
@@ -72,17 +73,17 @@ public class Club_Profile extends AppCompatActivity {
 
     public void onClick(View v){
         if (v.getId()== R.id.btnRegister){
-
+          //  String registeredClub [ref.child("clubs").getChildren()] = ref.child ("clubs").getChildren(),getKey();
 
             //register student into club
-           ref = FirebaseDatabase.getInstance().getReference().child("Student").child(currentUid);
-           ref.child ("clubs").child(Integer.toString(clubId)).child("permission").setValue(false)
+           ref.child ("clubs").child(Integer.toString(clubId)).setValue(false)
                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull Task<Void> task) {
                             if (task.isSuccessful()) {
                                 Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
                                 Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
+                                intent.putExtra("currentUid", currentUid);
                                 startActivity(intent);
                             }
 
