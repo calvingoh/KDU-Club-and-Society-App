@@ -6,7 +6,9 @@
     android:orientation="vertical"
     app:cardCornerRadius="12dp"
     android:layout_margin="7dp"
-    android:elevation="90dp">
+    android:elevation="90dp"
+    android:clickable="true"
+    android:onClick="onClick">
 
     <LinearLayout
         android:layout_width="match_parent"

@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Club;
@@ -89,6 +90,7 @@ public class DashboardActivity extends AppCompatActivity {
                 myHolder.setTitle(club.getName());
                 myHolder.setDesc(club.getDescription());
                 myHolder.setImage(club.getImage());
+                myHolder.id = club.getId();
             }
         };
 
