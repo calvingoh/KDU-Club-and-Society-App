@@ -77,6 +77,8 @@ public class DashboardActivity extends AppCompatActivity {
         dashView = findViewById(R.id.dashboardView);
         dashView.setLayoutManager(new GridLayoutManager(this,2));
 
+        query = mClubRef.orderByChild("id").equalTo(mStudentRef.child("clubs").getKey());
+
     }
 
     //set up card view
@@ -84,7 +86,7 @@ public class DashboardActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Club,MyHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Club, MyHolder>
-                (Club.class, R.layout.dashboard_cardview,MyHolder.class,mClubRef) {
+                (Club.class, R.layout.dashboard_cardview,MyHolder.class,query) {
             @Override
             protected void populateViewHolder(MyHolder myHolder, Club club, int i) {
                 myHolder.setTitle(club.getName());
