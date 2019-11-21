@@ -7,11 +7,12 @@
     tools:context=".Dashboard.Announcement">
 
     <ListView
+        android:id="@+id/announcement_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnEdit"
+        android:id="@+id/btnAddAnnouncement"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center|bottom"
@@ -19,5 +20,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:onClick="onClick"
-        android:src="@drawable/ic_edit_black" />
+        android:src="@drawable/ic_add_black"
+        android:backgroundTint="@color/addBlue"
+        android:tint ="@color/white"/>
 </RelativeLayout>

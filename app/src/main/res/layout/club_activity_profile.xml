@@ -106,7 +106,9 @@
         android:layout_gravity="end|bottom"
         android:layout_margin="16dp"
         android:onClick="onClick"
-        android:src="@drawable/ic_edit_black" />
+        android:src="@drawable/ic_edit_black"
+        android:backgroundTint="@color/editRed"
+        android:tint="@color/white"/>
 
 
 
