@@ -3,6 +3,7 @@ package com.example.kduclubandsociety.Dashboard;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.kduclubandsociety.R;
 
@@ -11,6 +12,10 @@ public class Announcement extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_announcement);
+        setContentView(R.layout.dashboard_announcement);
+    }
+
+    public void onClick(View v){
+
     }
 }

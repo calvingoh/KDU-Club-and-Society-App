@@ -9,7 +9,6 @@
     android:orientation="vertical"
     tools:context=".Clubs.Club_Profile">
 
-
     <!--top tool bar -->
     <RelativeLayout
         android:layout_width = "match_parent"
