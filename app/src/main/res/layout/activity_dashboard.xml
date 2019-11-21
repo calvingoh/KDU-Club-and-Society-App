@@ -8,31 +8,33 @@
     tools:context = ".Dashboard.DashboardActivity">
 
     <RelativeLayout
-        android:layout_width = "match_parent"
-        android:layout_height = "match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
         <!--top tool bar -->
         <RelativeLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:id= "@+id/rellayout1">
+            android:id="@+id/rellayout1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-            <include layout="@layout/layout_top_tabs"/>
+            <include layout="@layout/layout_top_tabs" />
         </RelativeLayout>
 
         <!--Middle section -->
         <RelativeLayout
-            android:layout_width = "match_parent"
-            android:layout_height = "wrap_content"
-            android:id= "@+id/rellayout2"
-            android:layout_below="@+id/rellayout1">
+            android:id="@+id/rellayout2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rellayout1"
+            android:layout_marginBottom="50dp">
 
-            <include layout="@layout/layout_center_viewpager_dashboard"/>
+            <include layout="@layout/layout_center_viewpager_dashboard" />
 
         </RelativeLayout>
 
         <!--Bottom Navigation -->
         <include layout="@layout/layout_bottom_navigation_view" />
+
 
     </RelativeLayout>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

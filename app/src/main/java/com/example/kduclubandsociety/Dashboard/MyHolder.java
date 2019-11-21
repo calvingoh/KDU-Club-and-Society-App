@@ -20,6 +20,7 @@ public class MyHolder extends RecyclerView.ViewHolder {
     Intent intent;
     String title, desc, image;
     int id;
+    String uid;
 
     public MyHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,6 +33,7 @@ public class MyHolder extends RecyclerView.ViewHolder {
                 intent.putExtra("mDesc", desc);
                 intent.putExtra("mImage", image);
                 intent.putExtra("mId", id);
+                intent.putExtra("currentUid", uid);
                 v.getContext().startActivity (intent);
             }
         });

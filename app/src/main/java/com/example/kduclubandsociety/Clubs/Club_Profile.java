@@ -15,6 +15,7 @@ import com.example.kduclubandsociety.MainActivity;
 import com.example.kduclubandsociety.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,11 +32,14 @@ public class Club_Profile extends AppCompatActivity {
     private TextView mMeetingTextView;
     private TextView mMaxTextView;
     private ImageView mImage;
+    private Button btnRegister;
+    private FloatingActionButton btnEdit;
+
 
     String currentUid;
     int clubId;
 
-    DatabaseReference ref;
+    DatabaseReference ref, mClubRef, mStudentRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,41 +62,100 @@ public class Club_Profile extends AppCompatActivity {
         String clubImage = intent.getStringExtra("cImage");
         currentUid = intent.getStringExtra("currentUid");
 
-        ref = FirebaseDatabase.getInstance().getReference().child("Student").child(currentUid);
-
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
         topTitle.setText(clubName);
 
-     //   mNameTextView.setText(clubName);
+        //   mNameTextView.setText(clubName);
         mDescriptionTextView.setText(clubDesc);
         mMaxTextView.setText(clubMax);
         mMeetingTextView.setText(clubMeeting);
         Picasso.get().load(clubImage).into(mImage);
+
+        // firebase
+        ref = FirebaseDatabase.getInstance().getReference();
+        mClubRef = ref.child("Club");
+        mStudentRef = ref.child("Student").child(currentUid);
+
+        //buttons
+        btnRegister = findViewById(R.id.btnRegister);
+        btnEdit = findViewById(R.id.btnEdit);
+
+        checkRegistered();
+
+
     }
 
+    // check whether student registered into the club or no and their permission
+    void checkRegistered(){
+        mStudentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+              if (dataSnapshot.hasChild("clubs")){
+                  if (dataSnapshot.child("clubs").hasChild(Integer.toString(clubId))){
+                      btnRegister.setVisibility(View.GONE);
+
+                      if (dataSnapshot.child("clubs").child(Integer.toString(clubId))
+                              .getValue(Boolean.class)== false){
+                          btnEdit.hide();
+                      }
+                      else {
+                          btnEdit.show();
+                      }
+
+                  }
+                  else {
+                      btnRegister.setVisibility(View.VISIBLE);
+                      btnEdit.hide();
+                  }
+              }
+
+              else {
+                  btnRegister.setVisibility(View.VISIBLE);
+                  btnEdit.hide();
+              }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+
+    //REGISTER Student to Club
     public void onClick(View v){
-        if (v.getId()== R.id.btnRegister){
-          //  String registeredClub [ref.child("clubs").getChildren()] = ref.child ("clubs").getChildren(),getKey();
+        switch (v.getId()){
 
-            //register student into club
-           ref.child ("clubs").child(Integer.toString(clubId)).setValue(false)
-                    .addOnCompleteListener(new OnCompleteListener<Void>() {
-                        @Override
-                        public void onComplete(@NonNull Task<Void> task) {
-                            if (task.isSuccessful()) {
-                                Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
-                                Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
-                                intent.putExtra("currentUid", currentUid);
-                                startActivity(intent);
+            case R.id.btnRegister: {
+                //register student into club
+                mStudentRef.child ("clubs").child(Integer.toString(clubId)).setValue(false)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if (task.isSuccessful()) {
+                                    Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
+                                    Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
+                                    intent.putExtra("currentUid", currentUid);
+                                    startActivity(intent);
+                                }
+
+                                else{
+                                    Toast.makeText(Club_Profile.this, "Data Failed to insert", Toast.LENGTH_LONG).show();
+                                }
                             }
+                        });
+            }
 
-                            else{
-                                Toast.makeText(Club_Profile.this, "Data Failed to insert", Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
-
+            case R.id.btnEdit:{
+                //edit and update
+            }
         }
+
+
+
+
     }
 }

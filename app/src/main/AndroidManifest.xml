@@ -6,12 +6,13 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/kdulogo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard.DashboardOptionActivity"></activity>
+        <activity android:name=".Dashboard.Announcement"></activity>
+        <activity android:name=".Dashboard.DashboardOptionActivity" />
         <activity android:name=".Notification.GenerateNotification" />
         <activity android:name=".Dashboard.DashboardActivity" />
         <activity android:name=".Clubs.ClubsActivity" />
@@ -28,7 +29,8 @@
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </activity>
-        <receiver android:name=".Notification.NotificationReciever"/>
+
+        <receiver android:name=".Notification.NotificationReciever" />
 
         <service android:name=".Notification.FirebaseMessagingService" />
     </application>

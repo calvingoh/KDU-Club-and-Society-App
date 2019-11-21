@@ -4,13 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_marginStart="15dp"
-    android:layout_marginEnd="15dp"
-    android:layout_marginBottom="100dp"
+    android:layout_marginBottom="10dp"
     android:gravity="center"
     android:orientation="vertical"
     tools:context=".Clubs.Club_Profile">
-
 
 
     <!--top tool bar -->
@@ -28,14 +25,6 @@
         android:layout_height="202dp"
         android:layout_weight="0"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
-<!--
-    <TextView
-        android:id="@+id/NametextView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
-        android:textSize="16sp"
-        android:textStyle="bold" /> -->
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -109,5 +98,17 @@
         android:layout_weight="0"
         android:text="@string/register"
         android:onClick="onClick"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="16dp"
+        android:onClick="onClick"
+        android:src="@drawable/ic_edit_black" />
+
+
 
 </LinearLayout>

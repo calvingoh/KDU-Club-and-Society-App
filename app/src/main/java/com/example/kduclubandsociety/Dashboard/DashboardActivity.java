@@ -24,6 +24,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
+import java.io.Console;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -49,6 +50,7 @@ public class DashboardActivity extends AppCompatActivity {
     // Recycle View - Dash board
     RecyclerView dashView;
     Query query;
+    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,25 +79,25 @@ public class DashboardActivity extends AppCompatActivity {
         dashView = findViewById(R.id.dashboardView);
         dashView.setLayoutManager(new GridLayoutManager(this,2));
 
-        query = mClubRef.orderByChild("id").equalTo(mStudentRef.child("clubs").getKey());
-
     }
+
 
     //set up card view
     @Override
     protected void onStart() {
         super.onStart();
         FirebaseRecyclerAdapter<Club,MyHolder>firebaseRecyclerAdapter = new FirebaseRecyclerAdapter<Club, MyHolder>
-                (Club.class, R.layout.dashboard_cardview,MyHolder.class,query) {
+                (Club.class, R.layout.dashboard_cardview,MyHolder.class,mClubRef) {
+
             @Override
             protected void populateViewHolder(MyHolder myHolder, Club club, int i) {
                 myHolder.setTitle(club.getName());
                 myHolder.setDesc(club.getDescription());
                 myHolder.setImage(club.getImage());
                 myHolder.id = club.getId();
+                myHolder.uid = uid;
             }
         };
-
         dashView.setAdapter(firebaseRecyclerAdapter);
     }
 

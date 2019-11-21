@@ -41,15 +41,12 @@ public class ClubsActivity extends AppCompatActivity {
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
     DatabaseReference myRef;
 
     //Listview
     ClubListAdapter adapter;
     ListView mlistview;
     List<Club> clubList;
-    List<Club> clubList2;
     Club club;
 
     //
@@ -74,7 +71,6 @@ public class ClubsActivity extends AppCompatActivity {
         topTitle.setText("Clubs");
 
         //firebase
-        mAuth = FirebaseAuth.getInstance();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         myRef = mFirebaseDatabase.getReference("Club");
 
