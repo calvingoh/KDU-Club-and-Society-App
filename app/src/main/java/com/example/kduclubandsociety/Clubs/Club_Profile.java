@@ -1,8 +1,10 @@
 package com.example.kduclubandsociety.Clubs;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -130,23 +132,7 @@ public class Club_Profile extends AppCompatActivity {
         switch (v.getId()){
 
             case R.id.btnRegister: {
-                //register student into club
-                mStudentRef.child ("clubs").child(Integer.toString(clubId)).setValue(false)
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
-                                    Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
-                                    intent.putExtra("currentUid", currentUid);
-                                    startActivity(intent);
-                                }
-
-                                else{
-                                    Toast.makeText(Club_Profile.this, "Data Failed to insert", Toast.LENGTH_LONG).show();
-                                }
-                            }
-                        });
+                confirmRegister();
             }
 
             case R.id.btnEdit:{
@@ -154,8 +140,46 @@ public class Club_Profile extends AppCompatActivity {
             }
         }
 
+    }
 
+    void register (){
+        //register student into club
+        mStudentRef.child ("clubs").child(Integer.toString(clubId)).setValue(false)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        if (task.isSuccessful()) {
+                            Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
+                            Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
+                            intent.putExtra("currentUid", currentUid);
+                            startActivity(intent);
+                        }
 
+                        else{
+                            Toast.makeText(Club_Profile.this, "Data Failed to insert", Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+    }
 
+    void confirmRegister(){
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(Club_Profile.this);
+        dialog.setTitle("Confirmation");
+        dialog.setMessage("Do you want to register into this club?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                register();
+            }
+        });
+
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

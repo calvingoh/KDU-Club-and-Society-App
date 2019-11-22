@@ -9,15 +9,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.Clubs.ClubListAdapter;
 import com.example.kduclubandsociety.Clubs.Club_Profile;
-import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,9 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.lang.reflect.Array;
-import java.util.List;
 
 public class DashboardOptionActivity extends AppCompatActivity {
     private static final String TAG = "ClubsActivity";
@@ -89,11 +83,17 @@ public class DashboardOptionActivity extends AppCompatActivity {
                  switch (position){
                      case 0 :{
 
+                         Intent intentAnnouncement = new Intent(mContext, AnnouncementActivity.class);
+                         intentAnnouncement.putExtra("currentUid",uid);
+                         intentAnnouncement.putExtra("cId",club.getId());
+                         startActivity(intentAnnouncement);
                      }
+                     break;
 
                      case 1:{
 
                      }
+                     break;
 
                      case 2:{
                          Intent intentClubDetails = new Intent(mContext, Club_Profile.class);
@@ -106,6 +106,7 @@ public class DashboardOptionActivity extends AppCompatActivity {
                          intentClubDetails.putExtra("currentUid",uid);
                          startActivity (intentClubDetails);
                      }
+                     break;
                  }
             }
         });
