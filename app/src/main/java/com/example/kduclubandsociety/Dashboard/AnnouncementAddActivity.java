@@ -44,9 +44,11 @@ public class AnnouncementAddActivity extends AppCompatActivity {
     EditText txtBody;
     String ancTitle;
     String ancBody;
+    String username;
 
-    DatabaseReference ref, mClubRef;
+    DatabaseReference ref, mClubRef, mStudentRef;
     int clubId;
+    String currentUid;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Calendar c;
@@ -59,10 +61,12 @@ public class AnnouncementAddActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         clubId = intent.getIntExtra("cId", 0);
+        currentUid = intent.getStringExtra("currentUid");
 
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
         mClubRef = ref.child("Club").child(Integer.toString(clubId));
+        mStudentRef = ref.child("Student").child (currentUid);
 
 
         txtTitle = findViewById(R.id.txtAncTitle);
@@ -70,6 +74,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
 
         windowSize();
         createNotificationChannel();
+        getUsername();
     }
 
     //change window size
@@ -110,11 +115,27 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         announcement1.setDate(date);
         announcement1.setTitle(ancTitle);
         announcement1.setBody(ancBody);
+        announcement1.setUsername (username);
+
 
         mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
         Toast.makeText(AnnouncementAddActivity.this, "Announcement Posted!", Toast.LENGTH_LONG).show();
 
         AnnouncementAddActivity.this.finish();
+    }
+
+    void getUsername(){
+        mStudentRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                username= dataSnapshot.child("name").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     private void createNotificationChannel() {

@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -70,6 +71,8 @@ public class AnnouncementActivity extends AppCompatActivity {
         btnAddAnnouncement = findViewById(R.id.btnAddAnnouncement);
 
         checkPermission();
+        addListView();
+        viewDetails();
     }
 
     // check whether student's permission
@@ -97,6 +100,7 @@ public class AnnouncementActivity extends AppCompatActivity {
     void add(){
        Intent intentAdd = new Intent(mContext, AnnouncementAddActivity.class);
        intentAdd.putExtra("cId",clubId);
+       intentAdd.putExtra("currentUid", currentUid);
        startActivity(intentAdd);
     }
 
@@ -111,7 +115,7 @@ public class AnnouncementActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild("announcement")){
-                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement").child("23").child("11");
+                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement").child("24").child("11");
                     announcementList.clear();
 
                     for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
@@ -130,9 +134,25 @@ public class AnnouncementActivity extends AppCompatActivity {
         });
     }
 
+    void viewDetails(){
+        aListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentAnnDeets = new Intent (mContext,AnnouncementDetails.class);
+                intentAnnDeets.putExtra("cId",clubId);
+                intentAnnDeets.putExtra("currentUid", currentUid);
+                intentAnnDeets.putExtra("annTitle", announcementList.get(position).getTitle());
+                intentAnnDeets.putExtra("annBody", announcementList.get(position).getBody());
+                intentAnnDeets.putExtra("annDate", announcementList.get(position).getDate());
+                intentAnnDeets.putExtra("annUsername", announcementList.get(position).getUsername());
+                startActivity(intentAnnDeets);
+            }
+        });
+    }
+
     @Override
     protected void onStart() {
         super.onStart();
-        addListView();
+
     }
 }
