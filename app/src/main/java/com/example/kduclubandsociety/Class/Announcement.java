@@ -4,6 +4,8 @@ public class Announcement {
     private String date;
     private String title;
     private String body;
+    private String username;
+
 
     public String getDate() {
         return date;
@@ -28,4 +30,13 @@ public class Announcement {
     public void setBody(String body) {
         this.body = body;
     }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
 }

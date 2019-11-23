@@ -74,7 +74,7 @@ public class ProfileActivity extends AppCompatActivity {
 
 
         //set profile details
-        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid); //problem
+        myRef = FirebaseDatabase.getInstance().getReference().child("Student").child(uid);
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

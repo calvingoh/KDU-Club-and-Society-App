@@ -2,48 +2,25 @@ package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 
-import android.app.Notification;
-import android.app.NotificationChannel;
-import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Announcement;
 import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.Class.Student;
 import com.example.kduclubandsociety.Clubs.ClubListAdapter;
 import com.example.kduclubandsociety.Clubs.ClubsActivity;
-import com.example.kduclubandsociety.Notification.GenerateNotification;
-import com.example.kduclubandsociety.Notification.NotificationActivity;
-import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.InstanceIdResult;
-import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -54,10 +31,6 @@ public class AnnouncementActivity extends AppCompatActivity {
     private static final String TAG = "AnnouncementActivity";
     private Context mContext = AnnouncementActivity.this;
     private FloatingActionButton btnAddAnnouncement;
-
-    public static final String CHANNEL_1_ID = "Channel1";
-    private static final String CHANNEL_NAME = "KDU";
-    private static final String CHANNEL_DESC = "KDU NOTIFICATION";
 
     private TextView topTitle;
 
@@ -70,10 +43,6 @@ public class AnnouncementActivity extends AppCompatActivity {
     Announcement announcement;
 
     DatabaseReference ref, mClubRef, mStudentRef;
-
-    private EditText mtitle;
-    private EditText mbody;
-    private Button msavebtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,16 +68,9 @@ public class AnnouncementActivity extends AppCompatActivity {
 
         //button
         btnAddAnnouncement = findViewById(R.id.btnAddAnnouncement);
-        msavebtn = findViewById(R.id.btnSave);
-
-
-        //edittext
-        mtitle = findViewById(R.id.txtAncTitle);
-        mbody = findViewById(R.id.txtBody);
 
         checkPermission();
     }
-
 
     // check whether student's permission
     void checkPermission(){
@@ -139,10 +101,8 @@ public class AnnouncementActivity extends AppCompatActivity {
     }
 
     public void onClick(View v){
-
         if (v.getId()==R.id.btnAddAnnouncement){
             add();
-
         }
     }
 
@@ -168,11 +128,7 @@ public class AnnouncementActivity extends AppCompatActivity {
 
             }
         });
-
-
     }
-
-
 
     @Override
     protected void onStart() {
