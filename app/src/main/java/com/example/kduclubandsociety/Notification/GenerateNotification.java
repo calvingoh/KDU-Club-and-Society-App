@@ -39,6 +39,8 @@ public class GenerateNotification extends AppCompatActivity {
 
        
     }
+
+
 /*
     public void sendNotification1(View view){
         String title = mtitle.getText().toString();

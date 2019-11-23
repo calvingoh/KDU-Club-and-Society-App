@@ -2,9 +2,19 @@ package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
@@ -13,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Announcement;
 import com.example.kduclubandsociety.MainActivity;
+import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -22,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+
+import static com.example.kduclubandsociety.Dashboard.AnnouncementActivity.CHANNEL_1_ID;
 
 public class AnnouncementAddActivity extends AppCompatActivity {
     private static final String TAG = "AnnouncementAddActivity";
@@ -56,6 +69,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         txtBody = findViewById(R.id.txtBody);
 
         windowSize();
+        createNotificationChannel();
     }
 
     //change window size
@@ -73,6 +87,8 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         switch (v.getId()){
             case R.id.btnSave:{
                save();
+               sendNotification();
+
             }
             break;
 
@@ -99,5 +115,51 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         Toast.makeText(AnnouncementAddActivity.this, "Announcement Posted!", Toast.LENGTH_LONG).show();
 
         AnnouncementAddActivity.this.finish();
+    }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_1_ID,
+                    "Channel 1",
+                    NotificationManager.IMPORTANCE_HIGH
+            );
+            channel.setDescription("this is channel 1");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void sendNotification() {
+        String title = txtTitle.getText().toString();
+        String body = txtBody.getText().toString();
+
+        Intent activityIntent = new Intent(this, AnnouncementActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+
+        Intent broadcastIntent = new Intent(this, NotificationReciever.class);
+        broadcastIntent.putExtra("toastMessage", body);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.profile_pic);
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_one)
+                .setContentTitle(title)
+                .setContentText(body)
+                .setLargeIcon(largeIcon)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .setAutoCancel(true)
+                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
+                .build();
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(1, notification);
+
     }
 }

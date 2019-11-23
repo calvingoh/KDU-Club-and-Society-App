@@ -61,9 +61,9 @@ public class NotificationActivity extends AppCompatActivity {
 
     private TextView topTitle;
     private TextView mtoken;
-    EditText mtitle;
-    EditText mbody;
-    Button addbtn;
+   // EditText mtitle;
+    //EditText mbody;
+   // Button addbtn;
 
 
 
@@ -76,9 +76,9 @@ public class NotificationActivity extends AppCompatActivity {
 
         setupBottomNavigationView();
 
-        mtitle = findViewById(R.id.TitleeditText);
-        mbody = findViewById(R.id.BodyeditText);
-        addbtn = findViewById(R.id.addButton);
+       // mtitle = findViewById(R.id.TitleeditText);
+       // mbody = findViewById(R.id.BodyeditText);
+        //addbtn = findViewById(R.id.addButton);
 
 
 
@@ -152,7 +152,7 @@ public class NotificationActivity extends AppCompatActivity {
             }
         });
     }
-
+/*
     public void sendNotification1(View v) {
         String title = mtitle.getText().toString();
         String body = mbody.getText().toString();
@@ -184,6 +184,8 @@ public class NotificationActivity extends AppCompatActivity {
     }
 
 
+
+ */
 
 
 
