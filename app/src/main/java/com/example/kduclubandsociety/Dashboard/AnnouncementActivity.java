@@ -7,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -36,6 +37,7 @@ public class AnnouncementActivity extends AppCompatActivity {
 
     String currentUid;
     int clubId;
+    int pos;
 
     ListView aListview;
     AnnouncementAdapter adp;
@@ -70,6 +72,7 @@ public class AnnouncementActivity extends AppCompatActivity {
         btnAddAnnouncement = findViewById(R.id.btnAddAnnouncement);
 
         checkPermission();
+        showAnnouncement();
     }
 
     // check whether student's permission
@@ -97,6 +100,7 @@ public class AnnouncementActivity extends AppCompatActivity {
     void add(){
        Intent intentAdd = new Intent(mContext, AnnouncementAddActivity.class);
        intentAdd.putExtra("cId",clubId);
+       intentAdd.putExtra("currentUid",currentUid);
        startActivity(intentAdd);
     }
 
@@ -134,5 +138,22 @@ public class AnnouncementActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         addListView();
+    }
+
+    void showAnnouncement(){
+        aListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                pos = position;
+                Intent intentAnnDetails = new Intent(mContext,AnnouncementDetails.class);
+                intentAnnDetails.putExtra("currentUid", currentUid);
+                intentAnnDetails.putExtra("cId",clubId);
+                intentAnnDetails.putExtra("annDate", announcementList.get(pos).getDate());
+                intentAnnDetails.putExtra("annTitle", announcementList.get(pos).getTitle());
+                intentAnnDetails.putExtra("annBody", announcementList.get(pos).getBody());
+                intentAnnDetails.putExtra("annUsername", announcementList.get(pos).getUsername());
+                startActivity(intentAnnDetails);
+            }
+        });
     }
 }
