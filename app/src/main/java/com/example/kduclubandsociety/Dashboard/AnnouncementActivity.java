@@ -10,6 +10,10 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.kduclubandsociety.Class.Announcement;
+import com.example.kduclubandsociety.Class.Club;
+import com.example.kduclubandsociety.Clubs.ClubListAdapter;
+import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -19,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class AnnouncementActivity extends AppCompatActivity {
     private static final String TAG = "AnnouncementActivity";
@@ -31,7 +37,10 @@ public class AnnouncementActivity extends AppCompatActivity {
     String currentUid;
     int clubId;
 
-    ListView announcementsList;
+    ListView aListview;
+    AnnouncementAdapter adp;
+    List<Announcement> announcementList;
+    Announcement announcement;
 
     DatabaseReference ref, mClubRef, mStudentRef;
 
@@ -51,9 +60,15 @@ public class AnnouncementActivity extends AppCompatActivity {
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
         mStudentRef = ref.child("Student").child(currentUid);
+        mClubRef= ref.child("Club").child(Integer.toString(clubId));
+
+        //listView
+        aListview = findViewById(R.id.announcement_list);
+        announcementList= new ArrayList<>();
 
         //button
         btnAddAnnouncement = findViewById(R.id.btnAddAnnouncement);
+
         checkPermission();
     }
 
@@ -86,9 +101,38 @@ public class AnnouncementActivity extends AppCompatActivity {
     }
 
     public void onClick(View v){
-
         if (v.getId()==R.id.btnAddAnnouncement){
             add();
         }
+    }
+
+    void addListView(){
+        mClubRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("announcement")){
+                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement").child("23").child("11");
+                    announcementList.clear();
+
+                    for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
+                        announcement = annoSnapshot.getValue(Announcement.class);
+                        announcementList.add (announcement);
+                    }
+                }
+                adp = new AnnouncementAdapter(AnnouncementActivity.this, announcementList);
+                aListview.setAdapter(adp);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        addListView();
     }
 }

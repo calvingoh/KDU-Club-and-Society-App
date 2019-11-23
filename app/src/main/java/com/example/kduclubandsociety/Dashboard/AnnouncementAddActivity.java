@@ -9,7 +9,10 @@ import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import com.example.kduclubandsociety.Class.Announcement;
+import com.example.kduclubandsociety.MainActivity;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,9 +29,11 @@ public class AnnouncementAddActivity extends AppCompatActivity {
 
     EditText txtTitle;
     EditText txtBody;
+    String ancTitle;
+    String ancBody;
 
     DatabaseReference ref, mClubRef;
-    String clubId;
+    int clubId;
 
     SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     Calendar c;
@@ -40,11 +45,11 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         setContentView(R.layout.dashboard_announcement_add);
 
         Intent intent = getIntent();
-        clubId =intent.getStringExtra("cId");
+        clubId =intent.getIntExtra("cId",0);
 
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
-        mClubRef = ref.child("Club").child(clubId);
+        mClubRef = ref.child("Club").child(Integer.toString(clubId));
 
 
         txtTitle= findViewById(R.id.txtAncTitle);
@@ -67,28 +72,32 @@ public class AnnouncementAddActivity extends AppCompatActivity {
     public void onClick (View v){
         switch (v.getId()){
             case R.id.btnSave:{
-            //    save();
+               save();
             }
             break;
 
             case R.id.btnCancel:{
                 AnnouncementAddActivity.this.finish();
             }
+            break;
         }
     }
 
     void save(){
-        String ancTitle = txtTitle.getText().toString();
-        String ancBody = txtBody.getText().toString();
+        ancTitle = txtTitle.getText().toString();
+        ancBody = txtBody.getText().toString();
 
         c = Calendar.getInstance();
         date = sdf.format(c.getTime());
 
-       mClubRef.child("announcement").child(date)
-               .child("title").setValue(ancTitle);
+        Announcement announcement1 = new Announcement();
+        announcement1.setDate(date);
+        announcement1.setTitle(ancTitle);
+        announcement1.setBody(ancBody);
 
-      /* mClubRef.child("announcement").child(date)
-                .child ("body").setValue (ancBody);*/
+        mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
+        Toast.makeText(AnnouncementAddActivity.this, "Announcement Posted!", Toast.LENGTH_LONG).show();
 
+        AnnouncementAddActivity.this.finish();
     }
 }
