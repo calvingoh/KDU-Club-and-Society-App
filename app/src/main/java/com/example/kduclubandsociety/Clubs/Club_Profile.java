@@ -42,6 +42,7 @@ public class Club_Profile extends AppCompatActivity {
     String currentUid;
     int clubId;
     String clubAdmin;
+    String tempClubIds;
 
     DatabaseReference ref, mClubRef, mStudentRef;
 
@@ -66,6 +67,8 @@ public class Club_Profile extends AppCompatActivity {
         String clubImage = intent.getStringExtra("cImage");
         clubAdmin = intent.getStringExtra("cAdmin");
         currentUid = intent.getStringExtra("currentUid");
+
+
 
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
@@ -143,10 +146,7 @@ public class Club_Profile extends AppCompatActivity {
         mStudentRef.child("clubs").addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String tempClubIds = dataSnapshot.getValue(String.class);
-                mStudentRef.child("clubs").setValue(tempClubIds + ";" + clubId);
-                Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
-                Club_Profile.this.finish();
+                tempClubIds = dataSnapshot.getValue(String.class);
             }
 
             @Override
@@ -154,6 +154,9 @@ public class Club_Profile extends AppCompatActivity {
 
             }
         });
+        mStudentRef.child("clubs").setValue(tempClubIds + ";" + clubId);
+        Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
+        Club_Profile.this.finish();
     }
 
     void confirmRegister(){
