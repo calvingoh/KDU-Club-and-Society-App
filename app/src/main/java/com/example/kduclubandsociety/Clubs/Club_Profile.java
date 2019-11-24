@@ -89,8 +89,6 @@ public class Club_Profile extends AppCompatActivity {
 
         checkPermission();
         checkRegistered();
-
-
     }
 
     void checkPermission(){
@@ -136,7 +134,7 @@ public class Club_Profile extends AppCompatActivity {
             }
 
             case R.id.btnEdit:{
-                //edit and update
+                //edit and update codes
             }
         }
 
