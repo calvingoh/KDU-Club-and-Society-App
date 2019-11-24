@@ -77,15 +77,14 @@ public class AnnouncementActivity extends AppCompatActivity {
 
     // check whether student's permission
     void checkPermission(){
-        mStudentRef.addValueEventListener(new ValueEventListener() {
+        mClubRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("clubs").child(Integer.toString(clubId))
-                        .getValue(Boolean.class)== false){
-                    btnAddAnnouncement.hide();
+                if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
+                    btnAddAnnouncement.show();
                 }
                 else {
-                    btnAddAnnouncement.show();
+                    btnAddAnnouncement.hide();
                 }
 
             }

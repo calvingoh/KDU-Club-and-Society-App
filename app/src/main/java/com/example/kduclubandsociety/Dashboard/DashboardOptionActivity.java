@@ -39,6 +39,7 @@ public class DashboardOptionActivity extends AppCompatActivity {
 
     int pos;
     String uid;
+    String[]student_club_id;
 
 
 
@@ -52,6 +53,8 @@ public class DashboardOptionActivity extends AppCompatActivity {
         String image = intent.getStringExtra("mImage");
         int id = intent.getIntExtra("mId",0);
         uid = intent.getStringExtra("currentUid");
+        student_club_id= intent.getStringArrayExtra("student_clubId");
+
 
 
         mImage = findViewById(R.id.dashboardImg);
@@ -103,6 +106,8 @@ public class DashboardOptionActivity extends AppCompatActivity {
                          intentClubDetails.putExtra("cMaxNum", club.getMaxNum());
                          intentClubDetails.putExtra("cMeeting", club.getMeeting());
                          intentClubDetails.putExtra("cImage", club.getImage());
+                         intentClubDetails.putExtra("cAdmin", club.getAdmin());
+                         intentClubDetails.putExtra("student_clubId",student_club_id );
                          intentClubDetails.putExtra("currentUid",uid);
                          startActivity (intentClubDetails);
                      }

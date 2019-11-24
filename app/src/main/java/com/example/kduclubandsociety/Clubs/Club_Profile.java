@@ -40,6 +40,8 @@ public class Club_Profile extends AppCompatActivity {
 
     String currentUid;
     int clubId;
+    String clubAdmin;
+    String[] student_clubId;
 
     DatabaseReference ref, mClubRef, mStudentRef;
 
@@ -62,6 +64,8 @@ public class Club_Profile extends AppCompatActivity {
         String clubMeeting = intent.getStringExtra("cMeeting");
         String clubMax = Integer.toString(intent.getIntExtra("cMaxNum",0));
         String clubImage = intent.getStringExtra("cImage");
+        clubAdmin = intent.getStringExtra("cAdmin");
+        student_clubId = intent.getStringArrayExtra("student_clubId");
         currentUid = intent.getStringExtra("currentUid");
 
         //TOP TAB TITLE
@@ -83,40 +87,23 @@ public class Club_Profile extends AppCompatActivity {
         btnRegister = findViewById(R.id.btnRegister);
         btnEdit = findViewById(R.id.btnEdit);
 
+        checkPermission();
         checkRegistered();
 
 
     }
 
-    // check whether student registered into the club or no and their permission
-    void checkRegistered(){
-        mStudentRef.addValueEventListener(new ValueEventListener() {
+    void checkPermission(){
+        mClubRef.child(Integer.toString(clubId)).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
+                    btnEdit.show();
+                }
 
-              if (dataSnapshot.hasChild("clubs")){
-                  if (dataSnapshot.child("clubs").hasChild(Integer.toString(clubId))){
-                      btnRegister.setVisibility(View.GONE);
-
-                      if (dataSnapshot.child("clubs").child(Integer.toString(clubId))
-                              .getValue(Boolean.class)== false){
-                          btnEdit.hide();
-                      }
-                      else {
-                          btnEdit.show();
-                      }
-
-                  }
-                  else {
-                      btnRegister.setVisibility(View.VISIBLE);
-                      btnEdit.hide();
-                  }
-              }
-
-              else {
-                  btnRegister.setVisibility(View.VISIBLE);
-                  btnEdit.hide();
-              }
+                else{
+                    btnEdit.hide();
+                }
             }
 
             @Override
@@ -124,6 +111,17 @@ public class Club_Profile extends AppCompatActivity {
 
             }
         });
+    }
+
+    // check whether student registered into the club or no and their permission
+    void checkRegistered(){
+        for (int i = 0; i <student_clubId.length; i++) {
+            if (student_clubId[i].equals(Integer.toString(clubId))){
+                btnRegister.setVisibility(View.GONE);
+                break;
+            }
+            btnRegister.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -142,24 +140,22 @@ public class Club_Profile extends AppCompatActivity {
 
     }
 
-    void register (){
+    void register () {
         //register student into club
-        mStudentRef.child ("clubs").child(Integer.toString(clubId)).setValue(false)
-                .addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        if (task.isSuccessful()) {
-                            Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
-                            Intent intent = new Intent(Club_Profile.this, ClubsActivity.class);
-                            intent.putExtra("currentUid", currentUid);
-                            startActivity(intent);
-                        }
+        mStudentRef.child("clubs").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String tempClubIds = dataSnapshot.getValue(String.class);
+                mStudentRef.child("clubs").setValue(tempClubIds + ";" + clubId);
+                Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
+                Club_Profile.this.finish();
+            }
 
-                        else{
-                            Toast.makeText(Club_Profile.this, "Data Failed to insert", Toast.LENGTH_LONG).show();
-                        }
-                    }
-                });
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     void confirmRegister(){

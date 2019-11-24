@@ -10,8 +10,9 @@ public class Club {
     private String meeting;
     private String image;
     private String icon;
+    private String admin;
 
-    public Club(int id, String name, String description, int num, String meeting, String image, String icon) {
+    public Club(int id, String name, String description, int num, String meeting, String image, String icon, String admin) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -19,6 +20,7 @@ public class Club {
         this.meeting = meeting;
         this.image = image;
         this.icon = icon;
+        this.admin = admin;
     }
 
     public Integer getId() {
@@ -77,7 +79,13 @@ public class Club {
         this.icon = icon;
     }
 
+    public String getAdmin() {
+        return admin;
+    }
 
+    public void setAdmin(String admin) {
+        this.admin = admin;
+    }
 
     public Club(){}
 }

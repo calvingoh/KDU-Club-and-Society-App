@@ -33,6 +33,7 @@ public class ProfileActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 3;
     private Context mContext = ProfileActivity.this;
     private String uid;
+    private String[] student_club_id;
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -56,6 +57,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
+        student_club_id = intent.getStringArrayExtra("student_clubId");
 
         setupBottomNavigationView();
 
@@ -135,7 +137,7 @@ public class ProfileActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid,student_club_id);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

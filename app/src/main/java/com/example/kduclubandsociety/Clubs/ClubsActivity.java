@@ -37,6 +37,7 @@ public class ClubsActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 1;
     private Context mContext = ClubsActivity.this;
     private String uid;
+    private String[] student_club_id;
     private TextView topTitle;
 
     //firebase
@@ -63,6 +64,8 @@ public class ClubsActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
+        student_club_id = intent.getStringArrayExtra("student_clubId");
+
 
         setupBottomNavigationView();
 
@@ -141,8 +144,9 @@ public class ClubsActivity extends AppCompatActivity {
                 intentClubDetails.putExtra("cMaxNum", clubList.get(pos).getMaxNum());
                 intentClubDetails.putExtra("cMeeting", clubList.get(pos).getMeeting());
                 intentClubDetails.putExtra("cImage", clubList.get(pos).getImage());
+                intentClubDetails.putExtra("cAdmin", clubList.get(pos).getAdmin());
                 intentClubDetails.putExtra("currentUid",uid);
-
+                intentClubDetails.putExtra("student_clubId",student_club_id);
                 startActivity (intentClubDetails);
 
             }
@@ -153,7 +157,7 @@ public class ClubsActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid, student_club_id);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
