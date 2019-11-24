@@ -49,16 +49,8 @@ public class NotificationActivity extends AppCompatActivity {
     private String[] student_club_id;
 
     public static final String CHANNEL_1_ID = "Channel1";
-    public static final String CHANNEL_2_ID = "Channel2";
-    private static final String CHANNEL_NAME = "KDU";
-    private static final String CHANNEL_DESC = "KDU NOTIFICATION";
 
-
-    //firebase
-    private FirebaseDatabase mFirebaseDatabase;
-    private FirebaseAuth mAuth;
-    private FirebaseAuth.AuthStateListener mAuthListener;
-    DatabaseReference myRef;
+    DatabaseReference ref, mClubRef, mStudentRef;
 
     private TextView topTitle;
 
@@ -73,8 +65,6 @@ public class NotificationActivity extends AppCompatActivity {
         student_club_id = intent.getStringArrayExtra("student_clubId");
 
         setupBottomNavigationView();
-
-
 
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
