@@ -46,7 +46,6 @@ public class NotificationActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 2;
     private Context mContext = NotificationActivity.this;
     private String uid;
-    private String[] student_club_id;
 
     public static final String CHANNEL_1_ID = "Channel1";
 
@@ -62,7 +61,6 @@ public class NotificationActivity extends AppCompatActivity {
         setContentView(R.layout.activity_notification);
         Intent intent = getIntent();
         uid = intent.getStringExtra("currentUid");
-        student_club_id = intent.getStringArrayExtra("student_clubId");
 
         setupBottomNavigationView();
 
@@ -84,17 +82,11 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
     // set up bottom navigation bar
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid,student_club_id);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

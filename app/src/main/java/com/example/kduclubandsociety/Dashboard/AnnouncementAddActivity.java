@@ -50,7 +50,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
     int clubId;
     String currentUid;
 
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
     Calendar c;
     String date;
 

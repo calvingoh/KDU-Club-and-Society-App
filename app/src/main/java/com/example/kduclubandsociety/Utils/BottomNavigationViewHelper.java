@@ -18,7 +18,7 @@ import androidx.annotation.NonNull;
 public class BottomNavigationViewHelper {
     private static final String TAG = "BottomNavigationViewHelper";
 
-    public static void enableNavigation (final Context context, BottomNavigationView view, final String uid, final String[] student_clubId){
+    public static void enableNavigation (final Context context, BottomNavigationView view, final String uid){
         view.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -26,14 +26,12 @@ public class BottomNavigationViewHelper {
                     case R.id.ic_dashboard:{
                         Intent intent1 =new Intent(context, DashboardActivity.class);   //ACTIVITY_NUM = 0
                         intent1.putExtra("currentUid",uid);
-                        intent1.putExtra("student_clubId", student_clubId);
                         context.startActivity(intent1);
                         break;
                     }
                     case R.id.ic_club:{
                         Intent intent2 =new Intent(context, ClubsActivity.class);   //ACTIVITY_NUM = 1
                         intent2.putExtra("currentUid",uid);
-                        intent2.putExtra("student_clubId", student_clubId);
                         context.startActivity(intent2);
                         break;
                     }
@@ -41,7 +39,6 @@ public class BottomNavigationViewHelper {
                     case R.id.ic_notification:{
                         Intent intent3 =new Intent(context, NotificationActivity.class);   //ACTIVITY_NUM = 2
                         intent3.putExtra("currentUid",uid);
-                        intent3.putExtra("student_clubId", student_clubId);
                         context.startActivity(intent3);
                         break;
                     }
@@ -49,7 +46,6 @@ public class BottomNavigationViewHelper {
                     case R.id.ic_profile:{
                         Intent intent4 =new Intent(context, ProfileActivity.class);    //ACTIVITY_NUM = 3
                         intent4.putExtra("currentUid",uid);
-                        intent4.putExtra("student_clubId", student_clubId);
                         context.startActivity(intent4);
                         break;
                     }

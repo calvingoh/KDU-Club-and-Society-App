@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.kduclubandsociety.Dashboard.DashboardActivity;
 import com.example.kduclubandsociety.MainActivity;
 import com.example.kduclubandsociety.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -41,7 +42,6 @@ public class Club_Profile extends AppCompatActivity {
     String currentUid;
     int clubId;
     String clubAdmin;
-    String[] student_clubId;
 
     DatabaseReference ref, mClubRef, mStudentRef;
 
@@ -65,7 +65,6 @@ public class Club_Profile extends AppCompatActivity {
         String clubMax = Integer.toString(intent.getIntExtra("cMaxNum",0));
         String clubImage = intent.getStringExtra("cImage");
         clubAdmin = intent.getStringExtra("cAdmin");
-        student_clubId = intent.getStringArrayExtra("student_clubId");
         currentUid = intent.getStringExtra("currentUid");
 
         //TOP TAB TITLE
@@ -113,14 +112,13 @@ public class Club_Profile extends AppCompatActivity {
 
     // check whether student registered into the club or no and their permission
     void checkRegistered(){
-        for(int i = 0; i < student_clubId.length; i++) {
-            if(Integer.toString(clubId).equals(student_clubId[i])) {
+        String[] clubs = DashboardActivity.student_clubs_id;
+        for(int i = 0; i < clubs.length; i++) {
+            if(Integer.toString(clubId).equals(clubs[i])) {
                 btnRegister.setVisibility(View.GONE);
-          //      btnRegister.isEnabled(false);
                 return;
             }
             btnRegister.setVisibility(View.VISIBLE);
-         //   btnRegister.isEnabled(true);
         }
     }
 

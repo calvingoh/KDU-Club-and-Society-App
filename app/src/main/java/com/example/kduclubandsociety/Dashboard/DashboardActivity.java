@@ -44,7 +44,7 @@ public class DashboardActivity extends AppCompatActivity {
     private static final int ACTIVITY_NUM = 0;
     private Context mContext = DashboardActivity.this;
     private String uid;
-    private String[] student_clubs_id;
+    public static String[] student_clubs_id;
     private List<Club> student_clubs;
     private ClubListAdapter temp; //rename as u see fit.
 
@@ -170,7 +170,7 @@ public class DashboardActivity extends AppCompatActivity {
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
-        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView, uid, student_clubs_id);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView, uid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);

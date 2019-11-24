@@ -114,7 +114,7 @@ public class AnnouncementActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild("announcement")){
-                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement").child("24").child("11");
+                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement");
                     announcementList.clear();
 
                     for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
