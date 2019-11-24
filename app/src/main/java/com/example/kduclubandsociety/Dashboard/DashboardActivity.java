@@ -79,6 +79,7 @@ public class DashboardActivity extends AppCompatActivity {
         mStudentRef = myRef.child ("Student").child(uid);
         mClubRef = myRef.child ("Club");
         student_clubs = new ArrayList<Club>();
+
         ValueEventListener studentClubListener = new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {

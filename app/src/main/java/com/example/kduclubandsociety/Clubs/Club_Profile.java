@@ -89,8 +89,6 @@ public class Club_Profile extends AppCompatActivity {
 
         checkPermission();
         checkRegistered();
-
-
     }
 
     void checkPermission(){
@@ -115,12 +113,14 @@ public class Club_Profile extends AppCompatActivity {
 
     // check whether student registered into the club or no and their permission
     void checkRegistered(){
-        for (int i = 0; i <student_clubId.length; i++) {
-            if (student_clubId[i].equals(Integer.toString(clubId))){
+        for(int i = 0; i < student_clubId.length; i++) {
+            if(Integer.toString(clubId).equals(student_clubId[i])) {
                 btnRegister.setVisibility(View.GONE);
-                break;
+          //      btnRegister.isEnabled(false);
+                return;
             }
             btnRegister.setVisibility(View.VISIBLE);
+         //   btnRegister.isEnabled(true);
         }
     }
 
@@ -134,7 +134,7 @@ public class Club_Profile extends AppCompatActivity {
             }
 
             case R.id.btnEdit:{
-                //edit and update
+                //edit and update codes
             }
         }
 
