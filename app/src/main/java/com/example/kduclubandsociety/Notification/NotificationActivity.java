@@ -61,10 +61,6 @@ public class NotificationActivity extends AppCompatActivity {
     DatabaseReference myRef;
 
     private TextView topTitle;
-    private TextView mtoken;
-   // EditText mtitle;
-    //EditText mbody;
-   // Button addbtn;
 
 
 
@@ -77,11 +73,6 @@ public class NotificationActivity extends AppCompatActivity {
         student_club_id = intent.getStringArrayExtra("student_clubId");
 
         setupBottomNavigationView();
-
-       // mtitle = findViewById(R.id.TitleeditText);
-       // mbody = findViewById(R.id.BodyeditText);
-        //addbtn = findViewById(R.id.addButton);
-
 
 
 
@@ -101,93 +92,11 @@ public class NotificationActivity extends AppCompatActivity {
 
             }
         }
-
-      mtoken = findViewById(R.id.TokenTextView);
-        mtoken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(NotificationActivity.this, GenerateNotification.class);
-                startActivity(intent);
-            }
-        });
-
-
-
-
-        //firebase
-        mAuth = FirebaseAuth.getInstance();
-        FirebaseMessaging.getInstance().subscribeToTopic("updates");
-
-
-        mFirebaseDatabase = FirebaseDatabase.getInstance();
-        FirebaseInstanceId.getInstance().getInstanceId()
-                .addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<InstanceIdResult> task) {
-                            if (task.isSuccessful()){
-                                String token = task.getResult().getToken();
-                                saveToken(token);
-                            }
-                            else{
-                                mtoken.setText(task.getException().getMessage());
-                            }
-                    }
-                });
-
     }
 
 
 
-    //save token of device with the app installed
-    private void saveToken(String token){
-        String email = mAuth.getCurrentUser().getEmail();
-        Student student = new Student(email, token);
 
-        DatabaseReference dbStudent = FirebaseDatabase.getInstance().getReference("Students");
-        dbStudent.child(mAuth.getCurrentUser().getUid())
-                .setValue(student).addOnCompleteListener(new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                if (task.isSuccessful()){
-                    Toast.makeText(NotificationActivity.this, "Token Saved", Toast.LENGTH_LONG).show();
-                }
-            }
-        });
-    }
-/*
-    public void sendNotification1(View v) {
-        String title = mtitle.getText().toString();
-        String body = mbody.getText().toString();
-
-        Intent activityIntent = new Intent(this, DashboardActivity.class);
-        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
-
-        Intent broadcastIntent = new Intent(this, NotificationReciever.class);
-        broadcastIntent.putExtra("toastMessage", body);
-        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
-
-        Bitmap largeIcon = BitmapFactory.decodeResource(getResources(), R.drawable.profile_pic);
-
-        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
-                .setSmallIcon(R.drawable.ic_one)
-                .setContentTitle(title)
-                .setContentText(body)
-                .setLargeIcon(largeIcon)
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-                .setColor(Color.BLUE)
-                .setContentIntent(contentIntent)
-                .setAutoCancel(true)
-                .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
-                .build();
-        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
-        notificationManagerCompat.notify(1, notification);
-
-    }
-
-
-
- */
 
 
 
