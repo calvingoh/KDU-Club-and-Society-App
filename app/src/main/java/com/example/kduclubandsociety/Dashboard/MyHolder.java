@@ -1,17 +1,14 @@
 package com.example.kduclubandsociety.Dashboard;
 
-import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.kduclubandsociety.MainActivity;
 import com.example.kduclubandsociety.R;
 import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 

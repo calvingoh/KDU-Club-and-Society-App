@@ -1,5 +1,7 @@
 package com.example.kduclubandsociety.Class;
 
+import java.util.Comparator;
+
 public class Announcement {
     private String date;
     private String title;
@@ -56,4 +58,15 @@ public class Announcement {
     public void setClubName(String clubName) {
         this.clubName = clubName;
     }
+
+    public static Comparator<Announcement> DateComparator = new Comparator <Announcement>(){
+        public int compare (Announcement n1, Announcement n2){
+            String Notification1 = n1.getDate();
+            String Notification2 = n2.getDate();
+
+            return Notification1.compareTo(Notification2);
+        }
+    };
 }
+
+

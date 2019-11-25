@@ -45,6 +45,7 @@ import com.google.firebase.iid.InstanceIdResult;
 import com.google.firebase.messaging.FirebaseMessaging;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import androidx.annotation.NonNull;
@@ -108,6 +109,7 @@ public class NotificationActivity extends AppCompatActivity {
 
         addNotification();
         viewDetails();
+
     }
 
     void addNotification(){
@@ -115,27 +117,32 @@ public class NotificationActivity extends AppCompatActivity {
         notificationList.clear();
         adp = new AnnouncementAdapter(NotificationActivity.this, notificationList);
         nListview.setAdapter(adp);
-        for(int i = 0; i < registeredClub.length; i++) {
-            mClubRef.child(registeredClub[i]).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    if (dataSnapshot.hasChild("announcement")){
-                        DataSnapshot pathSnapshot = dataSnapshot.child("announcement");
+        if (registeredClub!= null){
+            for(int i = 0; i < registeredClub.length; i++) {
+                mClubRef.child(registeredClub[i]).addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.hasChild("announcement")){
+                            DataSnapshot pathSnapshot = dataSnapshot.child("announcement");
 
-                        for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
-                            notification = annoSnapshot.getValue(Announcement.class);
-                            notificationList.add (notification);
+                            for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
+                                notification = annoSnapshot.getValue(Announcement.class);
+                                notificationList.add (notification);
+                            }
                         }
+                        adp.notifyDataSetChanged();
                     }
-                    adp.notifyDataSetChanged();
-                }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
+                    }
+                });
+            }
         }
+
+       // Collections.sort(notificationList,Announcement.DateComparator); //change to date
+        adp.notifyDataSetChanged();
     }
 
     void viewDetails(){
@@ -147,8 +154,9 @@ public class NotificationActivity extends AppCompatActivity {
                 intentAnnDeets.putExtra("annTitle", notificationList.get(position).getTitle());
                 intentAnnDeets.putExtra("annBody", notificationList.get(position).getBody());
                 intentAnnDeets.putExtra("annDate", notificationList.get(position).getDate());
-                intentAnnDeets.putExtra("annUsername", notificationList.get(position).getClubIcon());
+                intentAnnDeets.putExtra("annUsername", notificationList.get(position).getUsername());
                 intentAnnDeets.putExtra("annClubName", notificationList.get(position).getClubName());
+                intentAnnDeets.putExtra("annIcon", notificationList.get(position).getClubIcon());
                 startActivity(intentAnnDeets);
             }
         });

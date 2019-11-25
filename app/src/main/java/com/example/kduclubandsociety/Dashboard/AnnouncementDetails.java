@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -71,6 +72,8 @@ public class AnnouncementDetails extends AppCompatActivity {
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
         topTitle.setText("Announcement Details");
+        topTitle.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        topTitle.setTextSize(14);
 
         //DISPLAY DETAIL
         aTitle.setText(title);

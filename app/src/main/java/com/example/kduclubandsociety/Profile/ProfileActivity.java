@@ -82,33 +82,6 @@ public class ProfileActivity extends AppCompatActivity {
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
 
-                /*
-                // get registered club details
-                for (int i=0; i< dataSnapshot.getChildrenCount();i++) {
-                    //set profile details
-                    String clubId = Integer.toString(i); // figure this part
-
-                    myRef = FirebaseDatabase.getInstance().getReference().child("Club").child(clubId); //problem
-                    myRef.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                            String clubs =  dataSnapshot.child("name").getValue().toString();
-                            fullClubs = fullClubs + clubs + ", ";
-
-                            mClubName.setText(clubs);
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-
-                }
-
-                 */
-
                 mName.setText(name);
                 mEmail.setText (email);
                 mClubName.setText (fullClubs);
@@ -119,14 +92,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
 
-
         });
-
-
-
-
-
-
     }
 
 

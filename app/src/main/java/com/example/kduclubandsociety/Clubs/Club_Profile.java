@@ -18,11 +18,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.kduclubandsociety.Dashboard.DashboardActivity;
-import com.example.kduclubandsociety.MainActivity;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
@@ -151,10 +148,11 @@ public class Club_Profile extends AppCompatActivity {
 
     void register () {
         //register student into club
-        mStudentRef.child("clubs").addValueEventListener(new ValueEventListener() {
+        mStudentRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                tempClubIds = dataSnapshot.getValue(String.class);
+                tempClubIds = dataSnapshot.child("clubs").getValue(String.class);
+                mStudentRef.child("clubs").setValue(tempClubIds + ";" + clubId);
             }
 
             @Override
@@ -162,7 +160,6 @@ public class Club_Profile extends AppCompatActivity {
 
             }
         });
-        mStudentRef.child("clubs").setValue(tempClubIds + ";" + clubId);
         Toast.makeText(Club_Profile.this, "Club Registered Successfully", Toast.LENGTH_LONG).show();
         Club_Profile.this.finish();
     }
