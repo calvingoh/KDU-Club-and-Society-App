@@ -15,6 +15,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -25,6 +26,7 @@ import com.example.kduclubandsociety.Class.Announcement;
 import com.example.kduclubandsociety.Class.Student;
 import com.example.kduclubandsociety.Dashboard.AnnouncementActivity;
 import com.example.kduclubandsociety.Dashboard.AnnouncementAdapter;
+import com.example.kduclubandsociety.Dashboard.AnnouncementDetails;
 import com.example.kduclubandsociety.Dashboard.DashboardActivity;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
@@ -105,6 +107,7 @@ public class NotificationActivity extends AppCompatActivity {
         }
 
         addNotification();
+        viewDetails();
     }
 
     void addNotification(){
@@ -135,6 +138,21 @@ public class NotificationActivity extends AppCompatActivity {
         }
     }
 
+    void viewDetails(){
+        nListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentAnnDeets = new Intent (mContext, AnnouncementDetails.class);
+                intentAnnDeets.putExtra("currentUid",uid);
+                intentAnnDeets.putExtra("annTitle", notificationList.get(position).getTitle());
+                intentAnnDeets.putExtra("annBody", notificationList.get(position).getBody());
+                intentAnnDeets.putExtra("annDate", notificationList.get(position).getDate());
+                intentAnnDeets.putExtra("annUsername", notificationList.get(position).getClubIcon());
+                intentAnnDeets.putExtra("annClubName", notificationList.get(position).getClubName());
+                startActivity(intentAnnDeets);
+            }
+        });
+    }
 
     // set up bottom navigation bar
     private void setupBottomNavigationView(){

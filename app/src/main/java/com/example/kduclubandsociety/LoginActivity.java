@@ -1,8 +1,10 @@
 package com.example.kduclubandsociety;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 
 import android.content.SharedPreferences;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 
 import android.widget.Toast;
 
+import com.example.kduclubandsociety.Clubs.Club_Profile;
 import com.example.kduclubandsociety.Dashboard.DashboardActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -127,6 +130,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (v.getId() == R.id.btnSignin) {
             signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
         }
+    }
+
+    public void onBackPressed() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(LoginActivity.this);
+        dialog.setTitle("Really Exit?");
+        dialog.setMessage("Are you sure you want to exit?");
+        dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+                System.exit(0);
+            }
+        });
+
+        dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }
 

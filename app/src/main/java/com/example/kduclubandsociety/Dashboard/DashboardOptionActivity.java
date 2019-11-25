@@ -150,4 +150,10 @@ public class DashboardOptionActivity extends AppCompatActivity {
         menuItem.setChecked(true);
     }
 
+    public void onBackPressed(){
+        Intent intent = new Intent (mContext, DashboardActivity.class);
+        intent.putExtra("currentUid", uid);
+        startActivity(intent);
+    }
+
 }

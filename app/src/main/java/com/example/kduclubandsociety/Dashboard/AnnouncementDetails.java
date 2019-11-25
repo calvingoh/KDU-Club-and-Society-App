@@ -36,7 +36,6 @@ public class AnnouncementDetails extends AppCompatActivity {
     private TextView aClubName;
 
     String currentUid;
-    int clubId;
 
     DatabaseReference ref, mClubRef, mStudentRef;
     @Override
@@ -53,7 +52,6 @@ public class AnnouncementDetails extends AppCompatActivity {
 
         //intents
         Intent intent = getIntent();
-        clubId = intent.getIntExtra("cId",0);
         currentUid = intent.getStringExtra("currentUid");
         String title = intent.getStringExtra("annTitle");
         String body = intent.getStringExtra("annBody");
