@@ -5,6 +5,8 @@ public class Announcement {
     private String title;
     private String body;
     private String username;
+    private String clubIcon;
+    private String clubName;
 
 
     public String getDate() {
@@ -39,4 +41,19 @@ public class Announcement {
         this.username = username;
     }
 
+    public String getClubIcon() {
+        return clubIcon;
+    }
+
+    public void setClubIcon(String clubIcon) {
+        this.clubIcon = clubIcon;
+    }
+
+    public String getClubName() {
+        return clubName;
+    }
+
+    public void setClubName(String clubName) {
+        this.clubName = clubName;
+    }
 }

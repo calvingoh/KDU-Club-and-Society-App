@@ -157,4 +157,9 @@ public class ClubsActivity extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+    @Override
+    public void onBackPressed() {
+
+    }
 }

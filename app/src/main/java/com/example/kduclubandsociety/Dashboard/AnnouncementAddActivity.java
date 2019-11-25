@@ -45,6 +45,8 @@ public class AnnouncementAddActivity extends AppCompatActivity {
     String ancTitle;
     String ancBody;
     String username;
+    String icon;
+    String clubName;
 
     DatabaseReference ref, mClubRef, mStudentRef;
     int clubId;
@@ -75,6 +77,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
       //  windowSize();
         createNotificationChannel();
         getUsername();
+        getClubDetails();
     }
 
     //change window size
@@ -116,6 +119,8 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         announcement1.setTitle(ancTitle);
         announcement1.setBody(ancBody);
         announcement1.setUsername (username);
+        announcement1.setClubIcon(icon);
+        announcement1.setClubName(clubName);
 
 
         mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
@@ -129,6 +134,22 @@ public class AnnouncementAddActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 username= dataSnapshot.child("name").getValue().toString();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    void  getClubDetails (){
+        mClubRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                icon = dataSnapshot.child("icon").getValue().toString();
+                clubName = dataSnapshot.child("name").getValue().toString();
+
             }
 
             @Override

@@ -154,6 +154,8 @@ public class AnnouncementActivity extends AppCompatActivity {
                 intentAnnDeets.putExtra("annBody", announcementList.get(position).getBody());
                 intentAnnDeets.putExtra("annDate", announcementList.get(position).getDate());
                 intentAnnDeets.putExtra("annUsername", announcementList.get(position).getUsername());
+                intentAnnDeets.putExtra("annIcon", announcementList.get(position).getClubIcon());
+                intentAnnDeets.putExtra("annClubName", announcementList.get(position).getClubName());
                 startActivity(intentAnnDeets);
             }
         });

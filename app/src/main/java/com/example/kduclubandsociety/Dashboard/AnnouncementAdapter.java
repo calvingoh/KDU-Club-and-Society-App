@@ -40,6 +40,8 @@ public class AnnouncementAdapter extends ArrayAdapter<Announcement> implements F
         TextView title = listViewItem.findViewById(R.id.txtNotiTitle);
         TextView body = listViewItem.findViewById(R.id.txtNotiBody);
         TextView date = listViewItem.findViewById(R.id.txtNotiDate);
+        ImageView icon = listViewItem.findViewById(R.id.imgIcon);
+       // TextView clubName = listViewItem.findViewById(R.id.txtClubName);
 
 
         Announcement announcement= announcementList.get(position);
@@ -47,7 +49,8 @@ public class AnnouncementAdapter extends ArrayAdapter<Announcement> implements F
         title.setText(announcement.getTitle());
         body.setText(announcement.getBody());
         date.setText(announcement.getDate());
-
+        Picasso.get().load(announcement.getClubIcon()).into(icon);
+      //  clubName.setText("from " + announcement.getClubName());
         return listViewItem;
 
     }

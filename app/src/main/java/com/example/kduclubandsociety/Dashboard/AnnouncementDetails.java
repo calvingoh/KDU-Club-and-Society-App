@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.R;
@@ -19,6 +20,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 public class AnnouncementDetails extends AppCompatActivity {
     private static final String TAG = "AnnouncementDetails";
@@ -30,6 +32,8 @@ public class AnnouncementDetails extends AppCompatActivity {
     private TextView aBody;
     private TextView aDate;
     private TextView aUser;
+    private ImageView aIcon;
+    private TextView aClubName;
 
     String currentUid;
     int clubId;
@@ -44,6 +48,8 @@ public class AnnouncementDetails extends AppCompatActivity {
         aBody = findViewById(R.id.txtBody);
         aDate = findViewById(R.id.txtDate);
         aUser = findViewById(R.id.txtUser);
+        aClubName = findViewById(R.id.txtClubName);
+        aIcon = findViewById(R.id.imgIcon);
 
         //intents
         Intent intent = getIntent();
@@ -53,6 +59,8 @@ public class AnnouncementDetails extends AppCompatActivity {
         String body = intent.getStringExtra("annBody");
         String date = intent.getStringExtra("annDate");
         String username = intent.getStringExtra("annUsername");
+        String icon = intent.getStringExtra("annIcon");
+        String clubName = intent.getStringExtra("annClubName");
 
         setupBottomNavigationView();
 
@@ -69,10 +77,12 @@ public class AnnouncementDetails extends AppCompatActivity {
         //DISPLAY DETAIL
         aTitle.setText(title);
         aUser.setText(username);
-        aDate.setText(date);
+        aDate.setText("Posted on " +date);
         aBody.setText(body);
-
+        aClubName.setText("from " + clubName);
+        Picasso.get().load(icon).into(aIcon);
     }
+
     // set up bottom navigation bar
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
