@@ -72,7 +72,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtAncTitle);
         txtBody = findViewById(R.id.txtBody);
 
-        windowSize();
+      //  windowSize();
         createNotificationChannel();
         getUsername();
     }
@@ -181,5 +181,10 @@ public class AnnouncementAddActivity extends AppCompatActivity {
 
 
         }
+
+    @Override
+    public void onBackPressed() {
+
     }
+}
 

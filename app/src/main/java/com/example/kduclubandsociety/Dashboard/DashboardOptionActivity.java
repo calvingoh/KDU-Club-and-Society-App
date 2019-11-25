@@ -6,6 +6,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -16,6 +19,8 @@ import android.widget.TextView;
 import com.example.kduclubandsociety.Class.Club;
 import com.example.kduclubandsociety.Clubs.Club_Profile;
 import com.example.kduclubandsociety.R;
+import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,10 +29,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class DashboardOptionActivity extends AppCompatActivity {
-    private static final String TAG = "ClubsActivity";
+
+    private static final String TAG = "DashboardOptionActivity";
+    private TextView topTitle;
+    private static final int ACTIVITY_NUM = 0;
     private Context mContext = DashboardOptionActivity.this;
 
-    private TextView topTitle;
     private ImageView mImage;
 
     //firebase
@@ -56,6 +63,7 @@ public class DashboardOptionActivity extends AppCompatActivity {
         student_club_id= intent.getStringArrayExtra("student_clubId");
 
 
+        setupBottomNavigationView();
 
         mImage = findViewById(R.id.dashboardImg);
         Picasso.get().load(image).into(mImage);
@@ -130,6 +138,16 @@ public class DashboardOptionActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    // set up bottom navigation bar
+    private void setupBottomNavigationView(){
+        Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,uid);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 
 }

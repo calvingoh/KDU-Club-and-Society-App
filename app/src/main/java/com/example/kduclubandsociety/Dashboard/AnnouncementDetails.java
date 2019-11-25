@@ -3,11 +3,17 @@ package com.example.kduclubandsociety.Dashboard;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.R;
+import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,8 +21,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class AnnouncementDetails extends AppCompatActivity {
-
+    private static final String TAG = "AnnouncementDetails";
     private TextView topTitle;
+    private static final int ACTIVITY_NUM = 0;
+    private Context mContext = AnnouncementDetails.this;
 
     private TextView aTitle;
     private TextView aBody;
@@ -46,6 +54,8 @@ public class AnnouncementDetails extends AppCompatActivity {
         String date = intent.getStringExtra("annDate");
         String username = intent.getStringExtra("annUsername");
 
+        setupBottomNavigationView();
+
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
         mClubRef = ref.child("Club");
@@ -61,5 +71,15 @@ public class AnnouncementDetails extends AppCompatActivity {
         aUser.setText(username);
         aDate.setText(date);
         aBody.setText(body);
+
+    }
+    // set up bottom navigation bar
+    private void setupBottomNavigationView(){
+        Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,currentUid);
+        Menu menu = bottomNavigationView.getMenu();
+        MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
+        menuItem.setChecked(true);
     }
 }

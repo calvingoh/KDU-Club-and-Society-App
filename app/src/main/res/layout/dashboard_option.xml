@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".Dashboard.DashboardOptionActivity">
 
     <!--top tool bar -->
@@ -16,17 +15,32 @@
         <include layout="@layout/layout_top_tabs"/>
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/dashboardImg"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="202dp"
-        android:layout_weight="0"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-    <ListView
-        android:id="@+id/optionListview"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp">
 
 
-</LinearLayout>
+
+        <ImageView
+            android:id="@+id/dashboardImg"
+            android:layout_width="match_parent"
+            android:layout_height="202dp"
+            android:layout_weight="0"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <ListView
+            android:id="@+id/optionListview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="50dp"/>
+
+    </LinearLayout>
+
+    <!--Bottom Navigation -->
+    <include layout="@layout/layout_bottom_navigation_view" />
+
+</RelativeLayout>
