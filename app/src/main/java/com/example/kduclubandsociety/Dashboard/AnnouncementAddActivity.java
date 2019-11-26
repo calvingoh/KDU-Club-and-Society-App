@@ -181,7 +181,6 @@ public class AnnouncementAddActivity extends AppCompatActivity {
                     .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
                     .setColor(Color.BLUE)
                     .setContentIntent(contentIntent)
-                    .addAction(R.mipmap.ic_launcher, "Toast", actionIntent)
                     .build();
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
             notificationManagerCompat.notify(1, notification);

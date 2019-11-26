@@ -104,7 +104,7 @@ public class DashboardActivity extends AppCompatActivity {
                                 }
 
                             }
-                            temp = new TempListAdapter(student_clubs,getApplicationContext(),uid, student_clubs_id);
+                            temp = new TempListAdapter(student_clubs,mContext,uid, student_clubs_id);
                             dashView = findViewById(R.id.dashboardView);
                             dashView.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
                             dashView.setAdapter(temp);

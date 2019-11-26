@@ -2,9 +2,17 @@ package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -12,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Attendance;
 import com.example.kduclubandsociety.Class.Member;
+import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -21,6 +30,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.example.kduclubandsociety.Notification.NotificationActivity.CHANNEL_1_ID;
 
 public class AttendanceAddActivity extends AppCompatActivity {
     private static final String TAG = "AttendanceAddActivity";
@@ -63,6 +74,7 @@ public class AttendanceAddActivity extends AppCompatActivity {
         location =findViewById(R.id.txtMtgLocation);
 
         getMembers();
+        createNotificationChannel();
 
     }
 
@@ -93,6 +105,8 @@ public class AttendanceAddActivity extends AppCompatActivity {
         Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
 
         AttendanceAddActivity.this.finish();
+
+        sendNotification();
     }
 
     void getMembers(){
@@ -120,5 +134,47 @@ public class AttendanceAddActivity extends AppCompatActivity {
            }
        };
        mStudentRef.addListenerForSingleValueEvent(studentListener);
+    }
+    private void createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_1_ID, "Channel 1", importance);
+            channel.setDescription("Channel 1");
+            // Register the channel with the system; you can't change the importance
+            // or other notification behaviors after this
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    public void sendNotification(){
+        String title = date.getText().toString();
+        String body = time.getText().toString();
+        String body2 = location.getText().toString();
+
+        Intent activityIntent = new Intent(this, AttendanceActivity.class);
+        PendingIntent contentIntent = PendingIntent.getActivity(this, 0, activityIntent, 0);
+
+        Intent broadcastIntent = new Intent(this, NotificationReciever.class);
+        broadcastIntent.putExtra("toastMessage", body);
+        PendingIntent actionIntent = PendingIntent.getBroadcast(this, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+
+        Notification notification = new NotificationCompat.Builder(this, CHANNEL_1_ID)
+                .setSmallIcon(R.drawable.ic_one)
+                .setContentTitle("New Meeting")
+                .setContentText(body)
+                .setContentText(body2)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+                .setGroup("example_group")
+                .setGroupAlertBehavior(NotificationCompat.GROUP_ALERT_ALL)
+                .setColor(Color.BLUE)
+                .setContentIntent(contentIntent)
+                .build();
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        notificationManagerCompat.notify(1, notification);
     }
 }
