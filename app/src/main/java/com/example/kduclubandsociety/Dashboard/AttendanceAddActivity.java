@@ -93,6 +93,7 @@ public class AttendanceAddActivity extends AppCompatActivity {
         Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
 
         AttendanceAddActivity.this.finish();
+        //a
     }
 
     void getMembers(){
