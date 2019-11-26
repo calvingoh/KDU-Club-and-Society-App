@@ -28,6 +28,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class AttendanceDetails extends AppCompatActivity {
     private static final String TAG = "AttendanceDetails";
@@ -46,7 +47,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
     ListView mListview;
     MemberAdapter adp;
-    ArrayList<Member> memberList;
+    List<Member> memberList;
     Member member;
 
     DatabaseReference ref, mClubRef, mStudentRef;
@@ -56,8 +57,8 @@ public class AttendanceDetails extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.dashboard_attendance_details);
 
-        txtTime = findViewById(R.id.txtMtgTime);
-        txtLocation = findViewById(R.id.txtMtgLocation);
+        txtTime = findViewById(R.id.txtTime);
+        txtLocation = findViewById(R.id.txtLocation);
 
 
         Intent intent = getIntent();
@@ -71,7 +72,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
-        mClubRef = ref.child("Club");
+        mClubRef = ref.child("Club").child(Integer.toString(clubId));
         mStudentRef = ref.child("Student").child(currentUid);
 
         //TOP TAB TITLE
@@ -79,13 +80,13 @@ public class AttendanceDetails extends AppCompatActivity {
         topTitle.setText(date);
 
         //listView
-        mListview = findViewById(R.id.attendance_dates);
+        mListview = findViewById(R.id.namelist);
         memberList= new ArrayList<>();
 
         //buttons
         btnSave = findViewById(R.id.btnRegister);
         btnEdit = findViewById(R.id.btnEdit);
-        btnSave.setVisibility(View.GONE);
+//        btnSave.setVisibility(View.GONE);
 
         txtTime.setText (time);
         txtLocation.setText(location);
@@ -95,17 +96,16 @@ public class AttendanceDetails extends AppCompatActivity {
     }
 
     void addList(){
-        mClubRef.addValueEventListener(new ValueEventListener() {
+        mClubRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("attendance")){
-                    DataSnapshot pathSnapshot = dataSnapshot.child("attendance").child(date + " " + time).child("member");
-                    memberList.clear();
+                DataSnapshot pathSnapshot = dataSnapshot.child("attendance").child(date + " " + time).child("members");
+                memberList.clear();
 
-                    for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
-                        member = annoSnapshot.getValue(Member.class);
-                        memberList.add (member);
-                    }
+                for (int i = 0; i<pathSnapshot.getChildrenCount(); i++ ){
+                    DataSnapshot memberSnapshot = pathSnapshot.child(Integer.toString(i));
+                    member = memberSnapshot.getValue(Member.class);
+                    memberList.add (member);
                 }
                 adp = new MemberAdapter(AttendanceDetails.this, memberList);
                 mListview.setAdapter(adp);
@@ -120,10 +120,11 @@ public class AttendanceDetails extends AppCompatActivity {
     }
 
     void checkPermission(){
-        mClubRef.child(Integer.toString(clubId)).addValueEventListener(new ValueEventListener() {
+        mClubRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
+                String admin =dataSnapshot.child("admin").getValue(String.class);
+                if (admin.equals(currentUid)){
                     btnEdit.show();
                 }
 

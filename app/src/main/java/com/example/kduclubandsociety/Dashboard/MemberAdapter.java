@@ -20,9 +20,9 @@ import androidx.annotation.Nullable;
 
 public class MemberAdapter extends ArrayAdapter<Member> {
     private Activity context;
-    private ArrayList<Member> memberList;
+    private List<Member> memberList;
 
-    public MemberAdapter(Activity context, ArrayList<Member> memberList) {
+    public MemberAdapter(Activity context, List<Member> memberList) {
         super(context, R.layout.dashboard_attendance, memberList);
         this.context = context;
         this.memberList = memberList;
