@@ -39,19 +39,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*
-        SharedPreferences pref;
-        pref = getSharedPreferences("your_pref",  MODE_PRIVATE);
 
-        boolean login_status = pref.getBoolean("login_status", false);
-        if (login_status) {
-            Log.v(TAG, "UserInfo>>User already logged in");
-            Intent intent = new Intent(this, DashboardActivity.class);
-            startActivity(intent);
-            this.finish();
-        }
-
-         */
         setContentView(R.layout.activity_login);
 
         mAuth = FirebaseAuth.getInstance();
@@ -128,7 +116,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View v) {
         if (v.getId() == R.id.btnSignin) {
-            signIn(mEmailField.getText().toString(), mPasswordField.getText().toString());
+            signIn(mEmailField.getText().toString().trim(), mPasswordField.getText().toString().trim());
         }
     }
 
