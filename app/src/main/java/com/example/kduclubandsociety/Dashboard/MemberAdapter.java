@@ -9,21 +9,23 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Attendance;
+import com.example.kduclubandsociety.Class.Member;
 import com.example.kduclubandsociety.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class AttendanceAdapter extends ArrayAdapter<Attendance> {
+public class MemberAdapter extends ArrayAdapter<Member> {
     private Activity context;
-    private List<Attendance> attendanceList;
+    private ArrayList<Member> memberList;
 
-    public AttendanceAdapter(Activity context, List<Attendance> attendanceList) {
-        super(context, R.layout.dashboard_attendance, attendanceList);
+    public MemberAdapter(Activity context, ArrayList<Member> memberList) {
+        super(context, R.layout.dashboard_attendance, memberList);
         this.context = context;
-        this.attendanceList = attendanceList;
+        this.memberList = memberList;
     }
 
     @NonNull
@@ -32,14 +34,14 @@ public class AttendanceAdapter extends ArrayAdapter<Attendance> {
         LayoutInflater inflater = context.getLayoutInflater();
         View listViewItem = inflater.inflate(R.layout.attendance_listview_row, null, true);
 
-        TextView date = listViewItem.findViewById(R.id.txtDate);
-       // CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
+        TextView name = listViewItem.findViewById(R.id.txtDate);
+   //     CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
 
 
-        Attendance meeting= attendanceList.get(position);
+        Member member= memberList.get(position);
 
-        date.setText(meeting.getDate());
-        //checkBoxPresent.setChecked(false);
+        name.setText(member.getName());
+      //  checkBoxPresent.setChecked(false);
         return listViewItem;
     }
 }

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -41,7 +42,7 @@ public class AttendanceActivity extends AppCompatActivity {
 
     ListView aListview;
     AttendanceAdapter adp;
-    List<Attendance> attendanceList;
+    ArrayList<Attendance> attendanceList;
     Attendance attendance;
 
     DatabaseReference ref, mClubRef, mStudentRef;
@@ -75,6 +76,7 @@ public class AttendanceActivity extends AppCompatActivity {
 
         checkPermission();
         addMeetingList();
+        viewMeeting();
     }
 
     // check whether student's permission
@@ -128,7 +130,18 @@ public class AttendanceActivity extends AppCompatActivity {
     }
 
     void viewMeeting(){
-        //to view list of students
+        aListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intentAttend = new Intent (mContext,AttendanceDetails.class);
+                intentAttend.putExtra("cId",clubId);
+                intentAttend.putExtra("currentUid", currentUid);
+                intentAttend.putExtra("mtgDate", attendanceList.get(position).getDate());
+                intentAttend.putExtra("mtgTime", attendanceList.get(position).getTime());
+                intentAttend.putExtra ("mtgLocation", attendanceList.get(position).getLocation());
+                startActivity(intentAttend);
+            }
+        });
     }
 
     public void onClick (View v){

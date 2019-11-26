@@ -13,9 +13,10 @@
         android:text="15/11"
         android:textSize="16sp"
         android:textStyle="bold"/>
-
+<!--
     <CheckBox
         android:id="@+id/cbPresent"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:checked="true" />-->
 </LinearLayout>

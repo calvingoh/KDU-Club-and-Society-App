@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard.AttendanceAddActivity"></activity>
+        <activity android:name=".Dashboard.AttendanceDetails"></activity>
+        <activity android:name=".Dashboard.AttendanceAddActivity" />
         <activity android:name=".Dashboard.AttendanceActivity" />
         <activity android:name=".Dashboard.AnnouncementDetails" />
         <activity android:name=".Dashboard.AnnouncementAddActivity" />

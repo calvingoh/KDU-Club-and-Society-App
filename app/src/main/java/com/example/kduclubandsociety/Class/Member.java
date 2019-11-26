@@ -1,16 +1,16 @@
 package com.example.kduclubandsociety.Class;
 
 public class Member {
-    private String stuID;
+    private String uid;
     private String name;
     private Boolean present;
 
-    public String getStuID() {
-        return stuID;
+    public String getUid() {
+        return uid;
     }
 
-    public void setStuID(String stuID) {
-        this.stuID = stuID;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     public String getName() {

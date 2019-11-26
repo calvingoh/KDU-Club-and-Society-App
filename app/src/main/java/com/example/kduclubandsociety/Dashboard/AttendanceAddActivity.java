@@ -39,7 +39,7 @@ public class AttendanceAddActivity extends AppCompatActivity {
     String currentUid;
 
    String[] student_club_id;
-   List<Member> memberList;
+   ArrayList<Member> memberList;
 
 
     @Override
@@ -93,7 +93,6 @@ public class AttendanceAddActivity extends AppCompatActivity {
         Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
 
         AttendanceAddActivity.this.finish();
-        //a
     }
 
     void getMembers(){
@@ -105,9 +104,9 @@ public class AttendanceAddActivity extends AppCompatActivity {
                    for (int i = 0; i<student_club_id.length; i++){
                        if (Integer.toString(clubId).equals(student_club_id[i])){
                            Member member = new Member();
-                           member.setName(data.child("name").getValue(String.class));
-                           member.setStuID(data.child("stuID").getValue(String.class));
+                           member.setUid(data.child("uid").getValue(String.class));
                            member.setPresent(false);
+                           member.setName(data.child("name").getValue(String.class));
                            memberList.add (member);
                        }
                    }

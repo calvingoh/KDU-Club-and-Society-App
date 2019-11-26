@@ -7,7 +7,7 @@ public class Attendance {
     private String date;
     private String time;
     private String location;
-    private List<Member> members;
+    private ArrayList<Member> members;
 
     public String getDate() {
         return date;
@@ -33,11 +33,11 @@ public class Attendance {
         this.location = location;
     }
 
-    public List<Member> getMembers() {
+    public ArrayList<Member> getMembers() {
         return members;
     }
 
-    public void setMembers(List<Member> members) {
+    public void setMembers(ArrayList<Member> members) {
         this.members = members;
     }
 }
