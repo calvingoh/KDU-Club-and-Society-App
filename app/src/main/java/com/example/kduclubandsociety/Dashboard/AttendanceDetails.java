@@ -38,6 +38,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
     EditText txtTime;
     EditText txtLocation;
+    TextView txtDate;
     FloatingActionButton btnEdit;
     Button btnSave;
 
@@ -59,6 +60,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
         txtTime = findViewById(R.id.txtTime);
         txtLocation = findViewById(R.id.txtLocation);
+        txtDate=findViewById(R.id.txtDate);
 
 
         Intent intent = getIntent();
@@ -77,7 +79,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
-        topTitle.setText(date);
+        topTitle.setText("Attendance");
 
         //listView
         mListview = findViewById(R.id.namelist);
@@ -90,6 +92,7 @@ public class AttendanceDetails extends AppCompatActivity {
 
         txtTime.setText (time);
         txtLocation.setText(location);
+        txtDate.setText (date);
 
         checkPermission();
         addList();
@@ -144,6 +147,7 @@ public class AttendanceDetails extends AppCompatActivity {
         switch (v.getId()){
             case R.id.btnEdit:{
                 btnSave.setVisibility(View.VISIBLE);
+                btnEdit.hide();
             }
 
             case R.id.btnSave :{

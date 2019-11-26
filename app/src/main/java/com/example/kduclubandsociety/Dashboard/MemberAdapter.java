@@ -1,6 +1,7 @@
 package com.example.kduclubandsociety.Dashboard;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,13 +36,24 @@ public class MemberAdapter extends ArrayAdapter<Member> {
         View listViewItem = inflater.inflate(R.layout.attendance_listview_row, null, true);
 
         TextView name = listViewItem.findViewById(R.id.txtDate);
-   //     CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
+        CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
 
 
         Member member= memberList.get(position);
+        Boolean present = member.getPresent();
 
         name.setText(member.getName());
-      //  checkBoxPresent.setChecked(false);
+        name.setTextSize(14);
+
+
+        if (present){
+            checkBoxPresent.setChecked(true);
+        }
+
+        else{
+            checkBoxPresent.setChecked(false);
+        }
+
         return listViewItem;
     }
 }

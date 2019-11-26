@@ -48,6 +48,7 @@ public class Club_Profile extends AppCompatActivity {
     int clubId;
     String clubAdmin;
     String tempClubIds;
+    String[] clubs;
 
     DatabaseReference ref, mClubRef, mStudentRef;
 
@@ -120,7 +121,7 @@ public class Club_Profile extends AppCompatActivity {
 
     // check whether student registered into the club or no and their permission
     void checkRegistered(){
-        String[] clubs = DashboardActivity.student_clubs_id;
+        clubs = DashboardActivity.student_clubs_id;
         for(int i = 0; i < clubs.length; i++) {
             if(Integer.toString(clubId).equals(clubs[i])) {
                 btnRegister.setVisibility(View.GONE);

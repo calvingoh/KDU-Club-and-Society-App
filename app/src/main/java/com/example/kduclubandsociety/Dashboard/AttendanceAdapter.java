@@ -33,7 +33,9 @@ public class AttendanceAdapter extends ArrayAdapter<Attendance> {
         View listViewItem = inflater.inflate(R.layout.attendance_listview_row, null, true);
 
         TextView date = listViewItem.findViewById(R.id.txtDate);
-       // CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
+        date.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        CheckBox checkBoxPresent = listViewItem.findViewById(R.id.cbPresent);
+        checkBoxPresent.setVisibility(View.GONE);
 
 
         Attendance meeting= attendanceList.get(position);
