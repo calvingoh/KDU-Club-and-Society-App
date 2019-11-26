@@ -11,7 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Dashboard.AnnouncementDetails"></activity>
+        <activity android:name=".Dashboard.AttendanceAddActivity"></activity>
+        <activity android:name=".Dashboard.AttendanceActivity" />
+        <activity android:name=".Dashboard.AnnouncementDetails" />
         <activity android:name=".Dashboard.AnnouncementAddActivity" />
         <activity android:name=".Dashboard.AnnouncementActivity" />
         <activity android:name=".Dashboard.DashboardOptionActivity" />
@@ -20,8 +22,7 @@
         <activity android:name=".Clubs.ClubsActivity" />
         <activity android:name=".Notification.NotificationActivity" />
         <activity android:name=".Profile.ProfileActivity" />
-        <activity android:name=".Clubs.Club_Profile" />
-        <!-- android:label="@string/title_activity_main"></activity> -->
+        <activity android:name=".Clubs.Club_Profile" /> <!-- android:label="@string/title_activity_main"></activity> -->
         <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

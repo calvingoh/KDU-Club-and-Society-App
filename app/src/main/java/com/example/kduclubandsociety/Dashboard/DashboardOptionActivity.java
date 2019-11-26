@@ -102,7 +102,10 @@ public class DashboardOptionActivity extends AppCompatActivity {
                      break;
 
                      case 1:{
-
+                         Intent intentAttendance = new Intent (mContext, AttendanceActivity.class);
+                         intentAttendance.putExtra("currentUid",uid);
+                         intentAttendance.putExtra("cId", club.getId());
+                         startActivity(intentAttendance);
                      }
                      break;
 

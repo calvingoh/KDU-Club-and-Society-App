@@ -28,4 +28,6 @@
     <string name="txtAddAnnouncementTitle">New Announcement</string>
     <string name="btnSave">Save</string>
     <string name="btnCancel">Cancel</string>
+
+    <string name="txtAddMeetingTitle">New Meeting</string>
 </resources>

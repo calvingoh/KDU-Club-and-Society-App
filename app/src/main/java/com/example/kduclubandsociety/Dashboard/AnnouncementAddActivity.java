@@ -71,22 +71,11 @@ public class AnnouncementAddActivity extends AppCompatActivity {
         txtTitle = findViewById(R.id.txtAncTitle);
         txtBody = findViewById(R.id.txtBody);
 
-      //  windowSize();
         createNotificationChannel();
         getUsername();
         getClubDetails();
     }
 
-    //change window size
-    void windowSize() {
-        DisplayMetrics dm = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(dm);
-
-        int width = dm.widthPixels;
-        int height = dm.heightPixels;
-
-        getWindow().setLayout((int) (width * .8), (int) (height * .65));
-    }
 
     public void onClick(View v) {
         switch (v.getId()) {

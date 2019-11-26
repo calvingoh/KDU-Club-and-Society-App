@@ -10,15 +10,11 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Announcement;
-import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.Clubs.ClubListAdapter;
-import com.example.kduclubandsociety.Clubs.Club_Profile;
-import com.example.kduclubandsociety.Clubs.ClubsActivity;
+import com.example.kduclubandsociety.Class.Attendance;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,34 +25,32 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
-public class AnnouncementActivity extends AppCompatActivity {
+public class AttendanceActivity extends AppCompatActivity {
     private static final String TAG = "AnnouncementActivity";
     private TextView topTitle;
     private static final int ACTIVITY_NUM = 0;
-    private Context mContext = AnnouncementActivity.this;
+    private Context mContext = AttendanceActivity.this;
 
-    private FloatingActionButton btnAddAnnouncement;
+    private FloatingActionButton btnAddMeeting;
 
     String currentUid;
     int clubId;
 
     ListView aListview;
-    AnnouncementAdapter adp;
-    List<Announcement> announcementList;
-    Announcement announcement;
+    AttendanceAdapter adp;
+    List<Attendance> attendanceList;
+    Attendance attendance;
 
     DatabaseReference ref, mClubRef, mStudentRef;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard_announcement);
+        setContentView(R.layout.dashboard_attendance);
 
+        //get intent
         Intent intent = getIntent();
         clubId = intent.getIntExtra("cId",0);
         currentUid = intent.getStringExtra("currentUid");
@@ -65,7 +59,7 @@ public class AnnouncementActivity extends AppCompatActivity {
 
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
-        topTitle.setText("Announcement");
+        topTitle.setText("Attendance");
 
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
@@ -73,15 +67,14 @@ public class AnnouncementActivity extends AppCompatActivity {
         mClubRef= ref.child("Club").child(Integer.toString(clubId));
 
         //listView
-        aListview = findViewById(R.id.announcement_list);
-        announcementList= new ArrayList<>();
+        aListview = findViewById(R.id.attendance_dates);
+        attendanceList= new ArrayList<>();
 
         //button
-        btnAddAnnouncement = findViewById(R.id.btnAddAnnouncement);
+        btnAddMeeting = findViewById(R.id.btnAddMeeting);
 
         checkPermission();
-        addListView();
-        viewDetails();
+        addMeetingList();
     }
 
     // check whether student's permission
@@ -90,14 +83,12 @@ public class AnnouncementActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
-                    btnAddAnnouncement.show();
+                    btnAddMeeting.show();
                 }
                 else {
-                    btnAddAnnouncement.hide();
+                    btnAddMeeting.hide();
                 }
-
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -105,33 +96,27 @@ public class AnnouncementActivity extends AppCompatActivity {
         });
     }
 
-    void add(){
-       Intent intentAdd = new Intent(mContext, AnnouncementAddActivity.class);
-       intentAdd.putExtra("cId",clubId);
-       intentAdd.putExtra("currentUid", currentUid);
-       startActivity(intentAdd);
+    void addMeeting(){
+        Intent intentAdd = new Intent(mContext, AttendanceAddActivity.class);
+        intentAdd.putExtra("cId",clubId);
+        intentAdd.putExtra("currentUid", currentUid);
+        startActivity(intentAdd);
     }
 
-    public void onClick(View v){
-        if (v.getId()==R.id.btnAddAnnouncement){
-            add();
-        }
-    }
-
-    void addListView(){
+    void addMeetingList(){
         mClubRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("announcement")){
-                    DataSnapshot pathSnapshot = dataSnapshot.child("announcement");
-                    announcementList.clear();
+                if (dataSnapshot.hasChild("attendance")){
+                    DataSnapshot pathSnapshot = dataSnapshot.child("attendance");
+                    attendanceList.clear();
 
                     for (DataSnapshot annoSnapshot: pathSnapshot.getChildren() ){
-                        announcement = annoSnapshot.getValue(Announcement.class);
-                        announcementList.add (announcement);
+                        attendance = annoSnapshot.getValue(Attendance.class);
+                        attendanceList.add (attendance);
                     }
                 }
-                adp = new AnnouncementAdapter(AnnouncementActivity.this, announcementList);
+                adp = new AttendanceAdapter(AttendanceActivity.this, attendanceList);
                 aListview.setAdapter(adp);
             }
 
@@ -142,28 +127,14 @@ public class AnnouncementActivity extends AppCompatActivity {
         });
     }
 
-    void viewDetails(){
-        aListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intentAnnDeets = new Intent (mContext,AnnouncementDetails.class);
-                intentAnnDeets.putExtra("cId",clubId);
-                intentAnnDeets.putExtra("currentUid", currentUid);
-                intentAnnDeets.putExtra("annTitle", announcementList.get(position).getTitle());
-                intentAnnDeets.putExtra("annBody", announcementList.get(position).getBody());
-                intentAnnDeets.putExtra("annDate", announcementList.get(position).getDate());
-                intentAnnDeets.putExtra("annUsername", announcementList.get(position).getUsername());
-                intentAnnDeets.putExtra("annIcon", announcementList.get(position).getClubIcon());
-                intentAnnDeets.putExtra("annClubName", announcementList.get(position).getClubName());
-                startActivity(intentAnnDeets);
-            }
-        });
+    void viewMeeting(){
+        //to view list of students
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-
+    public void onClick (View v){
+        if (v.getId()==R.id.btnAddMeeting){
+            addMeeting();
+        }
     }
 
     // set up bottom navigation bar

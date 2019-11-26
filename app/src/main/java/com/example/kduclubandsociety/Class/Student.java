@@ -2,16 +2,16 @@ package com.example.kduclubandsociety.Class;
 
 public class Student {
     private String uid; //from firebase
-    private int id;
+    private String stuID;
     private String token;
     private String name;
     private String email;
-    private int[][] clubs;
+    private String clubs;
 
 
     public Student(String uid, String token) {
         this.uid = uid;
-        this.id = id;
+        this.stuID = stuID;
         this.token = token;
         this.name = name;
         this.email = email;
@@ -26,12 +26,12 @@ public class Student {
         this.uid = uid;
     }
 
-    public int getId() {
-        return id;
+    public String getStuID() {
+        return stuID;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setStuID(String stuID) {
+        this.stuID = stuID;
     }
 
     public String getName() {
@@ -50,11 +50,11 @@ public class Student {
         this.email = email;
     }
 
-    public int[][] getClubs() {
+    public String getClubs() {
         return clubs;
     }
 
-    public void setClubs(int[][] clubs) {
+    public void setClubs(String clubs) {
         this.clubs = clubs;
     }
 

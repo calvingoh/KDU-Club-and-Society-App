@@ -21,7 +21,7 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class AnnouncementAdapter extends ArrayAdapter<Announcement> implements Filterable {
+public class AnnouncementAdapter extends ArrayAdapter<Announcement> {
     private Activity context;
     private List<Announcement> announcementList;
 
