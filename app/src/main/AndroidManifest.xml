@@ -23,6 +23,7 @@
         <activity android:name=".Notification.GenerateNotification" />
         <activity android:name=".Dashboard.DashboardActivity" />
         <activity android:name=".Clubs.ClubsActivity" />
+        <activity android:name=".Clubs.Club_ProfileEdit"/>
         <activity android:name=".Notification.NotificationActivity" />
         <activity android:name=".Profile.ProfileActivity" />
         <activity android:name=".Clubs.Club_Profile" /> <!-- android:label="@string/title_activity_main"></activity> -->

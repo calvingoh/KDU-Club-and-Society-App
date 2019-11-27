@@ -40,15 +40,10 @@ public class AnnouncementDetailsEdit extends AppCompatActivity {
 
     EditText txtTitle;
     EditText txtBody;
-    String ancTitle;
-    String ancBody;
-    String username;
-    String icon;
-    String clubName;
 
     DatabaseReference ref, mClubRef, mStudentRef;
     int clubId;
-    String currentUid, body,title, date;
+    String currentUid, title, body , date, username, icon, clubName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +56,9 @@ public class AnnouncementDetailsEdit extends AppCompatActivity {
         body = intent.getStringExtra("body");
         title = intent.getStringExtra("title");
         date = intent.getStringExtra("date");
+        username = intent.getStringExtra("username");
+        icon = intent.getStringExtra("icon");
+        clubName = intent.getStringExtra("clubName");
 
 
         // firebase
@@ -94,16 +92,24 @@ public class AnnouncementDetailsEdit extends AppCompatActivity {
     }
 
     void save() {
-        ancTitle = txtTitle.getText().toString().trim();
-        ancBody = txtBody.getText().toString().trim();
+        title = txtTitle.getText().toString().trim();
+        body = txtBody.getText().toString().trim();
 
-        if (ancBody.length() > 0 && ancTitle.length() > 0){
-            mClubRef.child("announcement").child(date).child ("title").setValue(ancTitle);
-            mClubRef.child("announcement").child(date).child ("body").setValue(ancBody);
+        if (body.length() > 0 && title.length() > 0){
+            mClubRef.child("announcement").child(date).child ("title").setValue(title);
+            mClubRef.child("announcement").child(date).child ("body").setValue(body);
             Toast.makeText(AnnouncementDetailsEdit.this, "Announcement Edited", Toast.LENGTH_LONG).show();
 
-            AnnouncementDetailsEdit.this.finish();
-            sendNotification();
+            Intent intentAnnDeets = new Intent (mContext,AnnouncementDetails.class);
+            intentAnnDeets.putExtra("cId",clubId);
+            intentAnnDeets.putExtra("currentUid", currentUid);
+            intentAnnDeets.putExtra("annTitle",title);
+            intentAnnDeets.putExtra("annBody", body);
+            intentAnnDeets.putExtra("annDate", date);
+            intentAnnDeets.putExtra("annUsername", username);
+            intentAnnDeets.putExtra("annIcon", icon);
+            intentAnnDeets.putExtra("annClubName", clubName);
+            startActivity(intentAnnDeets);
         }
 
         else {

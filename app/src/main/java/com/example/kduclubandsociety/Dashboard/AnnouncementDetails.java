@@ -38,7 +38,7 @@ public class AnnouncementDetails extends AppCompatActivity {
     private TextView aClubName;
     FloatingActionButton btnEdit;
 
-    String currentUid, title, body , date;
+    String currentUid, title, body , date, username, icon, clubName;
     int clubId;
 
     DatabaseReference ref, mClubRef, mStudentRef;
@@ -62,9 +62,9 @@ public class AnnouncementDetails extends AppCompatActivity {
         title = intent.getStringExtra("annTitle");
         body = intent.getStringExtra("annBody");
         date = intent.getStringExtra("annDate");
-        String username = intent.getStringExtra("annUsername");
-        String icon = intent.getStringExtra("annIcon");
-        String clubName = intent.getStringExtra("annClubName");
+        username = intent.getStringExtra("annUsername");
+        icon = intent.getStringExtra("annIcon");
+        clubName = intent.getStringExtra("annClubName");
 
         setupBottomNavigationView();
 
@@ -120,6 +120,9 @@ public class AnnouncementDetails extends AppCompatActivity {
             intentEdit.putExtra("date", date);
             intentEdit.putExtra("cId", clubId);
             intentEdit.putExtra("currentUid", currentUid);
+            intentEdit.putExtra ("icon", icon);
+            intentEdit.putExtra("username", username);
+            intentEdit.putExtra("clubName", clubName);
             startActivity(intentEdit);
         }
     }

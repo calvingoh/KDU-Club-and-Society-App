@@ -30,7 +30,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 public class Club_Profile extends AppCompatActivity {
-    private static final String TAG = "ClubsActivity";
+    private static final String TAG = "ClubProfile";
     private TextView topTitle;
     private static final int ACTIVITY_NUM = 1;
     private Context mContext = Club_Profile.this;
@@ -46,6 +46,8 @@ public class Club_Profile extends AppCompatActivity {
 
     String currentUid;
     int clubId;
+    String clubName, clubDesc, clubMeeting, clubImage;
+    int clubMax;
     String clubAdmin;
     String tempClubIds;
     String[] clubs;
@@ -66,11 +68,11 @@ public class Club_Profile extends AppCompatActivity {
         //intents
         Intent intent = getIntent();
         clubId = intent.getIntExtra("cId",0);
-        String clubName = intent.getStringExtra("cName");
-        String clubDesc = intent.getStringExtra("cDescription");
-        String clubMeeting = intent.getStringExtra("cMeeting");
-        String clubMax = Integer.toString(intent.getIntExtra("cMaxNum",0));
-        String clubImage = intent.getStringExtra("cImage");
+        clubName = intent.getStringExtra("cName");
+        clubDesc = intent.getStringExtra("cDescription");
+        clubMeeting = intent.getStringExtra("cMeeting");
+        clubMax = intent.getIntExtra("cMaxNum",0);
+        clubImage = intent.getStringExtra("cImage");
         clubAdmin = intent.getStringExtra("cAdmin");
         currentUid = intent.getStringExtra("currentUid");
 
@@ -82,7 +84,7 @@ public class Club_Profile extends AppCompatActivity {
 
         //   mNameTextView.setText(clubName);
         mDescriptionTextView.setText(clubDesc);
-        mMaxTextView.setText(clubMax);
+        mMaxTextView.setText(Integer.toString(clubMax));
         mMeetingTextView.setText(clubMeeting);
         Picasso.get().load(clubImage).into(mImage);
 
@@ -141,7 +143,16 @@ public class Club_Profile extends AppCompatActivity {
             }
 
             case R.id.btnEdit:{
-                //edit and update codes
+                Intent intentEdit = new Intent(mContext, Club_ProfileEdit.class);
+                intentEdit.putExtra("cId", clubId);
+                intentEdit.putExtra("cName", clubName);
+                intentEdit.putExtra("cDescription", clubDesc);
+                intentEdit.putExtra("cMeeting", clubMeeting);
+                intentEdit.putExtra("cMaxNum", clubMax);
+                intentEdit.putExtra("cImage", clubImage);
+                intentEdit.putExtra("cAdmin", clubAdmin);
+                intentEdit.putExtra("currentUid", currentUid);
+                startActivity(intentEdit);
             }
         }
 
