@@ -3,39 +3,28 @@ package com.example.kduclubandsociety.Dashboard;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.renderscript.Sampler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.Clubs.ClubListAdapter;
-import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.Clubs.TempListAdapter;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.firebase.ui.database.FirebaseRecyclerAdapter;
 
-import java.io.Console;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class DashboardActivity extends AppCompatActivity {
@@ -46,7 +35,7 @@ public class DashboardActivity extends AppCompatActivity {
     private String uid;
     public static String[] student_clubs_id;
     private List<Club> student_clubs;
-    private TempListAdapter temp; //rename as u see fit.
+    private TempListAdapter temp;
 
     //firebase
     private FirebaseDatabase mFirebaseDatabase;
@@ -122,9 +111,6 @@ public class DashboardActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError databaseError) {
             }
         };
-        //two different types .addValueEventListener & .addListenerForSingleValueEvent
-        //One will only load the data from Firebase at Activity startup
-        //The other one will reload the data when you change something in Firebase.
         mStudentRef.child("clubs").addListenerForSingleValueEvent(studentClubListener);
         myRef.keepSynced(true);
     }

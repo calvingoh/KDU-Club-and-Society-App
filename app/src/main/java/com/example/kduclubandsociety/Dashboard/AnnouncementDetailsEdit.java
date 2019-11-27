@@ -14,7 +14,6 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.kduclubandsociety.Class.Announcement;
 import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
@@ -22,9 +21,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -196,8 +192,6 @@ public class AnnouncementDetailsEdit extends AppCompatActivity {
                     .build();
             NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
             notificationManagerCompat.notify(1, notification);
-
-
         }
 
     @Override

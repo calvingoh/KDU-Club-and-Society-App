@@ -1,7 +1,6 @@
 package com.example.kduclubandsociety.Clubs;
 
 import android.app.Activity;
-import android.graphics.ColorSpace;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,9 @@ import com.squareup.picasso.Picasso;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import io.opencensus.trace.export.RunningSpanStore;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ClubListAdapter extends ArrayAdapter<Club> implements Filterable {
     private Activity context;

@@ -22,7 +22,6 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Announcement;
-import com.example.kduclubandsociety.LoginActivity;
 import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;

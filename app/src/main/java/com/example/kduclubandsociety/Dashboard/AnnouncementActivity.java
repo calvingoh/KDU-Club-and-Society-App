@@ -15,10 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Announcement;
-import com.example.kduclubandsociety.Class.Club;
-import com.example.kduclubandsociety.Clubs.ClubListAdapter;
-import com.example.kduclubandsociety.Clubs.Club_Profile;
-import com.example.kduclubandsociety.Clubs.ClubsActivity;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -29,9 +25,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class AnnouncementActivity extends AppCompatActivity {
