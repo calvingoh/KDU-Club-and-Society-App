@@ -151,6 +151,7 @@ public class NotificationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intentAnnDeets = new Intent (mContext, AnnouncementDetails.class);
                 intentAnnDeets.putExtra("currentUid",uid);
+                intentAnnDeets.putExtra("cId", notificationList.get(position).getClubId());
                 intentAnnDeets.putExtra("annTitle", notificationList.get(position).getTitle());
                 intentAnnDeets.putExtra("annBody", notificationList.get(position).getBody());
                 intentAnnDeets.putExtra("annDate", notificationList.get(position).getDate());

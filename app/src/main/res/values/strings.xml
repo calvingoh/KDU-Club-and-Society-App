@@ -26,8 +26,12 @@
     <string name="clubMaxNum">Maximum Number of Member</string>
 
     <string name="txtAddAnnouncementTitle">New Announcement</string>
+    <string name="txtEditAnnouncementTitle">Edit Announcement</string>
     <string name="btnSave">Save</string>
     <string name="btnCancel">Cancel</string>
 
     <string name="txtAddMeetingTitle">New Meeting</string>
+    <string name="txtDate">Date : </string>
+    <string name="txtTime">Time :</string>
+    <string name="txtLocation">Location : </string>
 </resources>

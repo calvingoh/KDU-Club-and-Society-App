@@ -32,10 +32,10 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Date :"
+                android:text="@string/txtDate"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="15dp" />
 
             <EditText
                 android:id="@+id/txtDate"
@@ -44,7 +44,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="date"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -57,11 +59,11 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Time :"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
                 android:inputType="time"
-                android:layout_marginEnd="15dp"/>
+                android:layout_marginEnd="15dp"
+                android:text="@string/txtTime"/>
 
             <EditText
                 android:id="@+id/txtTime"
@@ -70,7 +72,9 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:inputType="none"
-                android:textSize="14sp"/>
+                android:textSize="14sp"
+                android:clickable="true"
+                android:focusable="false"/>
         </LinearLayout>
 
         <LinearLayout
@@ -83,7 +87,7 @@
                 android:layout_width="100dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Location :"
+                android:text="@string/txtLocation"
                 android:textAlignment="textEnd"
                 android:textStyle="bold"
                 android:layout_marginEnd="15dp"/>
@@ -122,7 +126,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnSave"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
             <Button
@@ -135,7 +139,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnCancel"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
 

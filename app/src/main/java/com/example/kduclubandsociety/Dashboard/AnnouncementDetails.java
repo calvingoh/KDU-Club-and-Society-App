@@ -91,11 +91,12 @@ public class AnnouncementDetails extends AppCompatActivity {
         checkPermission();
     }
 
+    @NonNull
     void checkPermission(){
-        mClubRef.child(Integer.toString(clubId)).addValueEventListener(new ValueEventListener() {
+        mClubRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String admin =dataSnapshot.child("admin").getValue(String.class);
+                String admin =dataSnapshot.child(Integer.toString(clubId)).child("admin").getValue(String.class);
                 if (admin.equals(currentUid)){
                     btnEdit.show();
                 }

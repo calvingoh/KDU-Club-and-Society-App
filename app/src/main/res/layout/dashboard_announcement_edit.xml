@@ -14,7 +14,7 @@
             android:layout_marginLeft="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="@string/txtAddAnnouncementTitle"
+            android:text="@string/txtEditAnnouncementTitle"
             android:textSize="24sp"
             android:textStyle="bold" />
 
@@ -62,7 +62,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnSave"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
             <Button
@@ -75,7 +75,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnCancel"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
 

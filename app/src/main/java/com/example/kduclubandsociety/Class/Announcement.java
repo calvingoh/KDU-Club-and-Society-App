@@ -9,6 +9,7 @@ public class Announcement {
     private String username;
     private String clubIcon;
     private String clubName;
+    private int clubId;
 
 
     public String getDate() {
@@ -57,6 +58,14 @@ public class Announcement {
 
     public void setClubName(String clubName) {
         this.clubName = clubName;
+    }
+
+    public int getClubId() {
+        return clubId;
+    }
+
+    public void setClubId(int clubId) {
+        this.clubId = clubId;
     }
 
     public static Comparator<Announcement> DateComparator = new Comparator <Announcement>(){

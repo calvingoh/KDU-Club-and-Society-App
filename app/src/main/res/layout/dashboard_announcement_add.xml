@@ -62,7 +62,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnSave"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
             <Button
@@ -75,7 +75,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnCancel"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
 

@@ -45,7 +45,7 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView mName;
     private TextView mEmail;
     private TextView topTitle;
-    private TextView mClubName;
+    private TextView mStuID;
 
 
    String fullClubs = "";
@@ -70,7 +70,7 @@ public class ProfileActivity extends AppCompatActivity {
         //initialize views
         mName = findViewById(R.id.txtName);
         mEmail = findViewById(R.id.txtEmail);
-        mClubName =findViewById(R.id.txtClub);
+        mStuID =findViewById(R.id.txtStuID);
 
 
         //set profile details
@@ -81,10 +81,11 @@ public class ProfileActivity extends AppCompatActivity {
 
                 String name = dataSnapshot.child("name").getValue().toString();
                 String email = dataSnapshot.child("email").getValue().toString();
+                String id = dataSnapshot.child("stuID").getValue().toString();
 
                 mName.setText(name);
                 mEmail.setText (email);
-                mClubName.setText (fullClubs);
+                mStuID.setText (id);
             }
 
             @Override

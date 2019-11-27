@@ -110,6 +110,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
             announcement1.setUsername (username);
             announcement1.setClubIcon(icon);
             announcement1.setClubName(clubName);
+            announcement1.setClubId (clubId);
 
 
             mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
@@ -157,6 +158,7 @@ public class AnnouncementAddActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 icon = dataSnapshot.child("icon").getValue().toString();
                 clubName = dataSnapshot.child("name").getValue().toString();
+                clubId = Integer.parseInt(dataSnapshot.child ("id").getValue().toString());
 
             }
 

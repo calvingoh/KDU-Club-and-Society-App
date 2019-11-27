@@ -48,7 +48,9 @@
             <EditText
                 android:id="@+id/DescriptiontextView"
                 android:layout_width="match_parent"
-                android:layout_height="70dp" />
+                android:layout_height="70dp"
+                android:textSize="12sp"
+                android:inputType="textMultiLine"/>
         </LinearLayout>
 
         <LinearLayout
@@ -68,7 +70,9 @@
             <EditText
                 android:id="@+id/MeetingtextView"
                 android:layout_width="match_parent"
-                android:layout_height="50dp" />
+                android:layout_height="50dp"
+                android:textSize="12sp"
+                android:inputType="textMultiLine"/>
         </LinearLayout>
 
         <LinearLayout
@@ -92,7 +96,8 @@
                 android:id="@+id/MaxtextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"/>
+                android:inputType="number"
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <LinearLayout
@@ -112,7 +117,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnSave"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
 
             <Button
@@ -125,7 +130,7 @@
                 android:background="@drawable/rounded_corner_button2"
                 android:onClick="onClick"
                 android:text="@string/btnCancel"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/white"
                 android:textSize="10sp" />
         </LinearLayout>
 

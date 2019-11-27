@@ -100,7 +100,9 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:onClick="onClick"
-            android:text="@string/register" />
+            android:text="@string/register"
+            android:background="@drawable/rounded_corner_button2"
+            android:textColor="@color/white"/>
 
     </LinearLayout>
 

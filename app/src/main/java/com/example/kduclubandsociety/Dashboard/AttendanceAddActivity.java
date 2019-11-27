@@ -6,10 +6,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
+import android.app.DatePickerDialog;
 import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,7 +19,9 @@ import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Attendance;
@@ -30,8 +34,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import static com.example.kduclubandsociety.Notification.NotificationActivity.CHANNEL_1_ID;
 
@@ -75,12 +82,14 @@ public class AttendanceAddActivity extends AppCompatActivity {
         time = findViewById(R.id.txtMtgTime);
         location =findViewById(R.id.txtMtgLocation);
 
+
         getMembers();
         createNotificationChannel();
-
+        pickDate();
+        pickTime();
     }
 
-    public void onClick (View v){
+     public void onClick (View v){
         switch (v.getId()){
             case R.id.btnSave:{
                 save();
@@ -127,6 +136,61 @@ public class AttendanceAddActivity extends AppCompatActivity {
             AttendanceAddActivity.this.finish();
             sendNotification();
         }
+
+    }
+
+    void pickDate(){
+        Calendar myCalendar = Calendar.getInstance();
+
+        final DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                String myFormat = "dd-MM-yyyy";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
+
+                date.setText(sdf.format(myCalendar.getTime()));
+
+            }
+
+        };
+
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new DatePickerDialog(mContext, datePickerListener, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+
+            }
+        });
+    }
+
+    void pickTime(){
+        Calendar mcurrentTime = Calendar.getInstance();
+
+        final TimePickerDialog.OnTimeSetListener timePickerListener = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                mcurrentTime.set(Calendar.HOUR, hourOfDay);
+                mcurrentTime.set(Calendar.MINUTE, minute);
+                String myFormat = "HH:mm";
+                SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.UK);
+
+                time.setText(sdf.format(mcurrentTime.getTime()));
+            }
+        };
+        time.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+              new TimePickerDialog(mContext,timePickerListener,
+                      mcurrentTime.get(Calendar.HOUR),
+                      mcurrentTime.get(Calendar.MINUTE),false).show();
+            }
+        });
 
     }
 
