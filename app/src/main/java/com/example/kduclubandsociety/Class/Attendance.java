@@ -4,10 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Attendance {
+    private String id;
     private String date;
     private String time;
     private String location;
     private List<Member> members;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getDate() {
         return date;

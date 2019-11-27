@@ -105,6 +105,20 @@
 
     </LinearLayout>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnEdit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:onClick="onClick"
+        android:src="@drawable/ic_edit_black"
+        android:backgroundTint="@color/editRed"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="65dp"
+        android:layout_marginEnd="15dp"
+        android:tint="@color/white"/>
+
 
 
     <!--Bottom Navigation -->

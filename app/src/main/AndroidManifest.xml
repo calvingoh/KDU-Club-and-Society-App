@@ -12,11 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Dashboard.AttendanceDetails"></activity>
+        <activity android:name=".Dashboard.AttendanceDetailsEdit"/>
         <activity android:name=".Dashboard.AttendanceAddActivity" />
         <activity android:name=".Dashboard.AttendanceActivity" />
         <activity android:name=".Dashboard.AnnouncementDetails" />
         <activity android:name=".Dashboard.AnnouncementAddActivity" />
         <activity android:name=".Dashboard.AnnouncementActivity" />
+        <activity android:name=".Dashboard.AnnouncementDetailsEdit"/>
         <activity android:name=".Dashboard.DashboardOptionActivity" />
         <activity android:name=".Notification.GenerateNotification" />
         <activity android:name=".Dashboard.DashboardActivity" />

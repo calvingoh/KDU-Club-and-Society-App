@@ -1,9 +1,7 @@
 package com.example.kduclubandsociety.Dashboard;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,8 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.example.kduclubandsociety.Class.Attendance;
 import com.example.kduclubandsociety.Class.Member;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
@@ -27,21 +25,23 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class AttendanceDetails extends AppCompatActivity {
-    private static final String TAG = "AttendanceDetails";
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+public class AttendanceDetailsEdit extends AppCompatActivity {
+    private static final String TAG = "AttendanceDetailsEdit";
     private TextView topTitle;
     private static final int ACTIVITY_NUM = 0;
-    private Context mContext = AttendanceDetails.this;
+    private Context mContext = AttendanceDetailsEdit.this;
 
-    TextView txtTime;
-    TextView txtLocation;
-    TextView txtDate;
-    FloatingActionButton btnEdit;
+    EditText txtTime;
+    EditText txtLocation;
+    EditText txtDate;
+    Button btnSave;
 
     String currentUid;
     int clubId;
@@ -57,7 +57,7 @@ public class AttendanceDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.dashboard_attendance_details);
+        setContentView(R.layout.dashboard_attendance_edit);
 
         txtTime = findViewById(R.id.txtTime);
         txtLocation = findViewById(R.id.txtLocation);
@@ -72,7 +72,7 @@ public class AttendanceDetails extends AppCompatActivity {
         location =intent.getStringExtra("mtgLocation");
         id = intent.getStringExtra("mtgId");
 
-        setupBottomNavigationView();
+        //setupBottomNavigationView();
 
         // firebase
         ref = FirebaseDatabase.getInstance().getReference();
@@ -88,13 +88,13 @@ public class AttendanceDetails extends AppCompatActivity {
         memberList= new ArrayList<>();
 
         //buttons
-        btnEdit = findViewById(R.id.btnEdit);
+        btnSave = findViewById(R.id.btnSave);
+//        btnSave.setVisibility(View.GONE);
 
         txtTime.setText (time);
         txtLocation.setText(location);
         txtDate.setText (date);
 
-        checkPermission();
         addList();
     }
 
@@ -110,7 +110,7 @@ public class AttendanceDetails extends AppCompatActivity {
                     member = memberSnapshot.getValue(Member.class);
                     memberList.add (member);
                 }
-                adp = new MemberAdapter(AttendanceDetails.this, memberList);
+                adp = new MemberAdapter(AttendanceDetailsEdit.this, memberList);
                 mListview.setAdapter(adp);
             }
 
@@ -122,38 +122,46 @@ public class AttendanceDetails extends AppCompatActivity {
 
     }
 
-    void checkPermission(){
-        mClubRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                String admin =dataSnapshot.child("admin").getValue(String.class);
-                if (admin.equals(currentUid)){
-                    btnEdit.show();
-                }
-
-                else{
-                    btnEdit.hide();
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
 
     public void onClick (View v){
         switch (v.getId()){
-            case R.id.btnEdit:{
-                Intent intentAttend = new Intent (mContext,AttendanceDetailsEdit.class);
-                intentAttend.putExtra("cId",clubId);
-                intentAttend.putExtra("currentUid", currentUid);
-                intentAttend.putExtra("mtgDate",date);
-                intentAttend.putExtra("mtgTime", time);
-                intentAttend.putExtra ("mtgLocation",location);
-                intentAttend.putExtra("mtgId", id);
-                startActivity(intentAttend);
+            case R.id.btnSave :{
+                date = txtDate.getText().toString().trim();
+                time = txtTime.getText().toString().trim();
+                location = txtLocation.getText().toString().trim();
+
+                if (date.length()==0 || time.length()==0 || location.length()==0){
+                    AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceDetailsEdit.this);
+                    dialog.setTitle("Oh no");
+                    dialog.setMessage("Do not leave the details empty!");
+                    dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+
+                else{
+                    mClubRef.child("attendance").child (id).child("date").setValue(date);
+                    mClubRef.child("attendance").child (id).child("time").setValue(time);
+                    mClubRef.child("attendance").child (id).child("location").setValue(location);
+                    Toast.makeText(AttendanceDetailsEdit.this, "Meeting edited", Toast.LENGTH_LONG).show();
+
+                    Intent intentAttend = new Intent (mContext,AttendanceDetails.class);
+                    intentAttend.putExtra("cId",clubId);
+                    intentAttend.putExtra("currentUid", currentUid);
+                    intentAttend.putExtra("mtgDate",date);
+                    intentAttend.putExtra("mtgTime", time);
+                    intentAttend.putExtra ("mtgLocation",location);
+                    intentAttend.putExtra("mtgId", id);
+                    startActivity(intentAttend);
+                }
+            }
+
+            case R.id.btnCancel:{
+                AttendanceDetailsEdit.this.finish();
             }
 
         }
@@ -168,5 +176,9 @@ public class AttendanceDetails extends AppCompatActivity {
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
+    }
+
+    public void onBackPressed(){
+
     }
 }

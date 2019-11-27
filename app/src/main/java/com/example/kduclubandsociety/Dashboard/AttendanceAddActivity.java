@@ -98,6 +98,7 @@ public class AttendanceAddActivity extends AppCompatActivity {
         mtgDate=date.getText().toString().trim();
         mtgTime= time.getText().toString().trim();
         mtgLocation=location.getText().toString().trim();
+        String key = mClubRef.child("attendance").push().getKey();
 
         if (mtgDate.length()==0 || mtgTime.length()==0 || mtgLocation.length()==0){
             AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceAddActivity.this);
@@ -114,12 +115,13 @@ public class AttendanceAddActivity extends AppCompatActivity {
 
         else{
             Attendance attendance = new Attendance();
+            attendance.setId(key);
             attendance.setDate(mtgDate);
             attendance.setTime(mtgTime);
             attendance.setLocation(mtgLocation);
             attendance.setMembers(memberList);
 
-            mClubRef.child("attendance").child(mtgDate+ " " + mtgTime).setValue(attendance);
+            mClubRef.child("attendance").child(key).setValue(attendance);
             Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
 
             AttendanceAddActivity.this.finish();

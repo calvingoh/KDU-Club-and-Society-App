@@ -139,6 +139,7 @@ public class AttendanceActivity extends AppCompatActivity {
                 intentAttend.putExtra("mtgDate", attendanceList.get(position).getDate());
                 intentAttend.putExtra("mtgTime", attendanceList.get(position).getTime());
                 intentAttend.putExtra ("mtgLocation", attendanceList.get(position).getLocation());
+                intentAttend.putExtra("mtgId", attendanceList.get(position).getId());
                 startActivity(intentAttend);
             }
         });

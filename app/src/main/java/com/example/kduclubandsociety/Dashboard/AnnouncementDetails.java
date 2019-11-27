@@ -16,6 +16,7 @@ import android.widget.TextView;
 import com.example.kduclubandsociety.R;
 import com.example.kduclubandsociety.Utils.BottomNavigationViewHelper;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +36,10 @@ public class AnnouncementDetails extends AppCompatActivity {
     private TextView aUser;
     private ImageView aIcon;
     private TextView aClubName;
+    FloatingActionButton btnEdit;
 
-    String currentUid;
+    String currentUid, title, body , date;
+    int clubId;
 
     DatabaseReference ref, mClubRef, mStudentRef;
     @Override
@@ -50,13 +53,15 @@ public class AnnouncementDetails extends AppCompatActivity {
         aUser = findViewById(R.id.txtUser);
         aClubName = findViewById(R.id.txtClubName);
         aIcon = findViewById(R.id.imgIcon);
+        btnEdit = findViewById(R.id.btnEdit);
 
         //intents
         Intent intent = getIntent();
+        clubId= intent.getIntExtra("cId", 0);
         currentUid = intent.getStringExtra("currentUid");
-        String title = intent.getStringExtra("annTitle");
-        String body = intent.getStringExtra("annBody");
-        String date = intent.getStringExtra("annDate");
+        title = intent.getStringExtra("annTitle");
+        body = intent.getStringExtra("annBody");
+        date = intent.getStringExtra("annDate");
         String username = intent.getStringExtra("annUsername");
         String icon = intent.getStringExtra("annIcon");
         String clubName = intent.getStringExtra("annClubName");
@@ -82,6 +87,41 @@ public class AnnouncementDetails extends AppCompatActivity {
         aBody.setText(body);
         aClubName.setText("from " + clubName);
         Picasso.get().load(icon).into(aIcon);
+
+        checkPermission();
+    }
+
+    void checkPermission(){
+        mClubRef.child(Integer.toString(clubId)).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String admin =dataSnapshot.child("admin").getValue(String.class);
+                if (admin.equals(currentUid)){
+                    btnEdit.show();
+                }
+
+                else{
+                    btnEdit.hide();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void onClick(View v){
+        if (v.getId()==R.id.btnEdit){
+            Intent intentEdit = new Intent (mContext, AnnouncementDetailsEdit.class);
+            intentEdit.putExtra("title", title);
+            intentEdit.putExtra("body", body);
+            intentEdit.putExtra("date", date);
+            intentEdit.putExtra("cId", clubId);
+            intentEdit.putExtra("currentUid", currentUid);
+            startActivity(intentEdit);
+        }
     }
 
     // set up bottom navigation bar
