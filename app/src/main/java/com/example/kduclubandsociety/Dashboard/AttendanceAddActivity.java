@@ -1,6 +1,7 @@
 package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -10,6 +11,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -83,10 +85,12 @@ public class AttendanceAddActivity extends AppCompatActivity {
             case R.id.btnSave:{
                 save();
             }
+            break;
 
             case R.id.btnCancel:{
                 AttendanceAddActivity.this.finish();
             }
+            break;
         }
     }
 
@@ -95,18 +99,33 @@ public class AttendanceAddActivity extends AppCompatActivity {
         mtgTime= time.getText().toString().trim();
         mtgLocation=location.getText().toString().trim();
 
-        Attendance attendance = new Attendance();
-        attendance.setDate(mtgDate);
-        attendance.setTime(mtgTime);
-        attendance.setLocation(mtgLocation);
-        attendance.setMembers(memberList);
+        if (mtgDate.length()==0 || mtgTime.length()==0 || mtgLocation.length()==0){
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceAddActivity.this);
+            dialog.setTitle("Oh no");
+            dialog.setMessage("Do not leave the details empty!");
+            dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
 
-        mClubRef.child("attendance").child(mtgDate+ " " + mtgTime).setValue(attendance);
-        Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
+        else{
+            Attendance attendance = new Attendance();
+            attendance.setDate(mtgDate);
+            attendance.setTime(mtgTime);
+            attendance.setLocation(mtgLocation);
+            attendance.setMembers(memberList);
 
-        AttendanceAddActivity.this.finish();
+            mClubRef.child("attendance").child(mtgDate+ " " + mtgTime).setValue(attendance);
+            Toast.makeText(AttendanceAddActivity.this, "Meeting added", Toast.LENGTH_LONG).show();
 
-        sendNotification();
+            AttendanceAddActivity.this.finish();
+            sendNotification();
+        }
+
     }
 
     void getMembers(){

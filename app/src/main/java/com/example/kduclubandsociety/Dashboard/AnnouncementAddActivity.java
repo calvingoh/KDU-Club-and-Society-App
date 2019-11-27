@@ -1,6 +1,7 @@
 package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -10,6 +11,7 @@ import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -20,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.kduclubandsociety.Class.Announcement;
+import com.example.kduclubandsociety.LoginActivity;
 import com.example.kduclubandsociety.Notification.NotificationReciever;
 import com.example.kduclubandsociety.R;
 import com.google.firebase.database.DataSnapshot;
@@ -94,25 +97,44 @@ public class AnnouncementAddActivity extends AppCompatActivity {
     }
 
     void save() {
-        ancTitle = txtTitle.getText().toString();
-        ancBody = txtBody.getText().toString();
-
+        ancTitle = txtTitle.getText().toString().trim();
+        ancBody = txtBody.getText().toString().trim();
         c = Calendar.getInstance();
         date = sdf.format(c.getTime());
 
-        Announcement announcement1 = new Announcement();
-        announcement1.setDate(date);
-        announcement1.setTitle(ancTitle);
-        announcement1.setBody(ancBody);
-        announcement1.setUsername (username);
-        announcement1.setClubIcon(icon);
-        announcement1.setClubName(clubName);
+        if (ancBody.length() > 0 && ancTitle.length() > 0){
+            Announcement announcement1 = new Announcement();
+            announcement1.setDate(date);
+            announcement1.setTitle(ancTitle);
+            announcement1.setBody(ancBody);
+            announcement1.setUsername (username);
+            announcement1.setClubIcon(icon);
+            announcement1.setClubName(clubName);
 
 
-        mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
-        Toast.makeText(AnnouncementAddActivity.this, "Announcement Posted!", Toast.LENGTH_LONG).show();
+            mClubRef.child("announcement").child(announcement1.getDate()).setValue(announcement1);
+            Toast.makeText(AnnouncementAddActivity.this, "Announcement Posted!", Toast.LENGTH_LONG).show();
 
-        AnnouncementAddActivity.this.finish();
+            AnnouncementAddActivity.this.finish();
+            sendNotification();
+        }
+
+        else {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(AnnouncementAddActivity.this);
+            dialog.setTitle("Oh no");
+            dialog.setMessage("Do not leave the title/ body empty!");
+            dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+
+
+
+
     }
 
     void getUsername(){
