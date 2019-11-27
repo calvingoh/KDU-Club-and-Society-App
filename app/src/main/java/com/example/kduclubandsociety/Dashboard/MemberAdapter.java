@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import com.example.kduclubandsociety.Class.Attendance;
@@ -22,11 +23,15 @@ import androidx.annotation.Nullable;
 public class MemberAdapter extends ArrayAdapter<Member> {
     private Activity context;
     private List<Member> memberList;
+    private Boolean permission;
 
-    public MemberAdapter(Activity context, List<Member> memberList) {
+
+
+    public MemberAdapter(Activity context, List<Member> memberList, Boolean permission) {
         super(context, R.layout.dashboard_attendance, memberList);
         this.context = context;
         this.memberList = memberList;
+        this.permission = permission;
     }
 
     @NonNull
@@ -45,7 +50,16 @@ public class MemberAdapter extends ArrayAdapter<Member> {
         name.setText(member.getName());
         name.setTextSize(14);
 
+        // check if its admin or no
+        if (permission){
+            checkBoxPresent.setEnabled(true);
+        }
+        else{
+            checkBoxPresent.setEnabled(false);
+        }
 
+
+        //check if firebase member is present or no
         if (present){
             checkBoxPresent.setChecked(true);
         }
@@ -54,6 +68,8 @@ public class MemberAdapter extends ArrayAdapter<Member> {
             checkBoxPresent.setChecked(false);
         }
 
+
         return listViewItem;
     }
+
 }

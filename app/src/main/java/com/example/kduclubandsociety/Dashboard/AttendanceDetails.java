@@ -110,7 +110,7 @@ public class AttendanceDetails extends AppCompatActivity {
                     member = memberSnapshot.getValue(Member.class);
                     memberList.add (member);
                 }
-                adp = new MemberAdapter(AttendanceDetails.this, memberList);
+                adp = new MemberAdapter(AttendanceDetails.this, memberList,false);
                 mListview.setAdapter(adp);
             }
 
@@ -135,7 +135,6 @@ public class AttendanceDetails extends AppCompatActivity {
                     btnEdit.hide();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
@@ -155,7 +154,6 @@ public class AttendanceDetails extends AppCompatActivity {
                 intentAttend.putExtra("mtgId", id);
                 startActivity(intentAttend);
             }
-
         }
 
     }

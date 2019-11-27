@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -32,6 +33,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+
 public class AttendanceDetailsEdit extends AppCompatActivity {
     private static final String TAG = "AttendanceDetailsEdit";
     private TextView topTitle;
@@ -46,6 +48,7 @@ public class AttendanceDetailsEdit extends AppCompatActivity {
     String currentUid;
     int clubId;
     String date, time, location, id;
+    int pos;
 
     ListView mListview;
     MemberAdapter adp;
@@ -110,7 +113,7 @@ public class AttendanceDetailsEdit extends AppCompatActivity {
                     member = memberSnapshot.getValue(Member.class);
                     memberList.add (member);
                 }
-                adp = new MemberAdapter(AttendanceDetailsEdit.this, memberList);
+                adp = new MemberAdapter(AttendanceDetailsEdit.this, memberList, true);
                 mListview.setAdapter(adp);
             }
 
@@ -130,43 +133,54 @@ public class AttendanceDetailsEdit extends AppCompatActivity {
                 time = txtTime.getText().toString().trim();
                 location = txtLocation.getText().toString().trim();
 
+
                 if (date.length()==0 || time.length()==0 || location.length()==0){
-                    AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceDetailsEdit.this);
-                    dialog.setTitle("Oh no");
-                    dialog.setMessage("Do not leave the details empty!");
-                    dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    });
-                    dialog.show();
+                    showErrorMsg();
                 }
 
-                else{
+                else {
                     mClubRef.child("attendance").child (id).child("date").setValue(date);
                     mClubRef.child("attendance").child (id).child("time").setValue(time);
                     mClubRef.child("attendance").child (id).child("location").setValue(location);
                     Toast.makeText(AttendanceDetailsEdit.this, "Meeting edited", Toast.LENGTH_LONG).show();
 
-                    Intent intentAttend = new Intent (mContext,AttendanceDetails.class);
-                    intentAttend.putExtra("cId",clubId);
-                    intentAttend.putExtra("currentUid", currentUid);
-                    intentAttend.putExtra("mtgDate",date);
-                    intentAttend.putExtra("mtgTime", time);
-                    intentAttend.putExtra ("mtgLocation",location);
-                    intentAttend.putExtra("mtgId", id);
-                    startActivity(intentAttend);
+                    startNew();
                 }
             }
 
             case R.id.btnCancel:{
                 AttendanceDetailsEdit.this.finish();
             }
-
         }
 
     }
+
+    void startNew (){
+        Intent intentAttend = new Intent (mContext,AttendanceDetails.class);
+        intentAttend.putExtra("cId",clubId);
+        intentAttend.putExtra("currentUid", currentUid);
+        intentAttend.putExtra("mtgDate",date);
+        intentAttend.putExtra("mtgTime", time);
+        intentAttend.putExtra ("mtgLocation",location);
+        intentAttend.putExtra("mtgId", id);
+        startActivity(intentAttend);
+    }
+
+    void showErrorMsg (){
+        AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceDetailsEdit.this);
+        dialog.setTitle("Oh no");
+        dialog.setMessage("Do not leave the details empty!");
+        dialog.setNeutralButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
+    }
+
+
+
 
     // set up bottom navigation bar
     private void setupBottomNavigationView(){
