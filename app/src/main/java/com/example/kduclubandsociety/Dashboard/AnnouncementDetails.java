@@ -77,8 +77,6 @@ public class AnnouncementDetails extends AppCompatActivity {
         //TOP TAB TITLE
         topTitle =findViewById(R.id.txtTitle);
         topTitle.setText("Announcement Details");
-   //     topTitle.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-     //   topTitle.setTextSize(14);
 
         //DISPLAY DETAIL
         aTitle.setText(title);
@@ -131,7 +129,7 @@ public class AnnouncementDetails extends AppCompatActivity {
     // set up bottom navigation bar
     private void setupBottomNavigationView(){
         Log.d (TAG, "setupBottomNavigationView: setting up Bottom Navigation View");
-        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavViewBar);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavViewBar);
         BottomNavigationViewHelper.enableNavigation(mContext, bottomNavigationView,currentUid);
         Menu menu = bottomNavigationView.getMenu();
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
@@ -139,9 +137,6 @@ public class AnnouncementDetails extends AppCompatActivity {
     }
 
     public void onBackPressed(){
-        Intent intentBack = new Intent (mContext, AnnouncementActivity.class);
-        intentBack.putExtra("currenUid",currentUid);
-        intentBack.putExtra("cId",clubId);
-        startActivity(intentBack);
+        finish();
     }
 }

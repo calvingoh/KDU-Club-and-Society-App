@@ -27,7 +27,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
 
             <TextView
                 android:id="@+id/titleDate"
@@ -99,7 +100,7 @@
             android:id="@+id/namelist"
             android:layout_width="match_parent"
             android:layout_height="400dp"
-            android:layout_marginTop="30dp"/>
+            android:layout_marginTop="15dp"/>
 
 
     </LinearLayout>

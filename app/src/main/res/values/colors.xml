@@ -8,6 +8,7 @@
 
     <color name="grey">#bfbfbf</color>
     <color name="white">#fff</color>
+    <color name="greyblue">#d8e7ec</color>
 
     <color name="editRed">#db4437</color>
     <color name="addBlue">#4285f4</color>

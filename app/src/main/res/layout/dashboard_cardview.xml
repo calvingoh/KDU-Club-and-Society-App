@@ -30,9 +30,11 @@
             android:layout_marginStart="10dp"
             android:layout_marginTop="5dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/open_sans"
             android:text="Title"
+            android:singleLine="true"
             android:textColor="#ffff"
-            android:textSize="18dp" />
+            android:textSize="18sp" />
 
         <TextView
             android:id="@+id/details"
@@ -40,6 +42,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginEnd="10dp"
+            android:fontFamily="@font/roboto"
             android:text="Sample details"
             android:textColor="#ffff" />
 
