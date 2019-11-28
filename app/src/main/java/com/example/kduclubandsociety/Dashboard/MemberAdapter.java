@@ -2,6 +2,7 @@ package com.example.kduclubandsociety.Dashboard;
 
 import android.app.Activity;
 import android.graphics.Typeface;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,8 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import static android.media.CamcorderProfile.get;
 
 public class MemberAdapter extends ArrayAdapter<Member> {
     private Activity context;
@@ -67,6 +70,13 @@ public class MemberAdapter extends ArrayAdapter<Member> {
         else{
             checkBoxPresent.setChecked(false);
         }
+
+        checkBoxPresent.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                memberList.get(position).setPresent(checkBoxPresent.isChecked());
+            }
+        });
 
 
         return listViewItem;

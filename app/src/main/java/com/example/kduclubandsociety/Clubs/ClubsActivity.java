@@ -115,10 +115,17 @@ public class ClubsActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.getFilter().filter(newText);
-                adapter.notifyDataSetChanged();
+                newText.toLowerCase();
+                List<Club> newList = new ArrayList<>();
+                for (Club club :clubList){
+                    String clubName = club.getName().toLowerCase();
 
-                return false;
+                    if (clubName.contains(newText)){
+                        newList.add(club);
+                    }
+                }
+                adapter.setFilter(newList);
+                return true;
             }
         });
     }

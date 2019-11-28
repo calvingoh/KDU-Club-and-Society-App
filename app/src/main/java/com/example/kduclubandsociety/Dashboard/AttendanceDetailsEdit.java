@@ -141,17 +141,22 @@ public class AttendanceDetailsEdit extends AppCompatActivity {
                 location = txtLocation.getText().toString().trim();
 
 
+
                 if (date.length()==0 || time.length()==0 || location.length()==0){
                     showErrorMsg();
                 }
 
                 else {
+                    for (int i= 0; i<memberList.size();i++){
+                        mClubRef.child("attendance").child(id).child("members")
+                                .child(Integer.toString(i)).child("present").setValue(memberList.get(i).getPresent());
+                    }
                     mClubRef.child("attendance").child (id).child("date").setValue(date);
                     mClubRef.child("attendance").child (id).child("time").setValue(time);
                     mClubRef.child("attendance").child (id).child("location").setValue(location);
                     Toast.makeText(AttendanceDetailsEdit.this, "Meeting edited", Toast.LENGTH_LONG).show();
 
-                    startNew();
+                    startNewActivity();
                 }
             }
 
@@ -162,7 +167,7 @@ public class AttendanceDetailsEdit extends AppCompatActivity {
 
     }
 
-    void startNew (){
+    void startNewActivity (){
         Intent intentAttend = new Intent (mContext,AttendanceDetails.class);
         intentAttend.putExtra("cId",clubId);
         intentAttend.putExtra("currentUid", currentUid);

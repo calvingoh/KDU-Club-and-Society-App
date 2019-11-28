@@ -17,10 +17,11 @@ import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ClubListAdapter extends ArrayAdapter<Club> implements Filterable {
+public class ClubListAdapter extends ArrayAdapter<Club> {
     private Activity context;
     private List<Club> clubList;
 
@@ -42,57 +43,18 @@ public class ClubListAdapter extends ArrayAdapter<Club> implements Filterable {
 
         Club club = clubList.get(position);
 
-        clubName.setText(club.getName());
-        Picasso.get().load(club.getIcon()).into(icon);
+        clubName.setText(clubList.get(position).getName());
+        Picasso.get().load(clubList.get(position).getIcon()).into(icon);
 
         return listViewItem;
 
     }
 
-    @NonNull
-    @Override
-    public Filter getFilter() {
-        return clubFilter;
+    public void setFilter (List<Club> newList){
+        clubList = new ArrayList<Club>();
+        clubList.addAll(newList);
+        notifyDataSetChanged();
     }
-
-    private Filter clubFilter = new Filter() {
-        @Override
-        protected FilterResults performFiltering(CharSequence constraint) {
-            FilterResults results = new FilterResults();
-            List<Club> suggestions = new ArrayList<>();
-
-            if (constraint == null || constraint.length() == 0) {
-                suggestions.addAll(clubList);
-
-            }
-            else {
-                String filterPattern = constraint.toString().toLowerCase().trim();
-
-                for (Club item : clubList) {
-                    if (item.getName().trim().toLowerCase().contains(filterPattern)) {
-                        suggestions.add(item);
-                    }
-                }
-            }
-
-            results.values = suggestions;
-            results.count = suggestions.size();
-            return results;
-        }
-
-
-        @Override
-        protected void publishResults(CharSequence constraint, FilterResults results) {
-            clear();
-            addAll((List) results.values);
-            notifyDataSetChanged();
-        }
-
-        @Override
-        public CharSequence convertResultToString(Object resultValue) {
-            return ((Club) resultValue).getName();
-        }
-    };
 
 }
 

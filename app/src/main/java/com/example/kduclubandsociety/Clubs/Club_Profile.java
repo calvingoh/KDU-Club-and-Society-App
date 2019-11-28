@@ -141,6 +141,7 @@ public class Club_Profile extends AppCompatActivity {
             case R.id.btnRegister: {
                 confirmRegister();
             }
+            break;
 
             case R.id.btnEdit:{
                 Intent intentEdit = new Intent(mContext, Club_ProfileEdit.class);
@@ -154,6 +155,7 @@ public class Club_Profile extends AppCompatActivity {
                 intentEdit.putExtra("currentUid", currentUid);
                 startActivity(intentEdit);
             }
+            break;
         }
 
     }
