@@ -137,4 +137,11 @@ public class AnnouncementDetails extends AppCompatActivity {
         MenuItem menuItem = menu.getItem(ACTIVITY_NUM);
         menuItem.setChecked(true);
     }
+
+    public void onBackPressed(){
+        Intent intentBack = new Intent (mContext, AnnouncementActivity.class);
+        intentBack.putExtra("currenUid",currentUid);
+        intentBack.putExtra("cId",clubId);
+        startActivity(intentBack);
+    }
 }

@@ -1,9 +1,11 @@
 package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -85,6 +87,7 @@ public class AnnouncementActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
                     btnAddAnnouncement.show();
+                    deleteAnnouncement();
                 }
                 else {
                     btnAddAnnouncement.hide();
@@ -150,6 +153,34 @@ public class AnnouncementActivity extends AppCompatActivity {
                 intentAnnDeets.putExtra("annIcon", announcementList.get(position).getClubIcon());
                 intentAnnDeets.putExtra("annClubName", announcementList.get(position).getClubName());
                 startActivity(intentAnnDeets);
+            }
+        });
+    }
+
+    void deleteAnnouncement () {
+        aListview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(AnnouncementActivity.this);
+                dialog.setTitle("Delete Announcement?");
+                dialog.setMessage("Are you sure you want to delete this meeting?");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mClubRef.child("announcement").child(announcementList.get(position).getDate()).removeValue();
+                        adp.notifyDataSetChanged();
+                    }
+                });
+
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+                return true;
             }
         });
     }

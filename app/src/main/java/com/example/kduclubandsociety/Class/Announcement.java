@@ -73,7 +73,7 @@ public class Announcement {
             String Notification1 = n1.getDate();
             String Notification2 = n2.getDate();
 
-            return Notification1.compareTo(Notification2);
+            return Notification2.compareTo(Notification1);
         }
     };
 }

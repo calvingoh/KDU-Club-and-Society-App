@@ -1,9 +1,11 @@
 package com.example.kduclubandsociety.Dashboard;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -74,7 +76,9 @@ public class AttendanceActivity extends AppCompatActivity {
 
         checkPermission();
         addMeetingList();
+       // deleteMeeting();
         viewMeeting();
+
     }
 
     // check whether student's permission
@@ -84,6 +88,7 @@ public class AttendanceActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.child("admin").getValue(String.class).equals(currentUid)){
                     btnAddMeeting.show();
+                    deleteMeeting();
                 }
                 else {
                     btnAddMeeting.hide();
@@ -142,6 +147,35 @@ public class AttendanceActivity extends AppCompatActivity {
             }
         });
     }
+
+    void deleteMeeting (){
+        aListview.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(AttendanceActivity.this);
+                dialog.setTitle("Delete Meeting?");
+                dialog.setMessage("Are you sure you want to delete this meeting?");
+                dialog.setCancelable(false);
+                dialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        mClubRef.child("attendance").child(attendanceList.get(position).getId()).removeValue();
+                        adp.notifyDataSetChanged();
+                    }
+                });
+
+                dialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                dialog.show();
+                return true;
+            }
+        });
+    }
+
 
     public void onClick (View v){
         if (v.getId()==R.id.btnAddMeeting){

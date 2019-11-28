@@ -130,6 +130,7 @@ public class NotificationActivity extends AppCompatActivity {
                                 notificationList.add (notification);
                             }
                         }
+                        Collections.sort(notificationList,Announcement.DateComparator);
                         adp.notifyDataSetChanged();
                     }
 
@@ -140,9 +141,6 @@ public class NotificationActivity extends AppCompatActivity {
                 });
             }
         }
-
-       // Collections.sort(notificationList,Announcement.DateComparator); //change to date
-        adp.notifyDataSetChanged();
     }
 
     void viewDetails(){
