@@ -56,6 +56,11 @@ public class ClubListAdapter extends ArrayAdapter<Club> {
         notifyDataSetChanged();
     }
 
+    @Override
+    public int getCount(){
+        return clubList.size();
+    }
+
 }
 
 
